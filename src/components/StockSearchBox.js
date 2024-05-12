@@ -2,6 +2,11 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useRef } from "react";
 import ModelSelection from "./ModelSelection";
+import styles from "../css/StockSearchBox.module.css";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import Table from 'react-bootstrap/Table';
 
 function StockSearchBox(){
 
@@ -48,50 +53,60 @@ function StockSearchBox(){
     };
 
     return(
-        <div>
-            <div>
-                <label htmlFor="thicker_box">주식Ticker검색</label>
-                <input id="thicker_box" ref={ticker_Ref} type="text" placeholder="thicker를 입력하세요" name="ticker"
+        <div className={styles.pCenter}>
+            <div className={`${styles.schBx} ${styles.assignInlineBlk}`}>
+                <label className={styles.textColor} htmlFor="thicker_box"><b>Ticker</b></label>
+                <Form.Control id="thicker_box" ref={ticker_Ref} type="text" placeholder="Ticker" name="ticker"
                        onChange={onChange}/>
                 <br/>
-                <label htmlFor="start_date_box">시작날짜</label>
-                <input type="date" ref={start_date_Ref} id="start_date_box" name="start_date" max="2024-05-01"
+                <label className={styles.textColor} htmlFor="start_date_box"><b>Start</b></label>
+                <Form.Control type="date" ref={start_date_Ref} id="start_date_box" name="start_date" max="2024-05-01"
                        min="2000-01-01" onChange={onChange}/>
                 <br/>
-                <label htmlFor="end_date_box">끝날짜</label>
-                <input type="date" ref={end_date_Ref} id="end_date_box" name="end_date" max="2024-05-01"
+                <label className={styles.textColor} htmlFor="end_date_box"><b>End</b></label>
+                <Form.Control type="date" ref={end_date_Ref} id="end_date_box" name="end_date" max="2024-05-01"
                        min="2000-01-01" onChange={onChange}/>
                 <br/>
-                <button onClick={doSearch}>검색</button>
+                <Button variant="secondary" onClick={doSearch}>검색</Button>
             </div>
-            <div>
+            <div className={`${styles.dfSize} ${styles.assignInlineBlk}`}>
                 {loading ? (
-                    <h2>---loading---</h2>
+                    <div className={styles.load}>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <b className={styles.loadingText}>Search Stock datas...</b>
+                    </div>
                 ) : (
                     <div>
-                        <div>
-
-                        </div>
-                        <table>
-                            <tr>
-                                <th>TimeStamp</th>
-                                {Object.entries(schRst).map(([colName, serialData]) => (
-                                    <th>{colName}</th>
-                                ))}
-                            </tr>
-                            {Object.keys(schRst['Open']).map(timestamp => (
-                                <tr key={timestamp}>
-                                    <td>{new Date(parseInt(timestamp)).toLocaleString().substring(0,11)}</td>
-                                    <td>{schRst['Open'][timestamp]}</td>
-                                    <td>{schRst['High'][timestamp]}</td>
-                                    <td>{schRst['Low'][timestamp]}</td>
-                                    <td>{schRst['Close'][timestamp]}</td>
-                                    <td>{schRst['Adj Close'][timestamp]}</td>
-                                    <td>{schRst['Volume'][timestamp]}</td>
+                        <div className={styles.df}>
+                            <Table striped bordered hover>
+                                <thead>
+                                <tr>
+                                    <th>TimeStamp</th>
+                                    {Object.entries(schRst).map(([colName, serialData]) => (
+                                        <th>{colName}</th>
+                                    ))}
                                 </tr>
-                            ))}
-                        </table>
-                        <ModelSelection></ModelSelection>
+                                </thead>
+                                <tbody>
+                                {Object.keys(schRst['Open']).map(timestamp => (
+                                    <tr key={timestamp}>
+                                        <td>{new Date(parseInt(timestamp)).toLocaleString().substring(0, 11)}</td>
+                                        <td>{schRst['Open'][timestamp]}</td>
+                                        <td>{schRst['High'][timestamp]}</td>
+                                        <td>{schRst['Low'][timestamp]}</td>
+                                        <td>{schRst['Close'][timestamp]}</td>
+                                        <td>{schRst['Adj Close'][timestamp]}</td>
+                                        <td>{schRst['Volume'][timestamp]}</td>
+                                    </tr>
+                                ))}
+                                </tbody>
+                            </Table>
+                        </div>
+                        <div>
+                            <ModelSelection></ModelSelection>
+                        </div>
                     </div>
                 )}
             </div>

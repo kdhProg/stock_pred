@@ -1,10 +1,10 @@
 import './components/StockSearchBox'
-import './App.css';
 import StockSearchBox from "./components/StockSearchBox";
+import styles from "./css/App.module.css"
 
 function App() {
   return (
-    <div className="App">
+    <div className={styles.app}>
         <StockSearchBox></StockSearchBox>
     </div>
   );
