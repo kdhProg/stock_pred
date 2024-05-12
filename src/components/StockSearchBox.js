@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useRef } from "react";
+import ModelSelection from "./ModelSelection";
 
 function StockSearchBox(){
 
@@ -42,6 +43,8 @@ function StockSearchBox(){
         setLoading(false);
         setSchRst(resp)
 
+        //Todo 검색 후 재검색 시 ModelSelction도 다시 렌더링하게 만들기
+
     };
 
     return(
@@ -50,15 +53,15 @@ function StockSearchBox(){
                 <label htmlFor="thicker_box">주식Ticker검색</label>
                 <input id="thicker_box" ref={ticker_Ref} type="text" placeholder="thicker를 입력하세요" name="ticker"
                        onChange={onChange}/>
-
+                <br/>
                 <label htmlFor="start_date_box">시작날짜</label>
                 <input type="date" ref={start_date_Ref} id="start_date_box" name="start_date" max="2024-05-01"
                        min="2000-01-01" onChange={onChange}/>
-
+                <br/>
                 <label htmlFor="end_date_box">끝날짜</label>
                 <input type="date" ref={end_date_Ref} id="end_date_box" name="end_date" max="2024-05-01"
                        min="2000-01-01" onChange={onChange}/>
-
+                <br/>
                 <button onClick={doSearch}>검색</button>
             </div>
             <div>
@@ -67,17 +70,28 @@ function StockSearchBox(){
                 ) : (
                     <div>
                         <div>
-                            {Object.entries(schRst).map(([colName, serialData]) => (
-                                <ul>
-                                    <p>{colName}</p>
-                                    {Object.entries(serialData).map(([timestamp, number]) => (
-                                        <li key={timestamp}>
-                                            {new Date(parseInt(timestamp)).toLocaleString()} - {number}
-                                        </li>
-                                    ))}
-                                </ul>
-                            ))}
+
                         </div>
+                        <table>
+                            <tr>
+                                <th>TimeStamp</th>
+                                {Object.entries(schRst).map(([colName, serialData]) => (
+                                    <th>{colName}</th>
+                                ))}
+                            </tr>
+                            {Object.keys(schRst['Open']).map(timestamp => (
+                                <tr key={timestamp}>
+                                    <td>{new Date(parseInt(timestamp)).toLocaleString().substring(0,11)}</td>
+                                    <td>{schRst['Open'][timestamp]}</td>
+                                    <td>{schRst['High'][timestamp]}</td>
+                                    <td>{schRst['Low'][timestamp]}</td>
+                                    <td>{schRst['Close'][timestamp]}</td>
+                                    <td>{schRst['Adj Close'][timestamp]}</td>
+                                    <td>{schRst['Volume'][timestamp]}</td>
+                                </tr>
+                            ))}
+                        </table>
+                        <ModelSelection></ModelSelection>
                     </div>
                 )}
             </div>
