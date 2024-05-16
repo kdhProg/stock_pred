@@ -1,0 +1,27 @@
+
+.cSiteName{
+    color: skyblue;
+    font-size: 40px;
+    font-family: "Times New Roman", Times, serif;
+    font-weight: bold;
+
+    /*margin-left: 20px;*/
+}
+
+.cSiteDes{
+    color: white;
+    margin-top : 20px;
+    /*margin-left: 20px;*/
+}
+
+.loginFont{
+    margin-top : 20px;
+    color: white;
+    text-align: right;
+}
+
+.joinFont{
+    margin-top : 20px;
+    color: white;
+    text-align: right;
+}
