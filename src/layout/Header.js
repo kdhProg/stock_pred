@@ -1,6 +1,6 @@
 import React from 'react';
-import styles from '../css/Header.module.css';
-import HeaderNavi from "../components/HeaderNavi";
+import styles from '../legacy/css/Header.module.css';
+import HeaderNavi from "../legacy/components/HeaderNavi";
 
 const Header = () => {
     return (
