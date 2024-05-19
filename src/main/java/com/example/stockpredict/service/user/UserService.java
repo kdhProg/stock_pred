@@ -52,7 +52,7 @@ public class UserService {
                 .phone(userJoinRequest.getPhone())
                 .gender(userJoinRequest.getGender())
                 .nickName(userJoinRequest.getNickName())
-                .profileImage(userJoinRequest.getProfileImage())
+//                .profileImage(userJoinRequest.getProfileImage())
                 .birth(userJoinRequest.getBirth())
                 .nation(userJoinRequest.getNation())
                 .createdAt(LocalDateTime.now())

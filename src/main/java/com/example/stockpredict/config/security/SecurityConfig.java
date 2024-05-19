@@ -7,6 +7,7 @@ import com.example.stockpredict.domain.user.User;
 import com.example.stockpredict.repository.user.UserRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -22,6 +23,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+
+import static org.springframework.boot.autoconfigure.security.servlet.PathRequest.*;
 
 @Configuration
 @EnableWebSecurity
@@ -42,12 +45,16 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
         http.authorizeHttpRequests((auth)->auth
+                .requestMatchers(toH2Console()).permitAll()
+                .requestMatchers("/", "/user/join").permitAll()
                 .anyRequest().permitAll());
 
         http.logout(
                 httpSecurityLogoutConfigurer -> httpSecurityLogoutConfigurer
-                        .logoutRequestMatcher(new AntPathRequestMatcher("/user/logout"))
+                        .logoutRequestMatcher(new AntPathRequestMatcher("/auth/logout"))
                         .logoutSuccessHandler(new LogoutSuccessHandler(objectMapper))
+                        .invalidateHttpSession(true)
+                        .deleteCookies("JSESSIONID")
         );
 
         http

@@ -7,13 +7,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController
+//@RestController
 @RequiredArgsConstructor
-public class PredictController {
+public class PredictController_leg {
 
     private final ModelService modelService;
 
-    @PostMapping("/showPredResult")
+//    @PostMapping("/showPredResult")
     public String showPredResult(@RequestBody PredictRequest req){
         return modelService.predict(req);
     }

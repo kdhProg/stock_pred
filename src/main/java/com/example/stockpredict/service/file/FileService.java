@@ -1,4 +1,4 @@
-package com.example.stockpredict.service.legacy;
+package com.example.stockpredict.service.file;
 
 //import lombok.Value;
 import lombok.extern.slf4j.Slf4j;
@@ -29,26 +29,14 @@ public class FileService {
 
     public void fileUpload(MultipartFile multipartFile) {
         
-        // Todo 정책 -> 한개의 csv파일만 존재해야함 --> 하나있는데 하나더 업로드 시 익셉션 투척
-        
-//        showCurrentLoc();
-        
-        if(!chkExtension(multipartFile)){throw new RuntimeException();} //Todo csv아닐시 -> 커스텀 익셉션 처리
-        
         Path copyOfLocation = Paths.get(uploadDir + File.separator + StringUtils.cleanPath(multipartFile.getOriginalFilename()));
         try {
             Files.copy(multipartFile.getInputStream(), copyOfLocation, StandardCopyOption.REPLACE_EXISTING);
         } catch (IOException e) {
-            e.printStackTrace();
-//            throw new FileStorageException("Could not store file : " + multipartFile.getOriginalFilename());
+            // Todo 커스텀 익셉션 처리
             throw new RuntimeException("Could not store file : " + multipartFile.getOriginalFilename());
         }
 
-    }
-
-    public boolean chkExtension(MultipartFile multipartFile) {
-        String extension = StringUtils.getFilenameExtension(multipartFile.getOriginalFilename());
-        return extension.equals("csv");
     }
 
 

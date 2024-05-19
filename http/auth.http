@@ -19,11 +19,14 @@ Content-Type: application/json
   "password": "qwer1234"
 }
 
-
 ### 현재 로그인 사용자 정보 불러오기
 
 GET http://localhost:9999/user/currentInfo
 
 ### 로그아웃
 
-GET http://localhost:9999/user/logout
+GET http://localhost:9999/auth/logout
+
+### 인증상태 체크
+
+GET http://localhost:9999/auth/status

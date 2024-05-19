@@ -49,8 +49,8 @@ public class UserProfile {
     private String nickName;
 
     /* 프로필이미지 경로 */
-    @Column(name="PROFILE_IMAGE")
-    private String profileImage;
+//    @Column(name="PROFILE_IMAGE")
+//    private String profileImage;
 
     /* 생일 */
     @Column(name="BIRTH")
@@ -71,7 +71,7 @@ public class UserProfile {
 
     @Builder
     public UserProfile(User user, String address, String phone, String gender,
-                       String nickName, String profileImage, String birth, String nation,
+                       String nickName, String birth, String nation,
                        LocalDateTime createdAt, LocalDateTime updateDate)
     {
         this.user = user;
@@ -79,7 +79,7 @@ public class UserProfile {
         this.phone = phone;
         this.gender = gender;
         this.nickName = nickName;
-        this.profileImage = profileImage;
+//        this.profileImage = profileImage;
         this.birth = birth;
         this.nation = nation;
         this.createdAt = createdAt;

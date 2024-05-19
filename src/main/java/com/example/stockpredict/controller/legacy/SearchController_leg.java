@@ -9,26 +9,26 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController
+//@RestController
 @RequiredArgsConstructor
-public class SearchController {
+public class SearchController_leg {
 
     private final ModelService modelService;
 
     /* 데이터 결과 리스트(CSV형태) */
-    @PostMapping("/showSearchResult")
+//    @PostMapping("/showSearchResult")
     public String showSearchResult(@RequestBody StockSearchRequest req){
         return modelService.showSearchResult(req.getTicker(),req.getStart_date(),req.getEnd_date());
     }
 
     /* 폴더 내 CSV목록 */
-    @GetMapping("/showCsvList")
+//    @GetMapping("/showCsvList")
     public String[] showCsvList(){
         return modelService.showCsvList();
     }
 
     /* 폴더 내 모델 리스트 */
-    @GetMapping("/showModelList")
+//    @GetMapping("/showModelList")
     public String[] showModelList(){
         return modelService.showModelList();
     }

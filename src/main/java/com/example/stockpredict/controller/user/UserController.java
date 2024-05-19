@@ -15,15 +15,16 @@ public class UserController {
 
     private final UserService userService;
 
+
+    /*
+     * 로그인, 로그아웃 => SecurityConfig
+     * */
+
     /* 회원가입 */
     @PostMapping("/join")
     public void join(@RequestBody @Valid UserJoinRequest userJoinRequest){
         userService.userJoin(userJoinRequest);
     }
-
-    /*
-    * 로그인, 로그아웃 => SecurityConfig
-    * */
 
     /* 현재 로그인 사용자 정보 */
     @GetMapping("/currentInfo")
