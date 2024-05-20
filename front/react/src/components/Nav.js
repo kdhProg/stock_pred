@@ -23,19 +23,19 @@ const Nav = () => {
     /*  Todo 마이페이지 만들기 */
     return (
         <div>
-            <div>
-                <Link to="/">Home</Link>
-                {isAuthenticated ? (
-                    <div>
-                        <Link to="/logout">Logout</Link>
-                    </div>
-                ) : (
-                    <div>
-                        <Link to="/Join">Join</Link>
-                        <Link to="/login">Login</Link>
-                    </div>
-                )}
-            </div>
+            <Link to="/">Home</Link>
+            <input type="text"/>
+            {isAuthenticated ? (
+                <div>
+
+                    <Link to="/logout">Logout</Link>
+                </div>
+            ) : (
+                <div>
+                    <Link to="/Join">Join</Link>
+                    <Link to="/login">Login</Link>
+                </div>
+            )}
         </div>
     );
 };

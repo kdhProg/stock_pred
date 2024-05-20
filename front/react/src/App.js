@@ -7,6 +7,7 @@ import Login from "./components/Login";
 import Logout from "./components/Logout";
 import Join from "./components/Join";
 import Nav from "./components/Nav"
+import SearchBox from "./components/SearchBox";
 
 
 function App() {

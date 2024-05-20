@@ -1,4 +1,4 @@
-package com.example.stockpredict.controller;
+package com.example.stockpredict.controller.exception;
 
 import com.example.stockpredict.exception.ExceptionInterface;
 import com.example.stockpredict.response.error.ErrorResponse;
