@@ -4,6 +4,8 @@ const Logout = () => {
 
     const doLogout = async () => {
         const resp = await axios.get(`/auth/logout`)
+        alert("로그아웃 성공")
+        window.location.replace("/");
     };
 
     return (

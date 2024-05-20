@@ -1,10 +1,9 @@
 import React, {useState} from 'react';
 import axios from "axios";
-import { useNavigate } from 'react-router-dom';
+
 
 const Login = () => {
 
-    const navigate = useNavigate();
 
     const [loginReq, setLoginReq] = useState({
         userAccount: '',
@@ -23,8 +22,10 @@ const Login = () => {
 
     const doLogin = async () => {
         await axios.post(`/auth/login`, loginReq)
-            .then((response) =>
-                navigate('/')
+            .then((response) =>{
+                    alert("로그인 성공")
+                    window.location.replace("/");
+            }
             )
             .catch((err) => {
                 console.log(err.message);

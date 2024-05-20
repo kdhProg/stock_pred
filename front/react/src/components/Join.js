@@ -1,10 +1,7 @@
 import React, { useState } from 'react';
 import axios from "axios";
-import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
-
-    const navigate = useNavigate();
 
         const [userJoinReq, setUserJoinReq] = useState({
                 userAccount: '',
@@ -32,7 +29,7 @@ const Login = () => {
             await axios.post(`/user/join`, userJoinReq)
                 .then(()=>{
                     alert("회원가입 성공")
-                    navigate('/')
+                    window.location.replace("/");
                 })
                 .catch((err) => {
                     console.log(err.message);
