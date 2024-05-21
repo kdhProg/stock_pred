@@ -12,7 +12,7 @@ public class DailyStockListInitializer {
     /* todayStockList.py를 실행 - stock_property_files에 오늘 주식 목록 CSV 저장 */
     /* fixedDelay에 constant 사용 불가 */
     @Scheduled(fixedDelay = (1000 * 60 * 60 * 24))
-    public void run() {
+    public void mkDailyStockListCsv() {
         try {
 
             String PATH = ".\\python_modules\\pykrx\\todayStockList.py";

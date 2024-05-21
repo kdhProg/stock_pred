@@ -1,6 +1,7 @@
 import {Link} from "react-router-dom";
 import React, {useEffect, useState} from 'react';
 import axios from "axios";
+import StockSearchBox from "./StockSearchBox";
 
 const Nav = () => {
 
@@ -24,17 +25,16 @@ const Nav = () => {
     return (
         <div>
             <Link to="/">Home</Link>
-            <input type="text"/>
             {isAuthenticated ? (
-                <div>
-
+                <span>
+                    <StockSearchBox/>
                     <Link to="/logout">Logout</Link>
-                </div>
+                </span>
             ) : (
-                <div>
+                <span>
                     <Link to="/Join">Join</Link>
                     <Link to="/login">Login</Link>
-                </div>
+                </span>
             )}
         </div>
     );

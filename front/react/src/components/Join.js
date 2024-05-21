@@ -15,7 +15,7 @@ const Login = () => {
         });
 
         const { userAccount, password,address , phone
-        ,gender ,nickName ,birth ,nation   } = userJoinReq; //비구조화 할당
+        ,gender ,nickName ,birth ,nation   } = userJoinReq;
 
         const onChange = (event) => {
                 const { value, name } = event.target;
