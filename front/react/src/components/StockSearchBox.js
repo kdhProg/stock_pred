@@ -1,30 +1,29 @@
 import React, {useState} from 'react';
+import {useDispatch, useSelector} from "react-redux";
+import { updateString } from '../redux/stringSlice';
+import { useNavigate } from 'react-router-dom';
 
 const StockSearchBox = ()=>{
 
-    const [schReq, setSchReq] = useState({
-        keyword: ''
-    });
+    const navigate = useNavigate();
 
-    const { keyword } = schReq;
+    const [inputValue, setInputValue] = useState('');
+    const dispatch = useDispatch();
 
-    const onChange = (event) => {
-        const { value, name } = event.target;
-        setSchReq({
-            ...schReq,
-            [name]: value,
-        });
+    const handleButtonClick = () => {
+        dispatch(updateString(inputValue));
+        navigate("/schStock")
     };
 
-    const doSearch = () => {
-        /* 특정 페이지로 이동해서 + 키워드 넘겨주기 */
-        window.location.replace("/schStock");
-    };
 
     return(
         <span>
-            <input type="text" name="keyword" value={keyword} onChange={onChange} placeholder="주식명 검색"/>
-            <button onClick={doSearch}>검색</button>
+          <input
+              type="text"
+              value={inputValue}
+              onChange={(e) => setInputValue(e.target.value)}
+          />
+          <button onClick={handleButtonClick}>Update String</button>
         </span>
     )
 }

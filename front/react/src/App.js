@@ -11,18 +11,19 @@ import StockSearchPage from "./pages/StockSearchPage";
 
 
 function App() {
+
   return (
       <BrowserRouter>
-        <Header/>
-        <Nav/>
-        <Routes>
-          <Route path="/" element={<Home/>}/>
-          <Route path="/login" element={<Login/>}/>
-          <Route path="/logout" element={<Logout/>}/>
-          <Route path="/Join" element={<Join/>}/>
-          <Route path="/schStock" element={<StockSearchPage/>}/>
-        </Routes>
-        <Footer/>
+          <Header/>
+          <Nav/>
+          <Routes>
+              <Route path="/" element={<Home/>}/>
+              <Route path="/login" element={<Login/>}/>
+              <Route path="/logout" element={<Logout/>}/>
+              <Route path="/Join" element={<Join/>}/>
+              <Route path="/schStock" element={<StockSearchPage/>}/>
+          </Routes>
+          <Footer/>
       </BrowserRouter>
   );
 }
