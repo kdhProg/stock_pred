@@ -1,0 +1,3 @@
+
+### 주식명 검색
+GET http://localhost:9999/pred/stockNameSearch?keyword=삼성

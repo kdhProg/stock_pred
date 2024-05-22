@@ -1,5 +1,6 @@
 package com.example.stockpredict.service.user;
 
+import com.example.stockpredict.config.security.UserPrincipal;
 import com.example.stockpredict.domain.user.User;
 import com.example.stockpredict.domain.user.UserPassword;
 import com.example.stockpredict.domain.user.UserProfile;
@@ -11,6 +12,7 @@ import com.example.stockpredict.repository.user.UserRepository;
 import com.example.stockpredict.repository.user.UserSubscriptionRepository;
 import com.example.stockpredict.request.user.UserJoinRequest;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +30,7 @@ public class UserService {
 
     private final PasswordEncoder passwordEncoder;
 
+    /* 회원가입 */
     public void userJoin(UserJoinRequest userJoinRequest) {
         Optional<User> userExist = userRepository.findByUserAccount(userJoinRequest.getUserAccount());
         if(userExist.isPresent()) {
@@ -70,4 +73,13 @@ public class UserService {
         userSubscriptionRepository.save(userSubscription);
     }
 
+    /* 현재 로그인 사용자 구독여부  무료:0  유료:1 */
+    public Integer getCurrentUserPlan(UserPrincipal userPrincipal) {
+        Optional<User> user = userRepository.findByUserAccount(userPrincipal.getUserAccount());
+        if(user.isPresent()) {
+            return user.get().getUserSubscription().getSubscriptionPlan();
+        }else{
+            throw new UsernameNotFoundException("User not found");
+        }
+    }
 }

@@ -50,4 +50,12 @@ public class UserSubscription {
         this.purchaseDate = purchaseDate;
         this.expirationDate = expirationDate;
     }
+
+    public void paidToFree(){
+        subscriptionPlan = 0;
+    }
+
+    public void freeToPaid(){
+        subscriptionPlan = 1;
+    }
 }

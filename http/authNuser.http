@@ -1,5 +1,5 @@
-### 회원가입
 
+### 회원가입
 POST http://localhost:9999/user/join
 Content-Type: application/json
 
@@ -10,7 +10,6 @@ Content-Type: application/json
 
 
 ### 로그인
-
 POST http://localhost:9999/auth/login
 Content-Type: application/json
 
@@ -20,17 +19,23 @@ Content-Type: application/json
 }
 
 ### 현재 로그인 사용자 정보 불러오기
+GET http://localhost:9999/user/currentUserAccount
 
-GET http://localhost:9999/user/currentInfo
+
+### 현재 로그인 사용자 구독여부 0 or 1
+GET http://localhost:9999/user/currentUserPlan
+
+
+### 현재 로그인 사용자 구독변경 무료 > 유료
+PATCH http://localhost:9999/payment/changeUserPlan
+
 
 ### 로그아웃
-
 GET http://localhost:9999/auth/logout
 
-### 인증상태 체크
 
+### 인증상태 체크
 GET http://localhost:9999/auth/status
 
-### 주식명 검색
-GET http://localhost:9999/pred/stockNameSearch?keyword=삼성
+
 

@@ -26,10 +26,16 @@ public class UserController {
         userService.userJoin(userJoinRequest);
     }
 
-    /* 현재 로그인 사용자 정보 */
-    @GetMapping("/currentInfo")
+    /* 현재 로그인 사용자 정보(아이디)*/
+    @GetMapping("/currentUserAccount")
     public String getUserInfo(@AuthenticationPrincipal UserPrincipal userPrincipal){
         return userPrincipal.getUserAccount();
+    }
+
+    /* 현재 로그인 사용자 구독여부  무료:0  유료:1 */
+    @GetMapping("/currentUserPlan")
+    public Integer currentUserPlan(@AuthenticationPrincipal UserPrincipal userPrincipal){
+        return userService.getCurrentUserPlan(userPrincipal);
     }
 
 

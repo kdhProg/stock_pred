@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
-import {useDispatch, useSelector} from "react-redux";
-import { updateString } from '../redux/stringSlice';
-import { useNavigate } from 'react-router-dom';
+import {useDispatch} from "react-redux";
+import {updateSchKW} from '../redux/stringSlice';
+import {useNavigate} from 'react-router-dom';
 
 const StockSearchBox = ()=>{
 
@@ -11,7 +11,7 @@ const StockSearchBox = ()=>{
     const dispatch = useDispatch();
 
     const handleButtonClick = () => {
-        dispatch(updateString(inputValue));
+        dispatch(updateSchKW(inputValue));
         navigate("/schStock")
     };
 
@@ -23,7 +23,7 @@ const StockSearchBox = ()=>{
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
           />
-          <button onClick={handleButtonClick}>Update String</button>
+          <button onClick={handleButtonClick}>검색하기</button>
         </span>
     )
 }

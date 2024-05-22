@@ -5,11 +5,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -19,46 +17,7 @@ public class PredictService {
 
     private final ObjectMapper objectMapper;
 
-    /* 주식목록 CSV를 읽어 List 반환 */
-//    public List<String[]> getDailyStockCsv(){
-//        List<String[]> records = new ArrayList<>();
-//        String line;
-//        String csvSeparator = ",";
-//
-//        try (BufferedReader br = new BufferedReader(new FileReader(DAILY_STOCK_FILEPATH))) {
-//            while ((line = br.readLine()) != null) {
-//                String[] values = line.split(csvSeparator);
-//                records.add(values);
-//            }
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//
-//        return records;
-//
-//    }
-//
-//    /* 리스트를 받아 키워드 검색 */
-//    public List<String> searchWithKeyword(List<String> list, String keyword) {
-//        return list.stream()
-//                .filter(str -> str.contains(keyword))
-//                .collect(Collectors.toList());
-//    }
-
-    /* 특정 키워드가 있는 결과를 리스트에 담아 반환 */
-//    public List<String> dailyStockSearchHandler(String keyword) {
-//        List<String[]> records = getDailyStockCsv();
-//        List<String> companyNames = new ArrayList<>();
-//
-//        for (String[] record : records) {
-//            companyNames.add(record[2]);
-//        }
-//
-//        return searchWithKeyword(companyNames, keyword);
-//    }
-
-
-
+    /* 검색 키워드를 받아 ticker또는 기업명에 해당하는 JSON을 문자열 형태로 반환 */
     public String dailyStockSearchHandler(String keyword){
         try (BufferedReader br = new BufferedReader(new FileReader(DAILY_STOCK_FILEPATH))) {
             StringBuilder jsonBuilder = new StringBuilder();
@@ -101,4 +60,55 @@ public class PredictService {
         }
     }
 
+
+    /* 현재 이용 가능 모델들 - 무료 */
+    public String[] showFreeModelList() {
+        String PATH = ".\\python_modules\\predictionModels\\freeModels";
+        File dir = new File(PATH);
+
+        String[] filenames = dir.list();
+
+        return filenames;
+    }
+
+    /* 현재 이용 가능 모델들 - 유료 */
+    public String[] showPaidModelList() {
+        String PATH = ".\\python_modules\\predictionModels\\paidModels";
+        File dir = new File(PATH);
+
+        String[] filenames = dir.list();
+
+        return filenames;
+    }
+
+    /* ticker에 해당하는 주식 정보 반환 */
+    public String[] getTickerCorpInfo(String tickerInput) {
+        String[] rst = {"","",""};
+        try (BufferedReader br = new BufferedReader(new FileReader(DAILY_STOCK_FILEPATH))) {
+            String line;
+            // 첫 줄 (헤더) 건너뛰기
+            br.readLine();
+
+            while ((line = br.readLine()) != null) {
+                String[] values = line.split(",");
+
+                String ticker = values[1].trim();
+                String corpName = values[2].trim();
+                String market = values[3].trim();
+
+                if(ticker.equals(tickerInput)){
+                    rst[0] = ticker;
+                    rst[1] = corpName;
+                    rst[2] = market;
+                    return rst;
+                }
+
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+
+        }
+        return rst;
+    }
 }

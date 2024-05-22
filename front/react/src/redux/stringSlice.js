@@ -3,13 +3,16 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const stringSlice = createSlice({
     name: 'string',
-    initialState: { value: '' },
+    initialState: { schStockKeyword: '', choStockKeyword: ''  },
     reducers: {
-        updateString: (state, action) => {
-            state.value = action.payload;
+        updateSchKW: (state, action) => {
+            state.schStockKeyword = action.payload;
+        },
+        updateChoKW: (state, action) => {
+            state.choStockKeyword = action.payload;
         }
     }
 });
 
-export const { updateString } = stringSlice.actions;
+export const { updateSchKW, updateChoKW } = stringSlice.actions;
 export default stringSlice.reducer;

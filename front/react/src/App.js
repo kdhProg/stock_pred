@@ -8,6 +8,7 @@ import Logout from "./components/Logout";
 import Join from "./components/Join";
 import Nav from "./components/Nav"
 import StockSearchPage from "./pages/StockSearchPage";
+import StockPredictPage from "./pages/StockPredictPage";
 
 
 function App() {
@@ -16,14 +17,15 @@ function App() {
       <BrowserRouter>
           <Header/>
           <Nav/>
+          <Footer/>
           <Routes>
               <Route path="/" element={<Home/>}/>
               <Route path="/login" element={<Login/>}/>
               <Route path="/logout" element={<Logout/>}/>
               <Route path="/Join" element={<Join/>}/>
               <Route path="/schStock" element={<StockSearchPage/>}/>
+              <Route path="/predStock" element={<StockPredictPage/>}/>
           </Routes>
-          <Footer/>
       </BrowserRouter>
   );
 }
