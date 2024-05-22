@@ -6,7 +6,7 @@ import axios from "axios";
 const StockSearchPage = ()=>{
 
     const globalKeywordStore = useSelector(state => state.string.value);
-    const [schList, setSchList] = useState([]);
+    const [schList, setSchList] = useState({});
 
     const doSearch = async (keyword) => {
         await axios.get(`/pred/stockNameSearch?keyword=${keyword}`)
@@ -40,9 +40,12 @@ const StockSearchPage = ()=>{
         <div>
             <p>검색어 : {globalKeywordStore}</p>
             <ul>
-                {schList.map((elem) => (
-                    <li key={elem}>
-                        <p>{elem}</p>
+                {Object.entries(schList).map(([corpName, thicker]) => (
+                    <li>
+                        <span>{corpName}</span>
+                        &nbsp;&nbsp;
+                        <span>{thicker}</span>
+                        <button>choose</button>
                     </li>
                 ))}
             </ul>

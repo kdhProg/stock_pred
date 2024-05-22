@@ -30,3 +30,7 @@ GET http://localhost:9999/auth/logout
 ### 인증상태 체크
 
 GET http://localhost:9999/auth/status
+
+### 주식명 검색
+GET http://localhost:9999/pred/stockNameSearch?keyword=삼성
+
