@@ -1,8 +1,5 @@
 import axios from "axios";
 import React, {useEffect, useState} from "react";
-import StockSearchBox from "./StockSearchBox";
-import {Link} from "react-router-dom";
-
 
 
 const ModelSelect = () => {
@@ -37,6 +34,7 @@ const ModelSelect = () => {
     }
 
     /* 현재 사용자 구독여부 체크  무료:0  유료:1 */
+    /* Todo 구독여부 체크 메서드 분리하기 */
     const chkUserPlan = async () => {
         await axios.get(`/user/currentUserPlan`)
             .then((resp) => {
@@ -53,6 +51,10 @@ const ModelSelect = () => {
     useEffect(() => {
         getFreeModels();
         getPaidModels();
+        chkUserPlan();
+        if(isPaidPlan){
+            setIsPaidPlan(true)
+        }
     }, []);
 
     return(

@@ -4,10 +4,7 @@ import com.example.stockpredict.config.security.UserPrincipal;
 import com.example.stockpredict.service.payment.PaymentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -17,8 +14,9 @@ public class PaymentController {
     private final PaymentService paymentService;
 
     /* 유료회원 전환 */
-    @PatchMapping("/changeUserPlan")
-    public void changeUserPlan(@AuthenticationPrincipal UserPrincipal userPrincipal) {
-        paymentService.changeUserPlan(userPrincipal.getUserAccount());
+    /* PATCH로 할려했는데 PUT만 정상작동함 Todo : 이유탐구 */
+    @PutMapping("/changeUserPlanFreeToPaid")
+    public void changeUserPlanFreeToPaid(@AuthenticationPrincipal UserPrincipal userPrincipal) {
+        paymentService.changeUserPlanFreeToPaid(userPrincipal.getUserAccount());
     }
 }

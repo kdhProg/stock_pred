@@ -27,7 +27,7 @@ GET http://localhost:9999/user/currentUserPlan
 
 
 ### 현재 로그인 사용자 구독변경 무료 > 유료
-PATCH http://localhost:9999/payment/changeUserPlan
+PUT http://localhost:9999/payment/changeUserPlanFreeToPaid
 
 
 ### 로그아웃

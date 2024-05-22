@@ -17,7 +17,7 @@ public class PaymentService {
 
     /* 유료회원 전환 */
     @Transactional
-    public void changeUserPlan(String userAccount) {
+    public void changeUserPlanFreeToPaid(String userAccount) {
 
         /*
         *
@@ -27,6 +27,5 @@ public class PaymentService {
         * */
         Optional<User> user = userRepository.findByUserAccount(userAccount);
         user.get().getUserSubscription().freeToPaid();
-
     }
 }

@@ -9,6 +9,7 @@ import Join from "./components/Join";
 import Nav from "./components/Nav"
 import StockSearchPage from "./pages/StockSearchPage";
 import StockPredictPage from "./pages/StockPredictPage";
+import SubscribePage from "./pages/SubscribePage";
 
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
               <Route path="/Join" element={<Join/>}/>
               <Route path="/schStock" element={<StockSearchPage/>}/>
               <Route path="/predStock" element={<StockPredictPage/>}/>
+              <Route path="/subscribePage" element={<SubscribePage/>}/>
           </Routes>
       </BrowserRouter>
   );
