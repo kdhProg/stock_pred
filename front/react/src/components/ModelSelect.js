@@ -33,12 +33,18 @@ const ModelSelect = () => {
             })
     }
 
-    /* 현재 사용자 구독여부 체크  무료:0  유료:1 */
-    /* Todo 구독여부 체크 메서드 분리하기 */
-    const chkUserPlan = async () => {
-        await axios.get(`/user/currentUserPlan`)
+
+
+
+    useEffect(() => {
+        getFreeModels();
+        getPaidModels();
+
+        /* 현재 사용자 구독여부 체크  무료:0  유료:1 */
+        /* Todo 구독여부 체크 메서드 분리하기 */
+        axios.get(`/user/currentUserPlan`)
             .then((resp) => {
-                    if(resp.data === '1'){
+                    if(resp.data === 1){
                         setIsPaidPlan(true)
                     }
                 }
@@ -46,15 +52,6 @@ const ModelSelect = () => {
             .catch((err) => {
                 console.log(err)
             })
-    }
-
-    useEffect(() => {
-        getFreeModels();
-        getPaidModels();
-        chkUserPlan();
-        if(isPaidPlan){
-            setIsPaidPlan(true)
-        }
     }, []);
 
     return(
@@ -64,7 +61,7 @@ const ModelSelect = () => {
                 <ul>
                     {freeModels.map((modelName) => (
                         <li key={modelName}>
-                            <input type="radio" name="freeModel" value={modelName}/>
+                            <input type="radio" name="predModel" value={modelName}/>
                             <label htmlFor={modelName}>{modelName}</label>
                         </li>
                     ))}
@@ -77,7 +74,7 @@ const ModelSelect = () => {
                     <ul>
                         {paidModels.map((modelName) => (
                             <li key={modelName}>
-                                <input type="radio" name="paidModel" value={modelName}/>
+                                <input type="radio" name="predModel" value={modelName}/>
                                 <label htmlFor={modelName}>{modelName}</label>
                             </li>
                         ))}
@@ -85,7 +82,6 @@ const ModelSelect = () => {
                 ) : (
                     <div>
                         <p>유료회원 전용입니다.</p>
-                        <button>돈을 내라!</button>
                     </div>
 
                 )}
