@@ -47,7 +47,7 @@ PUT http://localhost:9999/user/updateUser
 Content-Type: application/json
 
 {
-  "userAccount": "test123412341234",
+  "userAccount": "eqweqwe",
   "phone": "123123123",
   "nickName": "TESTNAME"
 }

@@ -91,9 +91,11 @@ public class UserService {
     public void updateUser(String currentUser,UserUpdateRequest req) {
         // Todo 에러 해결하기
         User user = userRepository.findByUserAccount(currentUser).get();
+        UserProfile profile = user.getUserProfile();
 
         // 새로운 계정으로 변경
         user.setUserAccount(req.getUserAccount());
+        profile.edit(req);
     }
 
 
