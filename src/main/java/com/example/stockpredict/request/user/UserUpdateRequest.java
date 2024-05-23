@@ -4,18 +4,19 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.Builder;
 import lombok.Getter;
 
-@Builder
 @Getter
-public class UserJoinRequest {
+@Builder
+public class UserUpdateRequest {
 
-    /* 필수 컬럼 - 아이디 + 비밀번호 */
-    @NotBlank(message = "아이디는 필수입니다")
+    /*
+    * 수정가능한 정보들 :
+    * 아이디 + 주소, 전화번호, 성별, 별명, 생일, 국가
+    *
+    * */
+
+    /* 바꿀 아이디 */
+    /* 현재 유저 정보는 로그인 기반 AuthenticationPrincipal으로 찾음 */
     private String userAccount;
-
-    @NotBlank(message = "비밀번호는 필수입니다")
-    private String password;
-
-
 
     /* 주소 */
     private String address;
@@ -37,12 +38,4 @@ public class UserJoinRequest {
 
     /* 국가 */
     private String nation;
-
-
-    /* 사용자 플랜 */
-    @Builder.Default
-    private Integer subscriptionPlan = 0;
-
-
-
 }

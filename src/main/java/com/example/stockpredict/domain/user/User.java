@@ -1,5 +1,6 @@
 package com.example.stockpredict.domain.user;
 
+import com.example.stockpredict.request.user.UserUpdateRequest;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
@@ -16,6 +17,7 @@ public class User {
     /* 기본키 id */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="USER_ID")
     private Long id;
 
     /* 매핑 필드 */
@@ -37,6 +39,11 @@ public class User {
     @Builder
     public User(String userAccount){
         this.userAccount = userAccount;
+    }
+
+
+    public void setUserAccount(String newAccount) {
+        userAccount = newAccount;
     }
 
 

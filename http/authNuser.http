@@ -38,4 +38,17 @@ GET http://localhost:9999/auth/logout
 GET http://localhost:9999/auth/status
 
 
+### 아이디 중복 체크
+GET http://localhost:9999/user/chkIdDuplicate?id=test12345
+
+
+### 유저정보 수정
+PUT http://localhost:9999/user/updateUser
+Content-Type: application/json
+
+{
+  "userAccount": "test123412341234",
+  "phone": "123123123",
+  "nickName": "TESTNAME"
+}
 

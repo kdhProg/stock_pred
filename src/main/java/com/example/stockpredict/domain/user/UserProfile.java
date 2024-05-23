@@ -1,5 +1,6 @@
 package com.example.stockpredict.domain.user;
 
+import com.example.stockpredict.request.user.UserUpdateRequest;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
@@ -27,7 +28,7 @@ public class UserProfile {
 
     /* 외래키 */
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "USER_ACCOUNT", referencedColumnName = "USER_ACCOUNT")
+    @JoinColumn(name = "USER_ID", referencedColumnName = "USER_ID")
     private User user;
 
 
@@ -85,4 +86,20 @@ public class UserProfile {
         this.createdAt = createdAt;
         this.updateDate = updateDate;
     }
+
+
+    public void edit(UserUpdateRequest req)
+    {
+        address = req.getAddress();
+        phone = req.getPhone();
+        gender = req.getGender();
+        nickName = req.getNickName();
+//        this.profileImage = profileImage;
+        birth = req.getBirth();
+        nation = req.getNation();
+
+        updateDate = LocalDateTime.now();
+    }
+
+
 }
