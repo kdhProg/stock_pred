@@ -10,6 +10,7 @@ import Nav from "./components/Nav"
 import StockSearchPage from "./pages/StockSearchPage";
 import StockPredictPage from "./pages/StockPredictPage";
 import SubscribePage from "./pages/SubscribePage";
+import Mypage from "./pages/Mypage";
 
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
               <Route path="/schStock" element={<StockSearchPage/>}/>
               <Route path="/predStock" element={<StockPredictPage/>}/>
               <Route path="/subscribePage" element={<SubscribePage/>}/>
+              <Route path="/Mypage" element={<Mypage/>}/>
           </Routes>
       </BrowserRouter>
   );

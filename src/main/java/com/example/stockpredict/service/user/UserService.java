@@ -12,6 +12,7 @@ import com.example.stockpredict.repository.user.UserRepository;
 import com.example.stockpredict.repository.user.UserSubscriptionRepository;
 import com.example.stockpredict.request.user.UserJoinRequest;
 import com.example.stockpredict.request.user.UserUpdateRequest;
+import com.example.stockpredict.response.UserProfileResponse;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -93,10 +94,30 @@ public class UserService {
         User user = userRepository.findByUserAccount(currentUser).get();
         UserProfile profile = user.getUserProfile();
 
-        // 새로운 계정으로 변경
-        user.setUserAccount(req.getUserAccount());
+        // 아이디 값이 변경
+        if(!(req.getUserAccount() == null || req.getUserAccount().isEmpty())) {
+            user.setUserAccount(req.getUserAccount());
+        }
         profile.edit(req);
     }
 
 
+    /* 현재 로그인 한 사용자 선택정보 */
+    public UserProfileResponse currentUserProfile(String userAccount) {
+        User user = userRepository.findByUserAccount(userAccount).get();
+        UserProfile profile = user.getUserProfile();
+
+        UserProfileResponse resp = UserProfileResponse.builder()
+                .address(profile.getAddress())
+                .phone(profile.getPhone())
+                .gender(profile.getGender())
+                .nickName(profile.getNickName())
+                .birth(profile.getBirth())
+                .nation(profile.getNation())
+                .createdAt(profile.getCreatedAt())
+                .updateDate(profile.getUpdateDate())
+                .build();
+
+        return resp;
+    }
 }

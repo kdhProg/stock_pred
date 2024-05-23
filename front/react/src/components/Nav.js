@@ -58,6 +58,7 @@ const Nav = () => {
                 <span>
                     <StockSearchBox/>
                     <Link to="/logout">Logout</Link>
+                    <Link to="/Mypage">Mypage</Link>
                     {isPaidPlan ?(
                         <div>
                             <p>이미 유료계정입니다.</p>

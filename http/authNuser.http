@@ -42,12 +42,16 @@ GET http://localhost:9999/auth/status
 GET http://localhost:9999/user/chkIdDuplicate?id=test12345
 
 
+### 현재 유저 부가정보
+GET http://localhost:9999/user/currentUserProfile
+
+
 ### 유저정보 수정
 PUT http://localhost:9999/user/updateUser
 Content-Type: application/json
 
 {
-  "userAccount": "eqweqwe",
+  "userAccount": "test1234",
   "phone": "123123123",
   "nickName": "TESTNAME"
 }
