@@ -16,13 +16,15 @@ public class UserUpdateRequest {
 
     /* 바꿀 아이디 */
     /* 현재 유저 정보는 로그인 기반 AuthenticationPrincipal으로 찾음 */
+    @NotBlank(message = "아이디는 필수")
     private String userAccount;
+
+    /* 전화번호 */
+    @NotBlank(message = "전화번호는 필수")
+    private String phone;
 
     /* 주소 */
     private String address;
-
-    /* 전화번호 */
-    private String phone;
 
     /* 성별 */
     private String gender;

@@ -62,7 +62,7 @@ public class UserController {
     * ==> 아이디가 바뀐다면 로그아웃+로그인 하도록 해야할 듯
     * */
     @PutMapping("/updateUser")
-    public void updateUser(@RequestBody UserUpdateRequest userUpdateRequest
+    public void updateUser(@RequestBody @Valid UserUpdateRequest userUpdateRequest
     , @AuthenticationPrincipal UserPrincipal userPrincipal){
         userService.updateUser(userPrincipal.getUserAccount(),userUpdateRequest);
     }

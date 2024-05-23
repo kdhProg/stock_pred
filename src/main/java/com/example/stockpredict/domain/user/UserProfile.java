@@ -31,15 +31,17 @@ public class UserProfile {
     @JoinColumn(name = "USER_ID", referencedColumnName = "USER_ID")
     private User user;
 
+    /* 전화번호 - 필수정보 */
+    @Column(name="PHONE",unique=true,nullable = false)
+    private String phone;
 
+    /*
+    * 하단은 선택입력가능 정보(null허용)
+    * */
 
     /* 주소 */
     @Column(name="ADDRESS")
     private String address;
-
-    /* 전화번호 */
-    @Column(name="PHONE")
-    private String phone;
 
     /* 성별 */
     @Column(name="GENDER")
