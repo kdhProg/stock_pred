@@ -12,12 +12,17 @@ import com.example.stockpredict.repository.user.UserRepository;
 import com.example.stockpredict.repository.user.UserSubscriptionRepository;
 import com.example.stockpredict.request.user.UserJoinRequest;
 import com.example.stockpredict.request.user.UserUpdateRequest;
-import com.example.stockpredict.response.UserProfileResponse;
+import com.example.stockpredict.response.user.UserFindByPhoneResponse;
+import com.example.stockpredict.response.user.UserProfileResponse;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
@@ -30,6 +35,8 @@ public class UserService {
     private final UserPasswordRepository userPasswordRepository;
     private final UserProfileRepository userProfileRepository;
     private final UserSubscriptionRepository userSubscriptionRepository;
+
+    private final ObjectMapper objectMapper;
 
     private final PasswordEncoder passwordEncoder;
 
@@ -118,6 +125,35 @@ public class UserService {
                 .updateDate(profile.getUpdateDate())
                 .build();
 
+        return resp;
+    }
+
+    /* 아이디 찾기 - 전화번호 기반 유저 찾기 */
+    public UserFindByPhoneResponse findUserByPhone(String inputPhoneJsonStr) throws JsonProcessingException {
+
+        /*
+        String이 다음과 같은 형태로 들어옴
+        {
+            "inputPhone": "12341234"
+        }
+
+        */
+
+        JsonNode jsonNode = objectMapper.readTree(inputPhoneJsonStr);
+        String inputPhone = jsonNode.get("inputPhone").asText();
+
+
+        UserFindByPhoneResponse resp = new UserFindByPhoneResponse();
+        Optional<UserProfile> userProfile = userProfileRepository.findByPhone(inputPhone);
+
+        if(userProfile.isPresent()) {
+            User user = userProfile.get().getUser();
+            resp.setIsUserExists(true);
+            resp.setUserAccount(user.getUserAccount());
+        }else{
+            resp.setIsUserExists(false);
+            resp.setUserAccount("");
+        }
         return resp;
     }
 }

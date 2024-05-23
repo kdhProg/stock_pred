@@ -5,7 +5,7 @@ const Login = () => {
 
     /*
     * Todo 전화번호 인증기능 넣기
-    *
+    * Todo 필수값 넣지 않으면 버튼 비활성화
     * */
 
         const [userJoinReq, setUserJoinReq] = useState({

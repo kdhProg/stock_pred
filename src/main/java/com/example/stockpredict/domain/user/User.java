@@ -20,6 +20,12 @@ public class User {
     @Column(name="USER_ID")
     private Long id;
 
+    /*
+    * Todo 고려해보기
+    * - 하단에 매핑된 3개 필드는 각각 즉시로딩(EAGER)로 설정되어있다.
+    * - 1:1 양방향 매핑 상태에서 지연로딩은 종종 LazyInitializationException를 유발한다
+    * - 성능상 즉시로딩도 괜찮은가?
+    * */
     /* 매핑 필드 */
     @OneToOne(mappedBy = "user",cascade = ALL)
     private UserPassword userPassword;

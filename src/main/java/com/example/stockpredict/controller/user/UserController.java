@@ -3,8 +3,10 @@ package com.example.stockpredict.controller.user;
 import com.example.stockpredict.config.security.UserPrincipal;
 import com.example.stockpredict.request.user.UserJoinRequest;
 import com.example.stockpredict.request.user.UserUpdateRequest;
-import com.example.stockpredict.response.UserProfileResponse;
+import com.example.stockpredict.response.user.UserFindByPhoneResponse;
+import com.example.stockpredict.response.user.UserProfileResponse;
 import com.example.stockpredict.service.user.UserService;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -65,6 +67,13 @@ public class UserController {
     public void updateUser(@RequestBody @Valid UserUpdateRequest userUpdateRequest
     , @AuthenticationPrincipal UserPrincipal userPrincipal){
         userService.updateUser(userPrincipal.getUserAccount(),userUpdateRequest);
+    }
+
+
+    /* 아이디 찾기 - 전화번호 기반 유저 찾기 */
+    @GetMapping("/findUserByPhone")
+    public UserFindByPhoneResponse findUserByPhone(@RequestBody String inputPhone) throws JsonProcessingException {
+        return userService.findUserByPhone(inputPhone);
     }
 
 

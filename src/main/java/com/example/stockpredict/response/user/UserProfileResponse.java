@@ -1,7 +1,5 @@
-package com.example.stockpredict.response;
+package com.example.stockpredict.response.user;
 
-import com.example.stockpredict.domain.user.User;
-import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 

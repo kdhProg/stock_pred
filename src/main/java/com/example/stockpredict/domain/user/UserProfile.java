@@ -27,7 +27,7 @@ public class UserProfile {
     private Long id;
 
     /* 외래키 */
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "USER_ID", referencedColumnName = "USER_ID")
     private User user;
 

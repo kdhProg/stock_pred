@@ -12,4 +12,6 @@ public interface UserProfileRepository extends JpaRepository<UserProfile, Intege
 
     Optional<UserProfile> findByUser(User user);
 
+    Optional<UserProfile> findByPhone(String phone);
+
 }
