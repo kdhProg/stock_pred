@@ -129,19 +129,7 @@ public class UserService {
     }
 
     /* 아이디 찾기 - 전화번호 기반 유저 찾기 */
-    public UserFindByPhoneResponse findUserByPhone(String inputPhoneJsonStr) throws JsonProcessingException {
-
-        /*
-        String이 다음과 같은 형태로 들어옴
-        {
-            "inputPhone": "12341234"
-        }
-
-        */
-
-        JsonNode jsonNode = objectMapper.readTree(inputPhoneJsonStr);
-        String inputPhone = jsonNode.get("inputPhone").asText();
-
+    public UserFindByPhoneResponse findUserByPhone(String inputPhone){
 
         UserFindByPhoneResponse resp = new UserFindByPhoneResponse();
         Optional<UserProfile> userProfile = userProfileRepository.findByPhone(inputPhone);

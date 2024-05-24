@@ -59,10 +59,6 @@ Content-Type: application/json
 
 
 ### 아이디 찾기 - 전화번호 기반 유저 찾기
-GET http://localhost:9999/user/findUserByPhone
-Content-Type: application/json
+POST http://localhost:9999/user/findUserByPhone?inputPhone=12341234
 
-{
-  "inputPhone": "12341234"
-}
 

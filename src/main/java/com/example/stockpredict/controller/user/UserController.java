@@ -62,6 +62,7 @@ public class UserController {
     * - 비밀번호는 재발급 형태로 구현
     * - 아이디를 변경하고 직후 다시 변경시도할 경우 서버의 세션정보(유저네임 등)은 바뀌지 않음
     * ==> 아이디가 바뀐다면 로그아웃+로그인 하도록 해야할 듯
+    *
     * */
     @PutMapping("/updateUser")
     public void updateUser(@RequestBody @Valid UserUpdateRequest userUpdateRequest
@@ -71,8 +72,8 @@ public class UserController {
 
 
     /* 아이디 찾기 - 전화번호 기반 유저 찾기 */
-    @GetMapping("/findUserByPhone")
-    public UserFindByPhoneResponse findUserByPhone(@RequestBody String inputPhone) throws JsonProcessingException {
+    @PostMapping("/findUserByPhone")
+    public UserFindByPhoneResponse findUserByPhone(@RequestParam(name = "inputPhone") String inputPhone){
         return userService.findUserByPhone(inputPhone);
     }
 

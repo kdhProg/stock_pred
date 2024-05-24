@@ -11,6 +11,7 @@ import StockSearchPage from "./pages/StockSearchPage";
 import StockPredictPage from "./pages/StockPredictPage";
 import SubscribePage from "./pages/SubscribePage";
 import Mypage from "./pages/Mypage";
+import UserFindIdForm from "./components/UserFindIdForm";
 
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
               <Route path="/predStock" element={<StockPredictPage/>}/>
               <Route path="/subscribePage" element={<SubscribePage/>}/>
               <Route path="/Mypage" element={<Mypage/>}/>
+              <Route path="/UserFindIdForm" element={<UserFindIdForm/>}/>
           </Routes>
       </BrowserRouter>
   );

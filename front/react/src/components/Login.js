@@ -1,9 +1,12 @@
 import React, {useState} from 'react';
 import axios from "axios";
+import {useNavigate} from "react-router-dom";
 
 
 const Login = () => {
 
+
+    const navigate = useNavigate();
 
     const [loginReq, setLoginReq] = useState({
         userAccount: '',
@@ -34,6 +37,11 @@ const Login = () => {
     };
 
 
+    const findId = ()=>{
+        navigate("/UserFindIdForm")
+    }
+
+
 
 
     return (
@@ -41,6 +49,7 @@ const Login = () => {
             <input type="text" placeholder="ID" name="userAccount" value={userAccount} onChange={onChange}/>
             <input type="text" placeholder="PW" name="password" value={password} onChange={onChange}/>
             <button onClick={doLogin}>Login</button>
+            <button onClick={findId}>아이디 찾기</button>
         </div>
     );
 };
