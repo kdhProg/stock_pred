@@ -1,5 +1,5 @@
 
-### 회원가입
+### 회원가입 1
 POST http://localhost:9999/user/join
 Content-Type: application/json
 
@@ -9,14 +9,33 @@ Content-Type: application/json
   "phone": "12341234"
 }
 
+### 회원가입 2
+POST http://localhost:9999/user/join
+Content-Type: application/json
 
-### 로그인
+{
+  "userAccount": "qwe",
+  "password": "qwe",
+  "phone": "112233"
+}
+
+
+### 로그인 1
 POST http://localhost:9999/auth/login
 Content-Type: application/json
 
 {
   "userAccount": "test1234",
   "password": "qwer1234"
+}
+
+### 로그인 2
+POST http://localhost:9999/auth/login
+Content-Type: application/json
+
+{
+  "userAccount": "qwe",
+  "password": "qwe"
 }
 
 ### 현재 로그인 사용자 정보 불러오기

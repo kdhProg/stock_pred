@@ -2,6 +2,7 @@ import {Link, useNavigate} from "react-router-dom";
 import React, {useEffect, useState} from 'react';
 import axios from "axios";
 import StockSearchBox from "./StockSearchBox";
+import {chkUserSubsPlan} from "../functions/chkUserSubsPlan";
 
 const Nav = () => {
 
@@ -15,26 +16,12 @@ const Nav = () => {
 
 
     useEffect(async () => {
-        /* Todo 현재 인증여부하는 메서드 분리하기 */
         await axios.get(`/auth/status`)
-            .then((response) =>{
-                    if(response.data.authenticated){
+            .then(async (response) => {
+                    if (response.data.authenticated) {
                         setIsAuthenticated(true)
-
-                        /* 현재 사용자 구독여부 체크  무료:0  유료:1 */
-                        /* Todo 구독여부 체크 메서드 분리하기 */
-                        axios.get(`/user/currentUserPlan`)
-                            .then((resp) => {
-                                    if(resp.data === 1){
-                                        setIsPaidPlan(true)
-                                    }
-                                }
-                            )
-                            .catch((err) => {
-                                console.log(err)
-                            })
-
-
+                        const isPaid = await chkUserSubsPlan();
+                        setIsPaidPlan(isPaid)
                     }
                 }
             )
