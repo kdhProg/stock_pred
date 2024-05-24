@@ -2,6 +2,19 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 
 const UserInfoChangeForm = () => {
+
+    /* 필수 컬럼 - 아이디, 비밀번호, 전화번호 */
+    let isButtonDisabled = true;
+
+    const chkIsEssentialValExists = ()=>{
+        if (proUpdReq.userAccount.trim().length !== 0 &&
+            proUpdReq.phone.trim().length !== 0) {
+            isButtonDisabled = false;
+        } else {
+            isButtonDisabled = true;
+        }
+    }
+
     /* userProfile 받는 변수 */
     const [curUserProfile, setCurUserProfile] = useState({});
 
@@ -72,18 +85,26 @@ const UserInfoChangeForm = () => {
     };
 
     const doProfileUpdate = async () => {
-        try {
-            await axios.put(`/user/updateUser`, proUpdReq);
-            alert("회원 데이터 수정 성공 - 다시 로그인 ㄱ");
-            await axios.get(`/auth/logout`);
-            /*
-             * 로그아웃
-             * Todo : 아이디를 유지했을 경우 로그아웃 굳이 안해도 되게 하기
-             * */
-            window.location.replace("/");
-        } catch (err) {
-            console.log(err.message);
+
+        chkIsEssentialValExists();
+
+        if(isButtonDisabled){
+            alert("아이디 / 전화번호 -> 필수!!")
+        }else{
+            try {
+                await axios.put(`/user/updateUser`, proUpdReq);
+                alert("회원 데이터 수정 성공 - 다시 로그인 ㄱ");
+                await axios.get(`/auth/logout`);
+                /*
+                 * 로그아웃
+                 * Todo : 아이디를 유지했을 경우 로그아웃 굳이 안해도 되게 하기
+                 * */
+                window.location.replace("/");
+            } catch (err) {
+                console.log(err.message);
+            }
         }
+
     };
 
     useEffect(() => {

@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 
 /*
 * 부가 정보 테이블
-* - 필수 입력값 아님
+* - 전화번호를 제외한 나머지는 필수 입력값 아님
 * */
 
 @Entity

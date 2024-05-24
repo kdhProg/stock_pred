@@ -1,13 +1,27 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import axios from "axios";
 
 const Login = () => {
 
     /*
     * Todo 전화번호 인증기능 넣기
-    * Todo 필수값 넣지 않으면 버튼 비활성화
     * */
 
+        /* 필수 컬럼 - 아이디, 비밀번호, 전화번호 */
+        let isButtonDisabled = true;
+
+        const chkIsEssentialValExists = ()=>{
+                if (userJoinReq.userAccount.trim().length !== 0 &&
+                    userJoinReq.password.trim().length !== 0 &&
+                    userJoinReq.phone.trim().length !== 0) {
+                        isButtonDisabled = false;
+                } else {
+                        isButtonDisabled = true;
+                }
+        }
+
+
+        /* request payload */
         const [userJoinReq, setUserJoinReq] = useState({
                 userAccount: '',
                 password: '',
@@ -31,14 +45,19 @@ const Login = () => {
         };
 
         const submitReq = async () => {
-            await axios.post(`/user/join`, userJoinReq)
-                .then(()=>{
-                    alert("회원가입 성공")
-                    window.location.replace("/");
-                })
-                .catch((err) => {
-                    console.log(err.message);
-                })
+                chkIsEssentialValExists();
+                if(isButtonDisabled){
+                        alert("아이디 / 비밀번호 / 전화번호 -> 필수!!")
+                }else{
+                        await axios.post(`/user/join`, userJoinReq)
+                            .then(()=>{
+                                    alert("회원가입 성공")
+                                    window.location.replace("/");
+                            })
+                            .catch((err) => {
+                                    console.log(err.message);
+                            })
+                }
         };
 
         return (
