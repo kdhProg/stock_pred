@@ -66,7 +66,6 @@ const UserInfoChangeForm = () => {
         try {
             const response = await axios.get(`/user/currentUserProfile`);
             setCurUserProfile(response.data);
-
             /* 프로필 데이터를 가져온 후 proUpdReq 상태 업데이트 */
             setProUpdReq({
                 userAccount: response.data.userAccount || '',
@@ -78,14 +77,12 @@ const UserInfoChangeForm = () => {
                 nation: response.data.nation || '',
             });
 
-
         } catch (err) {
             console.log(err.message);
         }
     };
 
     const doProfileUpdate = async () => {
-
         chkIsEssentialValExists();
 
         if(isButtonDisabled){

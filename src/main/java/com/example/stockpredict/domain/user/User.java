@@ -1,10 +1,13 @@
 package com.example.stockpredict.domain.user;
 
+import com.example.stockpredict.domain.post.board.Post;
 import com.example.stockpredict.request.user.UserUpdateRequest;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 import static jakarta.persistence.CascadeType.ALL;
 
@@ -26,7 +29,7 @@ public class User {
     * - 1:1 양방향 매핑 상태에서 지연로딩은 종종 LazyInitializationException를 유발한다
     * - 성능상 즉시로딩도 괜찮은가?
     * */
-    /* 매핑 필드 */
+    /* 연관관계 필드 */
     @OneToOne(mappedBy = "user",cascade = ALL)
     private UserPassword userPassword;
 
@@ -35,6 +38,9 @@ public class User {
 
     @OneToOne(mappedBy = "user",cascade = ALL)
     private UserSubscription userSubscription;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Post> posts;
 
 
     /* 유저 아이디 - 이메일 형식 */

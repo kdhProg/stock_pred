@@ -36,7 +36,6 @@ public class UserJoinRequest {
     /* 국가 */
     private String nation;
 
-
     /* 사용자 플랜 */
     @Builder.Default
     private Integer subscriptionPlan = 0;

@@ -41,6 +41,19 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
+
+    /*
+    * 임시 인메모리 관리자 권한
+    * */
+//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+//        auth.inMemoryAuthentication()
+//                .withUser("admin")
+//                .password(passwordEncoder().encode("admin123"))
+//                .roles("ADMIN");
+//    }
+
+
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 

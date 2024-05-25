@@ -97,14 +97,19 @@ public class UserService {
     /* 유저정보 수정 */
     @Transactional
     public void updateUser(String currentUser,UserUpdateRequest req) {
-        // Todo 에러 해결하기
+
         User user = userRepository.findByUserAccount(currentUser).get();
         UserProfile profile = user.getUserProfile();
 
-        // 아이디 값이 변경
-        if(!(req.getUserAccount() == null || req.getUserAccount().isEmpty())) {
-            user.setUserAccount(req.getUserAccount());
-        }
+        /*
+        * 20240525 변경사항 -> req에서 userAccount는 아이디변경여부에 관계없이 클라이언트에서 항상 값이 넘어옴
+        * => If문 제거
+        * */
+//        if(!(req.getUserAccount() == null || req.getUserAccount().isEmpty())) {
+//            user.setUserAccount(req.getUserAccount());
+//        }
+
+        user.setUserAccount(req.getUserAccount());
         profile.edit(req);
     }
 

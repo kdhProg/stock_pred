@@ -23,6 +23,10 @@ const Login = () => {
         });
     };
 
+    /*
+    * Todo 로그인 실패 시 로직 작성하기
+    * 
+    * */
     const doLogin = async () => {
         await axios.post(`/auth/login`, loginReq)
             .then((response) =>{
