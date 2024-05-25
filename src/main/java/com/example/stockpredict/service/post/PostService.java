@@ -8,11 +8,18 @@ import com.example.stockpredict.repository.post.PostRepository;
 import com.example.stockpredict.repository.user.UserRepository;
 import com.example.stockpredict.request.post.PostEditRequest;
 import com.example.stockpredict.request.post.PostSaveRequest;
+import com.example.stockpredict.request.post.PostSearchReqGetPostsDTO;
+import com.example.stockpredict.request.post.PostSearchRequest;
 import com.example.stockpredict.response.post.PostResponse;
-import com.example.stockpredict.service.user.UserService;
+import com.querydsl.core.types.Order;
+import com.querydsl.core.types.OrderSpecifier;
+import com.querydsl.core.types.dsl.PathBuilder;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -64,8 +71,60 @@ public class PostService {
     }
 
 
+    /*
+    * Todo N건 조회 고려사항 : 현재 검색어 입력값을 그대로 쿼리에 넣는데 보안상 문제없는가? - 별도의 필터 추가해야 하는가?
+    * */
+
+    public List<PostResponse> getPosts(PostSearchRequest req) {
+        PostSearchReqGetPostsDTO.PostSearchReqGetPostsDTOBuilder dto = PostSearchReqGetPostsDTO.builder()
+                .MAX_SIZE(req.getMAX_SIZE())
+                .page(req.getPage())
+                .size(req.getSize())
+                .category(req.getCategory())
+                .keyword(req.getKeyword());
+
+        PathBuilder<Post> pathBuilder = new PathBuilder<>(Post.class, "post");
+
+        switch (req.getSort()) {
+            case "postId":
+                dto.sort(new OrderSpecifier<>(Order.DESC,pathBuilder.getString("postId")));
+                break;
+
+            case "likes":
+                dto.sort(new OrderSpecifier<>(Order.DESC,pathBuilder.getString("likes")));
+                break;
+
+            case "reports":
+                dto.sort(new OrderSpecifier<>(Order.DESC,pathBuilder.getString("reports")));
+                break;
+
+            case "updateDate":
+                dto.sort(new OrderSpecifier<>(Order.DESC,pathBuilder.getString("updateDate")));
+                break;
+            case "":
+                /* 비어있는 경우 처리 - postId기준 정렬 = 최신순 정렬 */
+                dto.sort(new OrderSpecifier<>(Order.DESC,pathBuilder.getString("postId")));
+                break;
+            default:
+                throw new IllegalArgumentException("허용되지 않은 sort값: " + req.getSort());
+        }
+
+        List<Post> posts = postRepository.getPosts(dto.build());
+
+        /*
+        *
+        * map에서 PostResponse가 public임에도 접근할 수 없다는 에러
+        * => chatGPT 답변
+        * map 메서드는 함수형 인터페이스를 받아서 요소를 다른 요소로 매핑하는데 사용됩니다. 이 때,
+        * 매핑할 함수가 PostResponse 클래스의 생성자인 경우, 해당 생성자가 올바르게 호출되어야 합니다.
+        *  이 경우, PostResponse 클래스의 생성자는 Post 객체를 인자로 받아야 하며, Post 객체가 map 메서드에 의해 생성되는
+        * 새로운 PostResponse 객체에 전달되어야 합니다. 따라서 PostResponse 클래스의 생성자가 Post 객체를 인자로 받는지 확인해 보세요.
+        *
+        * */
 
 
+        return posts.stream().map(PostResponse::new).toList();
+    }
 
 
     @Transactional
@@ -79,6 +138,5 @@ public class PostService {
         Post post = postRepository.findById(postId).orElseThrow(PostNotFoundException::new);
         postRepository.delete(post);
     }
-
 
 }

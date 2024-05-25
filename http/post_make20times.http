@@ -1,0 +1,276 @@
+### 글 작성 2
+POST http://localhost:9999/post/savePost
+Content-Type: application/json
+
+{
+  "title": "title2",
+  "content": "content2",
+  "category": 1,
+  "isImportant": 1,
+  "likes": 1000,
+  "reports": 10,
+  "isSecret": 0
+}
+
+### 글 작성 2
+POST http://localhost:9999/post/savePost
+Content-Type: application/json
+
+{
+  "title": "title2",
+  "content": "content2",
+  "category": 1,
+  "isImportant": 1,
+  "likes": 1000,
+  "reports": 10,
+  "isSecret": 0
+}
+
+### 글 작성 2
+POST http://localhost:9999/post/savePost
+Content-Type: application/json
+
+{
+  "title": "title2",
+  "content": "content2",
+  "category": 1,
+  "isImportant": 1,
+  "likes": 1000,
+  "reports": 10,
+  "isSecret": 0
+}
+
+### 글 작성 2
+POST http://localhost:9999/post/savePost
+Content-Type: application/json
+
+{
+  "title": "title2",
+  "content": "content2",
+  "category": 1,
+  "isImportant": 1,
+  "likes": 1000,
+  "reports": 10,
+  "isSecret": 0
+}
+### 글 작성 2
+POST http://localhost:9999/post/savePost
+Content-Type: application/json
+
+{
+  "title": "title2",
+  "content": "content2",
+  "category": 1,
+  "isImportant": 1,
+  "likes": 1000,
+  "reports": 10,
+  "isSecret": 0
+}
+
+### 글 작성 2
+POST http://localhost:9999/post/savePost
+Content-Type: application/json
+
+{
+  "title": "title2",
+  "content": "content2",
+  "category": 1,
+  "isImportant": 1,
+  "likes": 1000,
+  "reports": 10,
+  "isSecret": 0
+}
+
+### 글 작성 2
+POST http://localhost:9999/post/savePost
+Content-Type: application/json
+
+{
+  "title": "title2",
+  "content": "content2",
+  "category": 1,
+  "isImportant": 1,
+  "likes": 1000,
+  "reports": 10,
+  "isSecret": 0
+}
+
+### 글 작성 2
+POST http://localhost:9999/post/savePost
+Content-Type: application/json
+
+{
+  "title": "title2",
+  "content": "content2",
+  "category": 1,
+  "isImportant": 1,
+  "likes": 1000,
+  "reports": 10,
+  "isSecret": 0
+}
+
+### 글 작성 2
+POST http://localhost:9999/post/savePost
+Content-Type: application/json
+
+{
+  "title": "title2",
+  "content": "content2",
+  "category": 1,
+  "isImportant": 1,
+  "likes": 1000,
+  "reports": 10,
+  "isSecret": 0
+}
+
+### 글 작성 2
+POST http://localhost:9999/post/savePost
+Content-Type: application/json
+
+{
+  "title": "title2",
+  "content": "content2",
+  "category": 1,
+  "isImportant": 1,
+  "likes": 1000,
+  "reports": 10,
+  "isSecret": 0
+}
+
+### 글 작성 2
+POST http://localhost:9999/post/savePost
+Content-Type: application/json
+
+{
+  "title": "title2",
+  "content": "content2",
+  "category": 1,
+  "isImportant": 1,
+  "likes": 1000,
+  "reports": 10,
+  "isSecret": 0
+}
+### 글 작성 2
+POST http://localhost:9999/post/savePost
+Content-Type: application/json
+
+{
+  "title": "title2",
+  "content": "content2",
+  "category": 1,
+  "isImportant": 0,
+  "likes": 1,
+  "reports": 1,
+  "isSecret": 1
+}
+
+### 글 작성 2
+POST http://localhost:9999/post/savePost
+Content-Type: application/json
+
+{
+  "title": "title2",
+  "content": "content2",
+  "category": 1,
+  "isImportant": 1,
+  "likes": 1000,
+  "reports": 10,
+  "isSecret": 0
+}
+
+### 글 작성 2
+POST http://localhost:9999/post/savePost
+Content-Type: application/json
+
+{
+  "title": "title2",
+  "content": "content2",
+  "category": 1,
+  "isImportant": 0,
+  "likes": 1,
+  "reports": 32,
+  "isSecret": 1
+}
+
+### 글 작성 2
+POST http://localhost:9999/post/savePost
+Content-Type: application/json
+
+{
+  "title": "title2",
+  "content": "content2",
+  "category": 1,
+  "isImportant": 1,
+  "likes": 420,
+  "reports": 10,
+  "isSecret": 1
+}
+
+### 글 작성 2
+POST http://localhost:9999/post/savePost
+Content-Type: application/json
+
+{
+  "title": "title2",
+  "content": "content2",
+  "category": 1,
+  "isImportant": 0,
+  "likes": 2,
+  "reports": 444,
+  "isSecret": 1
+}
+### 글 작성 2
+POST http://localhost:9999/post/savePost
+Content-Type: application/json
+
+{
+  "title": "title2",
+  "content": "content2",
+  "category": 0,
+  "isImportant": 1,
+  "likes": 123,
+  "reports": 4123,
+  "isSecret": 0
+}
+
+### 글 작성 2
+POST http://localhost:9999/post/savePost
+Content-Type: application/json
+
+{
+  "title": "title2",
+  "content": "content2",
+  "category": 0,
+  "isImportant": 0,
+  "likes": 1,
+  "reports": 4,
+  "isSecret": 1
+}
+
+### 글 작성 2
+POST http://localhost:9999/post/savePost
+Content-Type: application/json
+
+{
+  "title": "title2",
+  "content": "content2",
+  "category": 1,
+  "isImportant": 1,
+  "likes": 4242,
+  "reports": 32,
+  "isSecret": 0
+}
+
+### 글 작성 2
+POST http://localhost:9999/post/savePost
+Content-Type: application/json
+
+{
+  "title": "title2",
+  "content": "content2",
+  "category": 1,
+  "isImportant": 1,
+  "likes": 123,
+  "reports": 1,
+  "isSecret": 0
+}

@@ -50,14 +50,14 @@ Content-Type: application/json
 
 ### 글 단건 조회 1
 GET http://localhost:9999/post/1
-Content-Type: application/json
 
 
 ### 글 N건 조회 1
+GET http://localhost:9999/post/getPosts?page=1&size=10&sort=postId&category=0&keyword=2
 
 
 ### 글 수정
-PATCH http://localhost:9999/post/4
+PATCH http://localhost:9999/post/1
 Content-Type: application/json
 
 {

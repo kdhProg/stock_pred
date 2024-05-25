@@ -3,12 +3,15 @@ package com.example.stockpredict.controller.post;
 import com.example.stockpredict.config.security.UserPrincipal;
 import com.example.stockpredict.request.post.PostEditRequest;
 import com.example.stockpredict.request.post.PostSaveRequest;
+import com.example.stockpredict.request.post.PostSearchRequest;
 import com.example.stockpredict.response.post.PostResponse;
 import com.example.stockpredict.service.post.PostService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -31,7 +34,14 @@ public class PostController {
 
 
     /* 게시글 N개 조회 */
-
+    /*
+    * 파라미터가 url-encoded형태이기에 ModelAttribute 사용
+    *
+    * */
+    @GetMapping("/getPosts")
+    public List<PostResponse> getPosts(@ModelAttribute PostSearchRequest req){
+        return postService.getPosts(req);
+    }
 
 
     /* 게시글 수정 */
