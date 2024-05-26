@@ -43,9 +43,11 @@ const Nav = () => {
             <Link to="/">Home</Link>
             {isAuthenticated ? (
                 <span>
+                    <Link to="/NoticePage">공지사항</Link>
+                    <Link to="/FreeBoardPage">자유게시판</Link>
                     <StockSearchBox/>
-                    <Link to="/logout">Logout</Link>
-                    <Link to="/Mypage">Mypage</Link>
+                    <Link to="/logout">로그아웃</Link>
+                    <Link to="/Mypage">마이페이지</Link>
                     {isPaidPlan ?(
                         <div>
                             <p>이미 유료계정입니다.</p>
@@ -59,8 +61,8 @@ const Nav = () => {
                 </span>
             ) : (
                 <span>
-                    <Link to="/Join">Join</Link>
-                    <Link to="/login">Login</Link>
+                    <Link to="/Join">회원가입</Link>
+                    <Link to="/login">로그인</Link>
                 </span>
             )}
         </div>
