@@ -1,6 +1,7 @@
 package com.example.stockpredict.controller.post;
 
 import com.example.stockpredict.config.security.UserPrincipal;
+import com.example.stockpredict.request.post.PostCountRequest;
 import com.example.stockpredict.request.post.PostEditRequest;
 import com.example.stockpredict.request.post.PostSaveRequest;
 import com.example.stockpredict.request.post.PostSearchRequest;
@@ -35,12 +36,18 @@ public class PostController {
 
     /* 게시글 N개 조회 */
     /*
-    * 파라미터가 url-encoded형태이기에 ModelAttribute 사용
+    * 파라미터가 url-encoded형태 -> ModelAttribute 사용
     *
     * */
     @GetMapping("/getPosts")
     public List<PostResponse> getPosts(@ModelAttribute PostSearchRequest req){
         return postService.getPosts(req);
+    }
+
+    /* 게시글 N건 총개수 */
+    @GetMapping("/getPostsCount")
+    public Long getPostsCount(@ModelAttribute PostCountRequest req){
+        return postService.getPostsCount(req);
     }
 
 

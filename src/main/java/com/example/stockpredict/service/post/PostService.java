@@ -6,10 +6,7 @@ import com.example.stockpredict.domain.user.User;
 import com.example.stockpredict.exception.post.PostNotFoundException;
 import com.example.stockpredict.repository.post.PostRepository;
 import com.example.stockpredict.repository.user.UserRepository;
-import com.example.stockpredict.request.post.PostEditRequest;
-import com.example.stockpredict.request.post.PostSaveRequest;
-import com.example.stockpredict.request.post.PostSearchReqGetPostsDTO;
-import com.example.stockpredict.request.post.PostSearchRequest;
+import com.example.stockpredict.request.post.*;
 import com.example.stockpredict.response.post.PostResponse;
 import com.querydsl.core.types.Order;
 import com.querydsl.core.types.OrderSpecifier;
@@ -127,6 +124,12 @@ public class PostService {
     }
 
 
+
+    public Long getPostsCount(PostCountRequest req) {
+        return postRepository.getPostsCount(req);
+    }
+
+
     @Transactional
     public void editPost(Long postId, PostEditRequest req) {
         Post post = postRepository.findById(postId).orElseThrow(PostNotFoundException::new);
@@ -138,5 +141,6 @@ public class PostService {
         Post post = postRepository.findById(postId).orElseThrow(PostNotFoundException::new);
         postRepository.delete(post);
     }
+
 
 }

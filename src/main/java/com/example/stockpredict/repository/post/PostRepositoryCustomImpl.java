@@ -2,6 +2,7 @@ package com.example.stockpredict.repository.post;
 
 import com.example.stockpredict.domain.post.board.Post;
 import com.example.stockpredict.domain.post.board.QPost;
+import com.example.stockpredict.request.post.PostCountRequest;
 import com.example.stockpredict.request.post.PostSearchReqGetPostsDTO;
 import com.example.stockpredict.request.post.PostSearchRequest;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -31,14 +32,18 @@ public class PostRepositoryCustomImpl implements PostRepositoryCustom{
                 .fetch();
     }
 
-    /*
+    @Override
+    public Long getPostsCount(PostCountRequest req) {
+        return jpaQueryFactory
+                .select(post)
+                .from(post)
+                .where(
+                        post.title.contains(req.getKeyword())
+                                .and(post.category.eq(req.getCategory()))
+                )
+                .fetch()
+                .stream().count();
+    }
 
-    * queryFactory.select(qUser.username)
-                           .from(qUser)
-                           .where(qUser.description.like("%" + keyword + "%")
-                           .and(qUser.status.eq(statusValue)))
-                           .orderBy(qUser.createdAt.desc())
-                           .fetch();
-    * */
 
 }
