@@ -16,6 +16,7 @@ import NoticePage from "./pages/NoticePage";
 import FreeBoardPage from "./pages/FreeBoardPage";
 import PostDetail from "./pages/PostDetail";
 import PostWrite from "./pages/PostWrite";
+import PostUpdate from "./pages/PostUpdate";
 
 
 function App() {
@@ -42,6 +43,7 @@ function App() {
                   <Route path="/FreeBoardPage" element={<FreeBoardPage/>}/>
                   <Route path="/PostWrite" element={<PostWrite />} />
                   <Route path="/post/:postId" element={<PostDetail/>}/>
+                  <Route path="/update/:postId" element={<PostUpdate />} />
               </Routes>
           </BrowserRouter>
           <Footer/>

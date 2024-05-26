@@ -5,6 +5,7 @@ const Header = () => {
     return (
         <div>
             HEADER
+            <hr/>
         </div>
     );
 };

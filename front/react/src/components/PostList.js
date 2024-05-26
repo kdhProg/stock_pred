@@ -3,7 +3,7 @@ import {useEffect, useState} from "react";
 import axios from "axios";
 import styled from 'styled-components'
 import 'bootstrap/dist/css/bootstrap.css';
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 
 
 const PostList = (props)=>{
@@ -70,7 +70,7 @@ const PostList = (props)=>{
 
 
     /* response담는 변수 */
-    const [boardList, setBoardList] = useState([]);
+    const [postList, setPostList] = useState([]);
 
 
     /* 글 개수 선택시 boardListParams값 갱신 */
@@ -129,7 +129,7 @@ const PostList = (props)=>{
         setSizeForPagination(poReq.size); // 로드될 때 pagination 넘버 재설정 되도록
 
         const resp = await (await axios.get(`/post/getPosts?page=${poReq.page}&size=${poReq.size}&sort=${poReq.sort}&category=${poReq.category}&keyword=${poReq.keyword}`));
-        setBoardList(resp.data);
+        setPostList(resp.data);
         setIsLoading(false)
     }
 
@@ -179,10 +179,9 @@ const PostList = (props)=>{
                         <p>loading lists....</p>
                     ): (
                         <ul>
-                            {boardList.map((post) => (
+                            {postList.map((post) => (
                                 <li key={post.postId}>
-                                    <span>{post.title}</span>
-                                    {/*<Link className="link-success" to={`/board/${board.postId}`}>{board.title}</Link>*/}
+                                    <Link className="link-success" to={`/post/${post.postId}`}>{post.title}</Link>
                                 </li>
                             ))}
                         </ul>

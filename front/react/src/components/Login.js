@@ -8,6 +8,7 @@ const Login = () => {
 
     const navigate = useNavigate();
 
+    /* 서버 요청용 객체 */
     const [loginReq, setLoginReq] = useState({
         userAccount: '',
         password: '',
@@ -15,6 +16,7 @@ const Login = () => {
 
     const { userAccount, password } = loginReq;
 
+    /* input값 변화 반영 */
     const onChange = (event) => {
         const { value, name } = event.target;
         setLoginReq({
