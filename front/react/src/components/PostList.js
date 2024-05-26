@@ -11,6 +11,7 @@ const PostList = (props)=>{
     /*
     * 
     * Todo 비밀글여부 / 중요성여부 반영하여 화면에 출력
+    * Todo 조건에 맞는 글이 0개면 적절한 문구or화면 띄우기
     * 
     * */
 
@@ -138,6 +139,7 @@ const PostList = (props)=>{
         getPosts();
     }, [poReq.page]);
 
+    /* 글쓰기 페이지로 이동 */
     const moveToWrite = () => {
         navigate('/PostWrite');
     };

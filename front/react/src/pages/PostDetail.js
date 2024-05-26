@@ -29,13 +29,18 @@ const PostDetail = ()=>{
     };
 
     /* 게시글 삭제 */
+    /*
+    * Todo 게시글 삭제 시 글쓴이의 비밀번호 요구하기
+    *
+    * */
     const deletePost = async () => {
-        // if (window.confirm('게시글을 삭제하시겠습니까?')) {
-        //     await axios.delete(`/post/${postId}`).then((res) => {
-        //         alert('삭제되었습니다.');
-        //         navigate('/board');
-        //     });
-        // }
+        if (window.confirm('게시글을 삭제하시겠습니까?')) {
+            await axios.delete(`/post/${postId}`).then((res) => {
+                alert('삭제되었습니다.');
+                if(post.category === 0){navigate('/NoticePage');}
+                else{navigate('/FreeBoardPage');}
+            });
+        }
     };
 
     /* 목록으로 복귀 - 카테고리기반 판단 */
