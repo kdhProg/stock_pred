@@ -48,6 +48,17 @@ const PostList = (props)=>{
         keyword : ''
     });
 
+
+    /*
+    *
+    * 추가 itemPerPage변수
+    * - poReq의 size를 Pagination태그 itemsCountPerPage속성에 바로 적용시키면
+    *   사용자설정검색 버튼을 누르기 전에 pagination이 state에 의해 바로 변경되므로
+    *
+    *  */
+    const [sizeForPagination, setSizeForPagination] = useState(10);
+
+
     /* N개 조회 request */
     const [poReq, setPoReq] = useState({
         page : 1,
@@ -115,10 +126,11 @@ const PostList = (props)=>{
         /* 먼저 전체 글 개수 세팅 */
         await getEntirePostsCount();
 
+        setSizeForPagination(poReq.size); // 로드될 때 pagination 넘버 재설정 되도록
+
         const resp = await (await axios.get(`/post/getPosts?page=${poReq.page}&size=${poReq.size}&sort=${poReq.sort}&category=${poReq.category}&keyword=${poReq.keyword}`));
         setBoardList(resp.data);
         setIsLoading(false)
-        alert("글 불러오기 성공")
     }
 
 
@@ -182,7 +194,7 @@ const PostList = (props)=>{
                     <PaginationBox>
                     <Pagination
                         activePage={poReq.page}
-                        itemsCountPerPage={poReq.size}
+                        itemsCountPerPage={sizeForPagination}
                         totalItemsCount={totalSize}
                         pageRangeDisplayed={10}
                         onChange={handlePageChange}>

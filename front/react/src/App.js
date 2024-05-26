@@ -21,29 +21,32 @@ import PostWrite from "./pages/PostWrite";
 function App() {
 
   return (
-      <BrowserRouter>
+      <div>
           <Header/>
-          <Nav/>
+          <BrowserRouter>
+              <Nav/>
+              <Routes>
+                  <Route path="/" element={<Home/>}/>
+                  <Route path="/login" element={<Login/>}/>
+                  <Route path="/logout" element={<Logout/>}/>
+                  <Route path="/Join" element={<Join/>}/>
+
+                  <Route path="/schStock" element={<StockSearchPage/>}/>
+                  <Route path="/predStock" element={<StockPredictPage/>}/>
+                  <Route path="/subscribePage" element={<SubscribePage/>}/>
+
+                  <Route path="/Mypage" element={<Mypage/>}/>
+                  <Route path="/UserFindIdForm" element={<UserFindIdForm/>}/>
+
+                  <Route path="/NoticePage" element={<NoticePage/>}/>
+                  <Route path="/FreeBoardPage" element={<FreeBoardPage/>}/>
+                  <Route path="/PostWrite" element={<PostWrite />} />
+                  <Route path="/post/:postId" element={<PostDetail/>}/>
+              </Routes>
+          </BrowserRouter>
           <Footer/>
-          <Routes>
-              <Route path="/" element={<Home/>}/>
-              <Route path="/login" element={<Login/>}/>
-              <Route path="/logout" element={<Logout/>}/>
-              <Route path="/Join" element={<Join/>}/>
+      </div>
 
-              <Route path="/schStock" element={<StockSearchPage/>}/>
-              <Route path="/predStock" element={<StockPredictPage/>}/>
-              <Route path="/subscribePage" element={<SubscribePage/>}/>
-
-              <Route path="/Mypage" element={<Mypage/>}/>
-              <Route path="/UserFindIdForm" element={<UserFindIdForm/>}/>
-
-              <Route path="/NoticePage" element={<NoticePage/>}/>
-              <Route path="/FreeBoardPage" element={<FreeBoardPage/>}/>
-              <Route path="/PostWrite" element={<PostWrite />} />
-              <Route path="/post/:postId" element={<PostDetail/>}/>
-          </Routes>
-      </BrowserRouter>
   );
 }
 
