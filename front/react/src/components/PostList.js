@@ -1,7 +1,10 @@
-import {Pagination} from "react-bootstrap";
+import Pagination from "react-js-pagination";
 import {useEffect, useState} from "react";
 import axios from "axios";
+import styled from 'styled-components'
+import 'bootstrap/dist/css/bootstrap.css';
 import {useNavigate} from "react-router-dom";
+
 
 const PostList = (props)=>{
     
@@ -13,6 +16,9 @@ const PostList = (props)=>{
 
 
     const navigate = useNavigate();
+
+    /* 기본 글 개수 */
+    const defaultPostSize = 10;
 
     /* 글이 로드되었는가 */
     const [isLoading, setIsLoading] = useState(true);
@@ -42,9 +48,6 @@ const PostList = (props)=>{
         keyword : ''
     });
 
-    /* 현재 페이지 */
-    const [page, setPage] = useState(1);
-
     /* N개 조회 request */
     const [poReq, setPoReq] = useState({
         page : 1,
@@ -64,9 +67,8 @@ const PostList = (props)=>{
         const { value } = event.target;
         setPoReq((prevParams) => ({
             ...prevParams,
-            size: value
+            size: Number(value)
         }));
-        setTotalSizeReq(event.target);
     };
 
 
@@ -79,10 +81,14 @@ const PostList = (props)=>{
         }));
     };
 
-    /* 검색어 입력시 boardListParams값 갱신 */
+    /* 검색어 입력시 boardListParams값 + setTotalSizeReq 갱신 */
     const handleKeywordChange = (event) => {
         const { value } = event.target;
         setPoReq((prevParams) => ({
+            ...prevParams,
+            keyword: value
+        }));
+        setTotalSizeReq((prevParams) => ({
             ...prevParams,
             keyword: value
         }));
@@ -90,7 +96,10 @@ const PostList = (props)=>{
 
     /* pagination 페이지 클릭시 페이지값 갱신 */
     const handlePageChange = (currentPage) => {
-        setPage(currentPage)
+        setPoReq((prevPoReq) => ({
+            ...prevPoReq,
+            page: currentPage,
+        }));
     };
 
     /* 해당카테고리+검색어 전체 글 개수 - pagination에 필요 */
@@ -102,20 +111,20 @@ const PostList = (props)=>{
 
     /* 검색 수행 */
     const getPosts = async ()=>{
-        const resp = await (await axios.get(`/post/getPosts?page=${page}&size=${poReq.size}&sort=${poReq.sort}&category=${poReq.category}&keyword=${poReq.keyword}`));
+
+        /* 먼저 전체 글 개수 세팅 */
+        await getEntirePostsCount();
+
+        const resp = await (await axios.get(`/post/getPosts?page=${poReq.page}&size=${poReq.size}&sort=${poReq.sort}&category=${poReq.category}&keyword=${poReq.keyword}`));
         setBoardList(resp.data);
         setIsLoading(false)
+        alert("글 불러오기 성공")
     }
 
 
     useEffect(() => {
-        const fetchData = async () => {
-            await getEntirePostsCount();
-            await getPosts();
-        };
-
-        fetchData();
-    }, []);
+        getPosts();
+    }, [poReq.page]);
 
     const moveToWrite = () => {
         navigate('/PostWrite');
@@ -127,7 +136,8 @@ const PostList = (props)=>{
             <button onClick={moveToWrite}>글쓰기</button>
             <div>
                 <label htmlFor="quantity">한번에 불러올 글 개수(기본값10, max=2000)</label>
-                <input type="number" id="quantity" name="quantity" min="1" max="2000" onChange={handleSizeChange} defaultValue="10"/>
+                <input type="number" id="quantity" name="quantity" min="1" max="2000"
+                       onChange={handleSizeChange} defaultValue={defaultPostSize}/>
             </div>
             <div>
                 <h3>정렬기준</h3>
@@ -169,17 +179,43 @@ const PostList = (props)=>{
 
                 </div>
                 <div>
+                    <PaginationBox>
                     <Pagination
-                        activePage={page}
+                        activePage={poReq.page}
                         itemsCountPerPage={poReq.size}
                         totalItemsCount={totalSize}
                         pageRangeDisplayed={10}
                         onChange={handlePageChange}>
                     </Pagination>
+                    </PaginationBox>
                 </div>
             </div>
         </div>
     )
 }
+
+const PaginationBox = styled.div`
+  .pagination { display: flex; justify-content: center; margin-top: 15px;}
+  ul { list-style: none; padding: 0; }
+  ul.pagination li {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    border: 1px solid #e2e2e2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem; 
+  }
+  ul.pagination li:first-child{ border-radius: 5px 0 0 5px; }
+  ul.pagination li:last-child{ border-radius: 0 5px 5px 0; }
+  ul.pagination li a { text-decoration: none; color: #337ab7; font-size: 1rem; }
+  ul.pagination li.active a { color: white; }
+  ul.pagination li.active { background-color: #337ab7; }
+  ul.pagination li a:hover,
+  ul.pagination li a.active { color: blue; }
+`
+
+
 
 export default PostList;
