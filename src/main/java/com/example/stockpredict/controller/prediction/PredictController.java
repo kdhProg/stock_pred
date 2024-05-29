@@ -1,7 +1,9 @@
 package com.example.stockpredict.controller.prediction;
 
+import com.example.stockpredict.request.prediction.ShowSelectedEntireDataRequest;
 import com.example.stockpredict.service.legacy.ModelService;
 import com.example.stockpredict.service.prediction.PredictService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,5 +38,12 @@ public class PredictController {
     public String[] getTickerCorpInfo(@RequestParam String ticker){
         return predictService.getTickerCorpInfo(ticker);
     }
+
+    /* 선택한 시작일,마지막일,ticker에 해당하는 주식 x값,y값 반환 */
+    @GetMapping("/showSelectedEntireData")
+    public String showSelectedEntireData(@RequestBody @Valid ShowSelectedEntireDataRequest req){
+        return predictService.showSelectedEntireData(req);
+    }
+
 
 }

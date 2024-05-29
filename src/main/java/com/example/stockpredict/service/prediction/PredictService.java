@@ -1,13 +1,12 @@
 package com.example.stockpredict.service.prediction;
 
+import com.example.stockpredict.exception.python_modules.PythonModuleException;
+import com.example.stockpredict.request.prediction.ShowSelectedEntireDataRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 
 @Service
 @RequiredArgsConstructor
@@ -111,4 +110,30 @@ public class PredictService {
         }
         return rst;
     }
+
+
+    /* 선택한 시작일,마지막일,ticker에 해당하는 주식 x값,y값 반환 */
+    public String showSelectedEntireData(ShowSelectedEntireDataRequest req){
+        try {
+
+            String PATH = ".\\python_modules\\pykrx\\showSelectedEntireData.py";
+
+            ProcessBuilder processBuilder =
+                    new ProcessBuilder("python", PATH, req.getTicker(),req.getStartDate(),req.getEndDate());
+            Process process = processBuilder.start();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream(),"euc-kr"));
+
+            String rst = reader.readLine();
+            if(rst == null || rst.equals("")){
+                throw new PythonModuleException();
+            }
+            return rst;
+
+        } catch(IOException e){
+            throw new PythonModuleException();
+        }
+    }
+
+
+
 }
