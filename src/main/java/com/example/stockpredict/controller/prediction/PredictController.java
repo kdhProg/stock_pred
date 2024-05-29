@@ -41,7 +41,7 @@ public class PredictController {
 
     /* 선택한 시작일,마지막일,ticker에 해당하는 주식 x값,y값 반환 */
     @GetMapping("/showSelectedEntireData")
-    public String showSelectedEntireData(@RequestBody @Valid ShowSelectedEntireDataRequest req){
+    public String showSelectedEntireData(@ModelAttribute ShowSelectedEntireDataRequest req){
         return predictService.showSelectedEntireData(req);
     }
 

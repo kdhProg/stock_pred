@@ -119,7 +119,7 @@ public class PredictService {
             String PATH = ".\\python_modules\\pykrx\\showSelectedEntireData.py";
 
             ProcessBuilder processBuilder =
-                    new ProcessBuilder("python", PATH, req.getTicker(),req.getStartDate(),req.getEndDate());
+                    new ProcessBuilder("python", PATH, req.getTicker(), req.getColName(),req.getStartDate(),req.getEndDate());
             Process process = processBuilder.start();
             BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream(),"euc-kr"));
 
