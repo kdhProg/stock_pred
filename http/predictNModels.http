@@ -4,4 +4,4 @@ GET http://localhost:9999/pred/stockNameSearch?keyword=삼성
 
 
 ### 주식명 검색
-GET http://localhost:9999/pred/showSelectedEntireData?ticker=005930&colName=종가&startDate=20210101&endDate=20210110
+GET http://localhost:9999/pred/showSelectedEntireData?ticker=005930&colName=Close&startDate=20210101&endDate=20210110

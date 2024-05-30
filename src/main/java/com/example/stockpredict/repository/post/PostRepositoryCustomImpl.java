@@ -1,16 +1,14 @@
 package com.example.stockpredict.repository.post;
 
 import com.example.stockpredict.domain.post.board.Post;
-import com.example.stockpredict.domain.post.board.QPost;
 import com.example.stockpredict.request.post.PostCountRequest;
 import com.example.stockpredict.request.post.PostSearchReqGetPostsDTO;
-import com.example.stockpredict.request.post.PostSearchRequest;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
 
-import static com.example.stockpredict.domain.post.board.QPost.*;
+import static com.example.stockpredict.domain.post.board.QPost.post;
 
 @RequiredArgsConstructor
 public class PostRepositoryCustomImpl implements PostRepositoryCustom{

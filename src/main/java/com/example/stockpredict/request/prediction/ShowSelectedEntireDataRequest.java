@@ -14,7 +14,7 @@ import lombok.*;
 @Builder
 public class ShowSelectedEntireDataRequest {
 
-    /* 조회 가능 컬럼 : 한글로 "시가" "고가" "저가" "종가" "거래량" 중 택1 */
+    /* 조회 가능 컬럼 : OHLCV */
     private String colName;
 
     private String startDate;

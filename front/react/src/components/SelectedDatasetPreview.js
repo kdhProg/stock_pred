@@ -98,15 +98,15 @@ const SelectedDatasetPreview = (props) => {
             <br/>
             <h4>조회할 컬럼</h4>
             <label htmlFor="">시가</label>
-            <input type="radio" name="colName" value="시가" onChange={handleRadioChange}/>&nbsp;&nbsp;
+            <input type="radio" name="colName" value="Open" onChange={handleRadioChange}/>&nbsp;&nbsp;
             <label htmlFor="">고가</label>
-            <input type="radio" name="colName" value="고가" onChange={handleRadioChange}/>&nbsp;&nbsp;
+            <input type="radio" name="colName" value="High" onChange={handleRadioChange}/>&nbsp;&nbsp;
             <label htmlFor="">저가</label>
-            <input type="radio" name="colName" value="저가" onChange={handleRadioChange}/>&nbsp;&nbsp;
+            <input type="radio" name="colName" value="Low" onChange={handleRadioChange}/>&nbsp;&nbsp;
             <label htmlFor="">종가</label>
-            <input type="radio" name="colName" value="종가" onChange={handleRadioChange}/>&nbsp;&nbsp;
+            <input type="radio" name="colName" value="Close" onChange={handleRadioChange}/>&nbsp;&nbsp;
             <label htmlFor="">거래량</label>
-            <input type="radio" name="colName" value="거래량" onChange={handleRadioChange}/>
+            <input type="radio" name="colName" value="Volumne" onChange={handleRadioChange}/>
 
 
             <br/>

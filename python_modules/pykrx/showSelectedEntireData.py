@@ -9,6 +9,16 @@ start_date = sys.argv[3]
 end_date = sys.argv[4]
 
 df = stock.get_market_ohlcv_by_date(fromdate=start_date, todate=end_date, ticker=ticker)
+
+# 한글 컬럼 -> 영문
+df.rename(columns = {'날짜' : 'Date'}, inplace = True)
+df.rename(columns = {'시가' : 'Open'}, inplace = True)
+df.rename(columns = {'고가' : 'High'}, inplace = True)
+df.rename(columns = {'저가' : 'Low'}, inplace = True)
+df.rename(columns = {'종가' : 'Close'}, inplace = True)
+df.rename(columns = {'거래량' : 'Volumne'}, inplace = True)
+
+
 x_index = list(df.index.values)
 x_index = list(map(lambda x: (str(x))[:10],x_index))
 
