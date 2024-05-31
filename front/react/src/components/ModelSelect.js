@@ -3,6 +3,11 @@ import React, {useEffect, useState} from "react";
 
 
 const ModelSelect = () => {
+    
+    /*
+    * 20240531 - 이곳의 코드를 전부 stockpredictPage로 옮김
+    * 
+    * */
 
     const [freeModels, setFreeModels] = useState([]);
     const [paidModels, setPaidModels] = useState([]);

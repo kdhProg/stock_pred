@@ -29,9 +29,6 @@ total_dates = len(df)
 thirty_percent = int(total_dates * 0.3)   # 누적 30%정도의 날짜를 기준으로 split 예정
 selected_date = df.iloc[thirty_percent - 1:thirty_percent]['Date'].dt.strftime('%Y-%m-%d').values[0]
 
-
-split_date = thirty_percent
-
 train = df.loc[:split_date, ['Close']]
 test = df.loc[split_date:, ['Close']]
 

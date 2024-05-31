@@ -1,12 +1,15 @@
 package com.example.stockpredict.service.prediction;
 
 import com.example.stockpredict.exception.python_modules.PythonModuleException;
+import com.example.stockpredict.request.prediction.PredictModelRequest;
 import com.example.stockpredict.request.prediction.ShowSelectedEntireDataRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.io.*;
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -135,5 +138,56 @@ public class PredictService {
     }
 
 
+    /* free&payment 예측모델에 값 전달 + 결과Json전달 */
+    public String doPredict(PredictModelRequest req) {
+        try {
 
+            String PATH = ".\\python_modules\\predictionModels";
+            if(req.getIsFreeModel()){
+                PATH += "\\freeModels\\";
+            }else{
+                PATH += "\\paidModels\\";
+            }
+            PATH += req.getModelFileName();
+
+            // 파이썬 전달용 변수
+            Map<String, Object> data = new HashMap<>();
+            data.put("ticker", req.getTicker());
+            data.put("startDate", req.getStartDate());
+            data.put("endDate", req.getEndDate());
+            data.put("epoch", req.getEpoch().toString());
+            data.put("predColumns", req.getPredColumns());
+            data.put("targetColumn", req.getTargetColumn());
+            data.put("pastPredDays", req.getPastPredDays());
+            data.put("trainTestSplit", req.getTrainTestSplit());
+            data.put("validPercentage", req.getValidPercentage());
+            data.put("batchSize", req.getBatchSize());
+
+            String jsonData = objectMapper.writeValueAsString(data);
+
+            ProcessBuilder processBuilder = new ProcessBuilder("python", PATH);
+
+            Process process = processBuilder.start();
+            try (BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(process.getOutputStream()))) {
+                writer.write(jsonData);
+                writer.flush();
+            }
+
+            try (BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
+//                String line;
+//                while ((line = reader.readLine()) != null) {
+//                    System.out.println(line);
+//                }
+//                return line;
+                String rst = reader.readLine();
+                if(rst == null || rst.equals("")){
+                    throw new PythonModuleException();
+                }
+                return rst;
+            }
+
+        } catch(IOException e){
+            throw new PythonModuleException();
+        }
+    }
 }

@@ -1,5 +1,6 @@
 package com.example.stockpredict.controller.prediction;
 
+import com.example.stockpredict.request.prediction.PredictModelRequest;
 import com.example.stockpredict.request.prediction.ShowSelectedEntireDataRequest;
 import com.example.stockpredict.service.legacy.ModelService;
 import com.example.stockpredict.service.prediction.PredictService;
@@ -43,6 +44,12 @@ public class PredictController {
     @GetMapping("/showSelectedEntireData")
     public String showSelectedEntireData(@ModelAttribute ShowSelectedEntireDataRequest req){
         return predictService.showSelectedEntireData(req);
+    }
+
+    /* free&payment 예측모델에 값 전달 + 결과Json전달 */
+    @PostMapping("/doPredict")
+    public String doPredict(@RequestBody PredictModelRequest req){
+        return predictService.doPredict(req);
     }
 
 
