@@ -9,8 +9,10 @@ import {Chart} from "react-google-charts";
 const StockPredictPage = () => {
     
     /*
-    * Todo 새로고침 시 globalChoKeyword이 초기화되어버림
+    * Todo 새로고침 시 globalChoKeyword이 초기화됨 -> 별도의 저장방법 탐구
     * 20240531 - ModelSelect.js의 코드 이곳으로 옮김 -> Todo refactoring 필요(변수값 넘기기)
+    * Todo 기능별 컴포넌트 분리하기
+    * Todo 예측버튼 누를 시 -> 그래프 로드될 때까지 예측버튼 disable하기(계속누르면 안되므로)
     * */
 
     /* 검색어 */

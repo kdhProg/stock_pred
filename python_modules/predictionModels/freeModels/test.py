@@ -40,14 +40,14 @@ req = json.loads(server_request)
 
 pred_columns = req.get("predColumns")
 target_column = req.get("targetColumn")
-PAST_PRED_DAYS = req.get("pastPredDays")
+PAST_PRED_DAYS = int(req.get("pastPredDays"))
 start_date = req.get("startDate")
 end_date = req.get("endDate")
 ticker = req.get("ticker")
 epoch = int(req.get("epoch"))
-train_test_split = req.get("trainTestSplit")
-valid_percentage = req.get("validPercentage")
-batch_size = req.get("batchSize")
+train_test_split = int(req.get("trainTestSplit"))
+valid_percentage = int(req.get("validPercentage"))
+batch_size = int(req.get("batchSize"))
 
 
 original_data = stock.get_market_ohlcv_by_date(fromdate=start_date, todate=end_date, ticker=ticker)
