@@ -11,7 +11,6 @@ const StockPredictPage = () => {
     * Todo 새로고침 시 globalChoKeyword이 초기화됨 -> 별도의 저장방법 탐구
     * 20240531 - ModelSelect.js의 코드 이곳으로 옮김 -> Todo refactoring 필요(변수값 넘기기)
     * Todo 기능별 컴포넌트 분리하기
-    * Todo 예측버튼 누를 시 -> 그래프 로드될 때까지 예측버튼 disable하기(계속누르면 안되므로)
     * Todo 예측기준컬럼/타겟 컬럼 선정시 -> 타겟 컬럼은 반드시 예측기준컬럼중 하나여야 함 --> open/close 가지고 volumne을 예측할순없으므로
     * */
 
@@ -166,6 +165,8 @@ const StockPredictPage = () => {
                 }
             )
             .catch((err) => {
+                setIsDisabled(false);
+                alert("모델 에러 -> 값을 바꿔 재시도")
                 console.log(err)
             })
 
@@ -247,7 +248,7 @@ const StockPredictPage = () => {
                     {freeModels.map((modelName) => (
                         <li key={modelName}>
                             <input type="radio" name="predModel" value={modelName} onChange={freeModelChange}/>
-                            <label htmlFor={modelName}>{modelName}</label>
+                            <label htmlFor={modelName}>{modelName.slice(0, -3)}</label>
                         </li>
                     ))}
                 </ul>
@@ -260,7 +261,7 @@ const StockPredictPage = () => {
                         {paidModels.map((modelName) => (
                             <li key={modelName}>
                                 <input type="radio" name="predModel" value={modelName} onChange={paidModelChange}/>
-                                <label htmlFor={modelName}>{modelName}</label>
+                                <label htmlFor={modelName}>{modelName.slice(0, -3)}</label>
                             </li>
                         ))}
                     </ul>
