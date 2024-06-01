@@ -2,7 +2,6 @@ import {useSelector} from "react-redux";
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 import SelectedDatasetPreview from "../components/SelectedDatasetPreview";
-import StockPredictResult from "./StockPredictResult";
 import {Chart} from "react-google-charts";
 
 
@@ -13,6 +12,7 @@ const StockPredictPage = () => {
     * 20240531 - ModelSelect.js의 코드 이곳으로 옮김 -> Todo refactoring 필요(변수값 넘기기)
     * Todo 기능별 컴포넌트 분리하기
     * Todo 예측버튼 누를 시 -> 그래프 로드될 때까지 예측버튼 disable하기(계속누르면 안되므로)
+    * Todo 예측기준컬럼/타겟 컬럼 선정시 -> 타겟 컬럼은 반드시 예측기준컬럼중 하나여야 함 --> open/close 가지고 volumne을 예측할순없으므로
     * */
 
     /* 검색어 */
@@ -51,6 +51,12 @@ const StockPredictPage = () => {
     /* 최종 예측 response 여부 */
     const [isRstLoaded, setIsRstLoaded] = useState(false);
 
+
+    /* 최종 예측 tomorrow 값 */
+    const [tomorrowValue, setTomorrowValue] = useState(null);
+
+    /* 예측 버튼 활성화 여부 */
+    const [isDisabled, setIsDisabled] = useState(false);
 
     /* ticker에 해당하는 기업 정보 가져오기 */
     const getCorpInfo = async (val) => {
@@ -148,12 +154,15 @@ const StockPredictPage = () => {
 
     /* 서버로 예측 요청 전송 */
     const doPredict = async () => {
+        setIsDisabled(true);
         await axios.post(`/pred/doPredict`,predModelReq)
             .then((resp) => {
-                    alert("결과값 받음")
+                    alert("예측 완료")
+                setIsDisabled(false);
                 setIsRstLoaded(true)
                 let data = resp.data
                 setChartData(makeProperDataForm(data));
+                setTomorrowValue(data.tomorrow_value);
                 }
             )
             .catch((err) => {
@@ -194,7 +203,7 @@ const StockPredictPage = () => {
         x_index: [],
         pred: [],
         real: [],
-        tomorrow_value: ''
+        tomorrow_value: 0
     });
 
 
@@ -323,7 +332,7 @@ const StockPredictPage = () => {
             <hr/>
             <button onClick={()=>{console.log("predModelReq:  "+JSON.stringify(predModelReq))}}>콘솔에 전송객체 값 찍어보기</button>
             <br/>
-            <button onClick={doPredict}>예측하기!!!!!!!!!!</button>
+            <button onClick={doPredict} disabled={isDisabled}>예측하기!!!!!!!!!!</button>
             <div>
                 <h2>예측결과 TEST 데이터</h2>
                 {isRstLoaded?(
@@ -335,8 +344,13 @@ const StockPredictPage = () => {
                             data={chartData}
                             options={chartOptions}
                         />
+                        <div>
+                            <h3>내일 예측값:</h3>
+                            <p>Prediction : {chartData.tomorrow_value}</p>
+                            <p>{tomorrowValue}</p>
+                        </div>
                     </div>
-                ):(
+                ) : (
                     <div>
                         ....loading
                     </div>

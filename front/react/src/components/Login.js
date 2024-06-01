@@ -56,6 +56,8 @@ const Login = () => {
             <input type="text" placeholder="PW" name="password" value={password} onChange={onChange}/>
             <button onClick={doLogin}>Login</button>
             <button onClick={findId}>아이디 찾기</button>
+            <button>비밀번호 찾기(아직구현X)</button>
+            <button>소셜로그인(아직구현X)</button>
         </div>
     );
 };
