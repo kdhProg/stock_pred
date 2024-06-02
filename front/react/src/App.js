@@ -17,15 +17,14 @@ import FreeBoardPage from "./pages/FreeBoardPage";
 import PostDetail from "./pages/PostDetail";
 import PostWrite from "./pages/PostWrite";
 import PostUpdate from "./pages/PostUpdate";
-
+import './css/App.css'
 
 function App() {
 
   return (
-      <div>
-          <Header/>
+      <div className="entireNavWidthFix">
           <BrowserRouter>
-              <Nav/>
+              <Header/>
               <Routes>
                   <Route path="/" element={<Home/>}/>
                   <Route path="/login" element={<Login/>}/>
@@ -45,8 +44,8 @@ function App() {
                   <Route path="/post/:postId" element={<PostDetail/>}/>
                   <Route path="/update/:postId" element={<PostUpdate />} />
               </Routes>
+              <Footer/>
           </BrowserRouter>
-          <Footer/>
       </div>
 
   );

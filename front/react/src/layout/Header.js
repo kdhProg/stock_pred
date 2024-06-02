@@ -1,11 +1,11 @@
 import React from 'react';
+import Nav from "../components/Nav";
 
 const Header = () => {
 /*  Todo 마이페이지 만들기 */
     return (
         <div>
-            HEADER
-            <hr/>
+            <Nav/>
         </div>
     );
 };

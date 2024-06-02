@@ -1,0 +1,72 @@
+.navBar{
+    background-color: #313946;
+    color: white;
+    font-weight: bold;
+
+    /* a태그 처리 */
+    a:link{color:white;text-decoration:none;}
+    a:visited{color:white;text-decoration:none;}
+    a:hover{color:yellow;text-decoration:none;}
+}
+
+.allColAttribute{
+    vertical-align: center;
+    padding-top: 20px;
+    padding-bottom: 5px;
+}
+
+.allColAttribute:hover{
+    background-color: #1b1f24;
+}
+
+.schBoxStyle{
+    padding-top: 15px;
+}
+
+.buttonNormalDesign{
+    border: 0;
+    background-color: transparent;
+
+    color:white;
+    text-decoration:none;
+    font-weight: bold;
+
+    vertical-align: center;
+
+}
+
+.buttonNormalDesign:hover{
+    color:yellow;
+}
+
+.paidPlanText{
+    background-color:#4B3BAE;
+
+}
+
+.myPageDesign{
+    background-color: #47BEF0;
+
+    color:white;
+    text-decoration:none;
+    font-weight: bold;
+}
+
+.logoImgLinkCol{
+    padding:2px 0px 0px 0px;
+}
+
+.logoImgLink{
+    display: inline-block;
+    width: 125px;
+    height: 56px;
+    overflow: hidden;
+}
+
+
+.logoImg{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+

@@ -27,7 +27,7 @@ const Home = () => {
         <div>
             {isAuthenticated?(
                 <div>
-                    <StockSearchBox/>
+                    <p>상단의 검색바 이용</p>
                 </div>
             ):(
                 <div>
