@@ -31,8 +31,8 @@ function App() {
                   <Route path="/logout" element={<Logout/>}/>
                   <Route path="/Join" element={<Join/>}/>
 
-                  <Route path="/schStock" element={<StockSearchPage/>}/>
-                  <Route path="/predStock" element={<StockPredictPage/>}/>
+                  <Route path="/schStock/:keyword" element={<StockSearchPage/>}/>
+                  <Route path="/predStock/:ticker" element={<StockPredictPage/>}/>
                   <Route path="/subscribePage" element={<SubscribePage/>}/>
 
                   <Route path="/Mypage" element={<Mypage/>}/>

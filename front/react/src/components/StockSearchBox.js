@@ -12,11 +12,11 @@ const StockSearchBox = ()=>{
     const navigate = useNavigate();
 
     const [inputValue, setInputValue] = useState('');
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
 
     const handleButtonClick = () => {
-        dispatch(updateSchKW(inputValue));
-        navigate("/schStock")
+        // dispatch(updateSchKW(inputValue));
+        navigate('/schStock/'+inputValue)
     };
 
 

@@ -1,4 +1,3 @@
-import {useSelector} from "react-redux";
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 import SelectedDatasetPreview from "../components/SelectedDatasetPreview";
@@ -6,19 +5,24 @@ import {Chart} from "react-google-charts";
 import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
+import {useParams} from "react-router-dom";
 
 
 const StockPredictPage = () => {
     
     /*
-    * Todo 새로고침 시 globalChoKeyword이 초기화됨 -> 별도의 저장방법 탐구
     * 20240531 - ModelSelect.js의 코드 이곳으로 옮김 -> Todo refactoring 필요(변수값 넘기기)
     * Todo 기능별 컴포넌트 분리하기
     * Todo 예측기준컬럼/타겟 컬럼 선정시 -> 타겟 컬럼은 반드시 예측기준컬럼중 하나여야 함 --> open/close 가지고 volumne을 예측할순없으므로
     * */
 
     /* 검색어 */
-    const globalChoKeyword = useSelector(state => state.string.choStockKeyword);
+    // const globalChoKeyword = useSelector(state => state.string.choStockKeyword);
+    // 20240603  전역 redux방식에서 useParams방식으로 변경
+
+    /* 요청용 필드 */
+    const ticker = useParams().ticker;
+
 
     /* 기업정보 - ticker / 기업명 / market */
     const [corpInfo, setCorpInfo] = useState([]);
@@ -212,7 +216,7 @@ const StockPredictPage = () => {
 
 
     useEffect(() => {
-        getCorpInfo(globalChoKeyword)
+        getCorpInfo(ticker)
 
         getFreeModels();
         getPaidModels();
@@ -230,7 +234,7 @@ const StockPredictPage = () => {
                 console.log(err)
             })
 
-    }, [globalChoKeyword]);
+    }, [ticker]);
 
     return(
         <div>

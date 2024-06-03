@@ -1,8 +1,6 @@
-import {useDispatch, useSelector} from "react-redux";
 import React, {useEffect, useState} from "react";
 import axios from "axios";
-import {updateChoKW} from "../redux/stringSlice";
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -11,12 +9,20 @@ import Button from "react-bootstrap/Button";
 
 
 const StockSearchPage = () => {
+    
+    /*
+    * Todo : 빈 검색어 입력시 감지하여 적절한 문구 띄우기
+    * */
 
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
     const navigate = useNavigate();
 
     /* 전역 검색값(문자열 받아오기) */
-    const globalKeywordStore = useSelector(state => state.string.schStockKeyword);
+    // 20240603  전역 redux방식에서 useParams방식으로 변경
+    // const globalKeywordStore = useSelector(state => state.string.schStockKeyword);
+
+    /* 키워드 요청 필드 */
+    const keyword = useParams().keyword;
 
     /* 서버로부터 요청 결과 받기*/
     const [schList, setSchList] = useState({});
@@ -35,15 +41,15 @@ const StockSearchPage = () => {
 
     /* 특정 주식 선택 -> 예측창으로 이동 */
     const choButtonClick = (ticker) => {
-        dispatch(updateChoKW(ticker));
-        navigate("/predStock")
+        // dispatch(updateChoKW(ticker));
+        navigate('/predStock/'+ticker)
     };
 
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                await doSearch(globalKeywordStore);
+                await doSearch(keyword);
             } catch (error) {
                 console.error('Error:', error);
             }
@@ -54,7 +60,7 @@ const StockSearchPage = () => {
         return () => {
             // cleanup 작업 수행
         };
-    }, [globalKeywordStore]);
+    }, [keyword]);
 
 
     return (
@@ -64,7 +70,7 @@ const StockSearchPage = () => {
                 <br/>
                 <Row className={styles.schKeywordStyle}>
                     <Col md={4}>
-                        <p>검색어 : {globalKeywordStore}</p>
+                        <p>검색어 : {keyword}</p>
                     </Col>
                     <Col/>
                 </Row>
