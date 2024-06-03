@@ -52,6 +52,7 @@ public class PostResponse {
         this.author = author;
     }
 
+    /* N건 조회 map메서드가 사용 */
     public PostResponse(Post post) {
         this.postId = post.getPostId();
         this.title = post.getTitle();

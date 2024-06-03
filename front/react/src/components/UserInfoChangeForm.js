@@ -8,7 +8,8 @@ const UserInfoChangeForm = () => {
 
     const chkIsEssentialValExists = ()=>{
         if (proUpdReq.userAccount.trim().length !== 0 &&
-            proUpdReq.phone.trim().length !== 0) {
+            proUpdReq.phone.trim().length !== 0 &&
+            proUpdReq.nickName.trim().length !== 0) {
             isButtonDisabled = false;
         } else {
             isButtonDisabled = true;
@@ -120,7 +121,7 @@ const UserInfoChangeForm = () => {
     return (
         <div>
             <h3>유저 정보 수정</h3>
-            <h4>반드시 있어야 하는 정보 : 아이디 / 전화번호 !!!</h4>
+            <h4>반드시 있어야 하는 정보 : 아이디 / 전화번호 / nickname!!!</h4>
             <div>
                 <label htmlFor="userAccount">아이디</label>
                 <input

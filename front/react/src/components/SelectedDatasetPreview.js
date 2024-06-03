@@ -1,6 +1,10 @@
 import {useEffect, useState} from "react";
 import axios from "axios";
 import { Chart } from 'react-google-charts';
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Button from "react-bootstrap/Button";
+import styles from "../css/SelectedDatasetPreview.module.css"
 
 const SelectedDatasetPreview = (props) => {
 
@@ -9,6 +13,9 @@ const SelectedDatasetPreview = (props) => {
 
     /* 데이터 로드 여부 */
     const [isLoading, setIsLoading] = useState(true);
+
+    /* 데이터 로드 버튼 활성화 여부 */
+    const [isDisabled, setIsDisabled] = useState(false);
 
     /* get: showSelectedEntireData 전송용 */
     const [dataReq, setDataReq] = useState({
@@ -44,10 +51,12 @@ const SelectedDatasetPreview = (props) => {
     *
     *  */
     const showSelectedEntireData = async () => {
+        setIsDisabled(true);
         await axios.get(`/pred/showSelectedEntireData?&ticker=${dataReq.ticker}&colName=${dataReq.colName}&startDate=${dataReq.startDate}&endDate=${dataReq.endDate}`)
             .then((res) => {
             setIsLoading(false);
             setChartData(makeProperDataForm(res.data));
+            setIsDisabled(false);
         });
     }
 
@@ -89,47 +98,56 @@ const SelectedDatasetPreview = (props) => {
 
     return(
         <div>
-            <label htmlFor="startDate">start date</label>
-            <input id="startDate" type="date" name="startDate" onChange={onChangeDate}/>
+            <Row className={styles.previewRowHeightFix}>
+                <Col md={4}>
+                    <Row>
+                        <Col>
+                            <label htmlFor="startDate">start date</label>
+                            <input id="startDate" type="date" name="startDate" onChange={onChangeDate}/>
 
-            <label htmlFor="endDate">end date</label>
-            <input id="endDate" type="date" name="endDate" onChange={onChangeDate}/>
-
-            <br/>
-            <h4>조회할 컬럼</h4>
-            <label htmlFor="">시가</label>
-            <input type="radio" name="colName" value="Open" onChange={handleRadioChange}/>&nbsp;&nbsp;
-            <label htmlFor="">고가</label>
-            <input type="radio" name="colName" value="High" onChange={handleRadioChange}/>&nbsp;&nbsp;
-            <label htmlFor="">저가</label>
-            <input type="radio" name="colName" value="Low" onChange={handleRadioChange}/>&nbsp;&nbsp;
-            <label htmlFor="">종가</label>
-            <input type="radio" name="colName" value="Close" onChange={handleRadioChange}/>&nbsp;&nbsp;
-            <label htmlFor="">거래량</label>
-            <input type="radio" name="colName" value="Volumne" onChange={handleRadioChange}/>
-
-
-            <br/>
-            <button onClick={showSelectedEntireData}>데이터 로드하기</button>
-            <br/>
-            <br/>
-            <div>
-                {isLoading ? (
-                    <div>
-                        ........loading.....
-                    </div>
-                ) : (
-                    <div>
-                        <Chart
-                            chartType="LineChart"
-                            width="100%"
-                            height="700px"
-                            data={chartData}
-                            options={chartOptions}
-                        />
-                    </div>
-                )}
-            </div>
+                            <label htmlFor="endDate">end date</label>
+                            <input id="endDate" type="date" name="endDate" onChange={onChangeDate}/>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col>
+                            <h4>조회할 컬럼</h4>
+                            <label htmlFor="">시가</label>
+                            <input type="radio" name="colName" value="Open" onChange={handleRadioChange}/>&nbsp;&nbsp;
+                            <label htmlFor="">고가</label>
+                            <input type="radio" name="colName" value="High" onChange={handleRadioChange}/>&nbsp;&nbsp;
+                            <label htmlFor="">저가</label>
+                            <input type="radio" name="colName" value="Low" onChange={handleRadioChange}/>&nbsp;&nbsp;
+                            <label htmlFor="">종가</label>
+                            <input type="radio" name="colName" value="Close" onChange={handleRadioChange}/>&nbsp;&nbsp;
+                            <label htmlFor="">거래량</label>
+                            <input type="radio" name="colName" value="Volumne" onChange={handleRadioChange}/>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col>
+                            <Button variant="secondary" onClick={showSelectedEntireData} disabled={isDisabled}>데이터 로드하기</Button>
+                        </Col>
+                    </Row>
+                </Col>
+                <Col>
+                    {isLoading ? (
+                        <div>
+                            ........loading.....
+                        </div>
+                    ) : (
+                        <div>
+                            <Chart
+                                chartType="LineChart"
+                                width="100%"
+                                height="300px"
+                                data={chartData}
+                                options={chartOptions}
+                            />
+                        </div>
+                    )}
+                </Col>
+            </Row>
         </div>
     )
 }

@@ -3,6 +3,9 @@ import React, {useEffect, useState} from "react";
 import axios from "axios";
 import SelectedDatasetPreview from "../components/SelectedDatasetPreview";
 import {Chart} from "react-google-charts";
+import Container from "react-bootstrap/Container";
+import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
 
 
 const StockPredictPage = () => {
@@ -231,16 +234,35 @@ const StockPredictPage = () => {
 
     return(
         <div>
-            <h1>예측 페이지</h1>
-            <div>
-                <h2>기업정보 Preview</h2>
-                <p>Ticker : {corpInfo[0]}</p>
-                <p>기업명 : {corpInfo[1]}</p>
-                <p>Market : {corpInfo[2]}</p>
-            </div>
-            <hr/>
-            <h2>데이터 Preview</h2>
-            <SelectedDatasetPreview ticker={corpInfo[0]}/>
+            <Container>
+                <Row>
+                    <Col>
+                        <div>
+                            <h2>기업정보 Preview</h2>
+                            <p>Ticker : {corpInfo[0]}</p>
+                            <p>기업명 : {corpInfo[1]}</p>
+                            <p>Market : {corpInfo[2]}</p>
+                        </div>
+                    </Col>
+                </Row>
+                <SelectedDatasetPreview ticker={corpInfo[0]}/>
+                <Row>
+                    <Col>
+                        무료 파라미터
+                    </Col>
+                    <Col>
+                        유료 파라미터
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        테스트셋 그래프
+                    </Col>
+                    <Col>
+                        등락률 그래프
+                    </Col>
+                </Row>
+            </Container>
             <hr/>
             <div>
                 <h2>무료 모델</h2>
