@@ -35,6 +35,10 @@ public class UserProfile {
     @Column(name="PHONE",unique=true,nullable = false)
     private String phone;
 
+    /* 별명  - 필수정보 */
+    @Column(name="NICKNAME")
+    private String nickName;
+
     /*
     * 하단은 선택입력가능 정보(null허용)
     * */
@@ -46,10 +50,6 @@ public class UserProfile {
     /* 성별 */
     @Column(name="GENDER")
     private String gender;
-
-    /* 별명 */
-    @Column(name="NICKNAME")
-    private String nickName;
 
     /* 프로필이미지 경로 */
 //    @Column(name="PROFILE_IMAGE")

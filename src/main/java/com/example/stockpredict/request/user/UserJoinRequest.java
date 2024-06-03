@@ -8,7 +8,7 @@ import lombok.Getter;
 @Getter
 public class UserJoinRequest {
 
-    /* 필수 컬럼 - 아이디 + 비밀번호 + 전화번호 */
+    /* 필수 컬럼 - 아이디 + 비밀번호 + 전화번호 + 별명*/
     @NotBlank(message = "아이디는 필수입니다")
     private String userAccount;
 
@@ -18,14 +18,16 @@ public class UserJoinRequest {
     @NotBlank(message = "전화번호는 필수입니다")
     private String phone;
 
+    /* 별명 - 글 작성 시 필수이므로 필수 지정 */
+    @NotBlank(message = "닉네임은 필수입니다")
+    private String nickName;
+
     /* 주소 */
     private String address;
 
     /* 성별 */
     private String gender;
 
-    /* 별명 */
-    private String nickName;
 
     /* 프로필이미지 경로 */
 //    private String profileImage;
