@@ -92,10 +92,10 @@ const Nav = () => {
                             <Col>
 
                             </Col>
-                            <Col md={2} className={styles.allColAttribute}>
+                            <Col md={2} className={styles.allColAttributeNoAuth}>
                                 <Link to="/Join">회원가입</Link>
                             </Col>
-                            <Col md={2} className={styles.allColAttribute}>
+                            <Col md={2} className={styles.allColAttributeNoAuth}>
                                 <Link to="/login">로그인</Link>
                             </Col>
                         </Row>

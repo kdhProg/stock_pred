@@ -6,7 +6,8 @@ Content-Type: application/json
 {
   "userAccount": "test1234",
   "password": "qwer1234",
-  "phone": "12341234"
+  "phone": "12341234",
+  "nickName": "aaaaaa"
 }
 
 
@@ -53,10 +54,10 @@ GET http://localhost:9999/post/1
 
 
 ### 글 N건 조회 1
-GET http://localhost:9999/post/getPosts?page=1&size=10&sort=postId&category=0&keyword=2
+GET http://localhost:9999/post/getPosts?page=1&size=10&sort=postId&category=0&keyword=
 
 ### 글 N건 총개수
-GET http://localhost:9999/post/getPostsCount?category=1&keyword=
+GET http://localhost:9999/post/getPostsCount?category=0&keyword=
 
 
 ### 글 수정

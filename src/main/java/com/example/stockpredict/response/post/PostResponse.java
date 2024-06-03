@@ -11,6 +11,9 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class PostResponse {
 
+    /* 글쓴이 - user의 nickname */
+    private String author;
+
     private Long postId;
 
     private String title;
@@ -34,7 +37,7 @@ public class PostResponse {
     @Builder
     public PostResponse(Long postId, String title, String content, Integer category,
                         Integer isImportant, Integer likes, Integer reports,
-                        Integer isSecret, LocalDateTime createdAt, LocalDateTime updateDate) {
+                        Integer isSecret, LocalDateTime createdAt, LocalDateTime updateDate,String author) {
         this.postId = postId;
         this.title = title;
         this.content = content;
@@ -45,6 +48,8 @@ public class PostResponse {
         this.isSecret = isSecret;
         this.createdAt = createdAt;
         this.updateDate = updateDate;
+
+        this.author = author;
     }
 
     public PostResponse(Post post) {
@@ -58,5 +63,6 @@ public class PostResponse {
         this.isSecret = post.getIsSecret();
         this.createdAt = post.getCreatedAt();
         this.updateDate = post.getCreatedAt();
+        this.author = post.getUser().getUserProfile().getNickName();
     }
 }

@@ -64,6 +64,7 @@ public class PostService {
                 .isSecret(post.getIsSecret())
                 .createdAt(post.getCreatedAt())
                 .updateDate(post.getUpdateDate())
+                .author(post.getUser().getUserProfile().getNickName())
                 .build();
     }
 

@@ -19,6 +19,18 @@
     background-color: #1b1f24;
 }
 
+.allColAttributeNoAuth{
+    vertical-align: center;
+    padding-top: 20px;
+    /*Todo : 로그인/로그아웃 간의 height가 약간 다름 -> 임시로 적당한px로 고정*/
+    height: 65px;
+
+}
+
+.allColAttributeNoAuth:hover{
+    background-color: #1b1f24;
+}
+
 .schBoxStyle{
     padding-top: 15px;
 }
@@ -58,8 +70,8 @@
 
 .logoImgLink{
     display: inline-block;
-    width: 125px;
-    height: 56px;
+    width: 110px;
+    height: 51px;
     overflow: hidden;
 }
 
