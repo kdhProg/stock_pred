@@ -1,4 +1,37 @@
 
 .previewRowHeightFix{
     height: 400px;
+    background-color: #eceded;
+}
+
+.prevDateInfoText{
+    font-weight: bold;
+}
+
+.prevDateBtn{
+    border: none;
+    width: 300px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+    background-color: #616169;
+    border-radius: 8px;
+    color: white;
+    text-align: center;
+}
+
+.prevBtn{
+    width: 200px;
+    box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+}
+
+.prevColRadioInfo{
+    font-weight: bold;
+}
+
+.prevColRadio{
+    display: inline-block;
+}
+
+.boldFont{
+    font-weight: bold;
 }

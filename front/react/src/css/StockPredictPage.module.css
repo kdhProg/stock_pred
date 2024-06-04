@@ -1,0 +1,92 @@
+
+
+.boldFont{
+    font-weight: bold;
+}
+
+/* 기업정보 info */
+.corpInfoRow{
+    background-color: #eceded;
+}
+
+.corpInfoText{
+    font-weight: bold;
+    font-size: 30px;
+    color: #4B3BAE;
+}
+
+
+/* free / paid model 행 */
+
+.modelSelectRow{
+    background-color: #eceded;
+}
+
+.freeModelCol{
+
+}
+
+.paidModelCol{
+
+}
+
+.modelLabelNForm{
+    font-weight: bold;
+    background-color: #dbdbdb;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.modelRow{
+
+}
+
+/* 모델 파리미터 행*/
+.modelParamRow{
+    background-color: #eceded;
+}
+
+.predDateBtn{
+    border: none;
+    width: 300px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+    background-color: #616169;
+    border-radius: 8px;
+    color: white;
+    text-align: center;
+}
+
+.predColumnsBoxes{
+
+}
+
+.predColumn{
+    display: inline-block;
+}
+
+.predEpochBox{
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.predTargetColumnSelBox{
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* 예측 실행 버튼 */
+.predBtn{
+    width: 300px;
+    height: 75px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.predBtn:hover{
+    border: none;
+    background-color: #862626;
+}
+
+
+
+

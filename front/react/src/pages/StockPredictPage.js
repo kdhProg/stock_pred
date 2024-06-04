@@ -6,7 +6,10 @@ import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import {useParams} from "react-router-dom";
-
+import styles from "../css/StockPredictPage.module.css"
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
+import {Spinner} from "react-bootstrap";
 
 const StockPredictPage = () => {
     
@@ -239,150 +242,326 @@ const StockPredictPage = () => {
     return(
         <div>
             <Container>
-                <Row>
+                <br/>
+                <Row className={styles.corpInfoRow}>
                     <Col>
-                        <div>
-                            <h2>기업정보 Preview</h2>
-                            <p>Ticker : {corpInfo[0]}</p>
-                            <p>기업명 : {corpInfo[1]}</p>
-                            <p>Market : {corpInfo[2]}</p>
-                        </div>
+                        <br/>
+                        <Row>
+                            <h4 className={styles.boldFont}>Ticker</h4>
+                        </Row>
+                        <br/>
+                        <Row>
+                            <p className={styles.corpInfoText}>{corpInfo[0]}</p>
+                        </Row>
+                        <br/>
                     </Col>
+                    <Col>
+                        <br/>
+                        <Row>
+                            <h4 className={styles.boldFont}>기업명</h4>
+                        </Row>
+                        <br/>
+                        <Row>
+                            <p className={styles.corpInfoText}>{corpInfo[1]}</p>
+                        </Row>
+                        <br/>
+                    </Col>
+                    <Col>
+                        <br/>
+                        <Row>
+                            <h4 className={styles.boldFont}>주식시장</h4>
+                        </Row>
+                        <br/>
+                        <Row>
+                            <p className={styles.corpInfoText}>{corpInfo[2]}</p>
+                        </Row>
+                        <br/>
+                    </Col>
+                    <br/>
                 </Row>
+                <br/>
                 <SelectedDatasetPreview ticker={corpInfo[0]}/>
-                <Row>
-                    <Col>
-                        무료 파라미터
+                <br/>
+                <Row className={styles.modelSelectRow}>
+                    <Col className={styles.freeModelCol}>
+                        <br/>
+                        <Row>
+                            <h2 className={styles.boldFont}>무료 모델</h2>
+                        </Row>
+                        <br/>
+                        {freeModels.map((modelName) => (
+                        <div key={modelName} className={styles.modelRow}>
+                            <Row>
+                                <Col md={2}/>
+                                <Col className={styles.modelLabelNForm}>
+                                    <label htmlFor={modelName}>{modelName.slice(0, -3)}</label>
+                                    <Form.Check id={modelName} type="radio" name="predModel" value={modelName}
+                                                onChange={freeModelChange}/>
+                                </Col>
+                                <Col md={2}/>
+                            </Row>
+                            <br/>
+                        </div>
+                        ))}
+                        <br/>
                     </Col>
-                    <Col>
-                        유료 파라미터
+                    <Col className={styles.paidModelCol}>
+                        <br/>
+                        <Row>
+                            <h2 className={styles.boldFont}>유료 모델</h2>
+                        </Row>
+                        <br/>
+                        {isPaidPlan ? (
+                            <span>
+                                {paidModels.map((modelName) => (
+                                    <div key={modelName} className={styles.modelRow}>
+                                        <Row>
+                                            <Col md={2}/>
+                                            <Col className={styles.modelLabelNForm}>
+                                                <label htmlFor={modelName}>{modelName.slice(0, -3)}</label>
+                                                <Form.Check id={modelName} type="radio" name="predModel"
+                                                            value={modelName}
+                                                            onChange={freeModelChange}/>
+                                            </Col>
+                                            <Col md={2}/>
+                                        </Row>
+                                        <br/>
+                                    </div>
+                                ))}
+                            </span>
+                        ) : (
+                            <Row>
+                                <p>유료회원 전용입니다.</p>
+                            </Row>
+
+                        )}
                     </Col>
                 </Row>
+                <br/>
+                <Row className={styles.modelParamRow}>
+                    <Col>
+                        <br/>
+                        <Row>
+                            <h2 className={styles.boldFont}>모델 기본 설정</h2>
+                        </Row>
+                        <br/>
+                        <Row>
+                            <Col md={3}>
+                                <p className={styles.boldFont}>
+                                    시작일
+                                </p>
+                                <p className={styles.boldFont}>
+                                    마지막일
+                                </p>
+                            </Col>
+                            <Col>
+                                <input  className={styles.predDateBtn}name="startDate" type="date" onChange={onChange}/>
+                                <br/><br/>
+                                <input  className={styles.predDateBtn} name="endDate" type="date" onChange={onChange}/>
+                            </Col>
+                        </Row>
+                        <br/>
+                        <Row>
+                            <Col md={3}>
+                                <p className={styles.boldFont}>Epoch</p>
+                            </Col>
+                            <Col md={2}/>
+                            <Col>
+                                <Form.Control className={styles.predEpochBox} name="epoch" type="number" placeholder="ex) 100" onChange={onChange}/>
+                            </Col>
+                            <Col md={2}/>
+                        </Row>
+                        <br/>
+                        <Row>
+                            <Col md={3}>
+                                <p className={styles.boldFont}>예측 기준 컬럼</p>
+                            </Col>
+                            <Col className={styles.predColumnsBoxes}>
+                                <label htmlFor="">시가</label>
+                                <Form.Check className={styles.predColumn} name="predColumns" value="Open" type="checkbox"
+                                       onChange={handleCheckboxChange}/>&nbsp;&nbsp;
+                                <label htmlFor="">고가</label>
+                                <Form.Check className={styles.predColumn} name="predColumns" value="High" type="checkbox"
+                                       onChange={handleCheckboxChange}/>&nbsp;&nbsp;
+                                <label htmlFor="">저가</label>
+                                <Form.Check className={styles.predColumn} name="predColumns" value="Low" type="checkbox"
+                                       onChange={handleCheckboxChange}/>&nbsp;&nbsp;
+                                <label htmlFor="">종가</label>
+                                <Form.Check className={styles.predColumn} name="predColumns" value="Close" type="checkbox"
+                                       onChange={handleCheckboxChange}/>&nbsp;&nbsp;
+                                <label htmlFor="">거래량</label>
+                                <Form.Check className={styles.predColumn} name="predColumns" value="Volumne" type="checkbox"
+                                       onChange={handleCheckboxChange}/>
+                            </Col>
+                        </Row>
+                        <br/>
+                        <Row>
+                            <Col md={3}>
+                                <p className={styles.boldFont}>예측 목표 컬럼</p>
+                            </Col>
+                            <Col md={2}/>
+                            <Col>
+                                <Form.Select className={styles.predTargetColumnSelBox} name="targetColumn" onChange={onChangeTarget}>
+                                    <option value="Open">시가</option>
+                                    <option value="High">고가</option>
+                                    <option value="Low">저가</option>
+                                    <option value="Close">종가</option>
+                                    <option value="Volumne">거래량</option>
+                                </Form.Select>
+                            </Col>
+                            <Col md={2}/>
+                        </Row>
+                        <br/><br/>
+                    </Col>
+                    <Col>
+                        <br/>
+                        <Row>
+                            <h2 className={styles.boldFont}>유료 파라미터</h2>
+                        </Row>
+                        {isPaidPlan ? (
+                            <div>
+                                <Row>
+                                    <Col md={3}>
+                                        <p className={styles.boldFont}>과거 N일 예측</p>
+                                    </Col>
+                                    <Col md={1}/>
+                                    <Col>
+                                        <Form.Control name="pastPredDays" type="number" placeholder="ex) 30 = 과거30일치 데이터로 학습" onChange={onChange}/>
+                                    </Col>
+                                    <Col md={2}/>
+                                </Row>
+                                <br/>
+                                <Row>
+                                    <Col md={3}>
+                                        <p className={styles.boldFont}>Train/Test 비율</p>
+                                    </Col>
+                                    <Col md={1}/>
+                                    <Col>
+                                        <Form.Control name="trainTestSplit" type="number" placeholder="ex) 30 = Train 70 : Test 30" onChange={onChange}/>
+                                    </Col>
+                                    <Col md={2}/>
+                                </Row>
+                                <br/>
+                                <Row>
+                                    <Col md={3}>
+                                        <p className={styles.boldFont}>Validation 비율</p>
+                                    </Col>
+                                    <Col md={1}/>
+                                    <Col>
+                                        <Form.Control name="validPercentage" type="number" placeholder="ex) 10 = Train데이터의 10%를 검증에 사용" onChange={onChange}/>
+                                    </Col>
+                                    <Col md={2}/>
+                                </Row>
+                                <br/>
+                                <Row>
+                                    <Col md={3}>
+                                        <p className={styles.boldFont}>Batch Size</p>
+                                    </Col>
+                                    <Col md={1}/>
+                                    <Col>
+                                        <Form.Control name="batchSize" type="number" placeholder="기본값:30" onChange={onChange}/>
+                                    </Col>
+                                    <Col md={2}/>
+                                </Row>
+                            </div>
+                        ) : (
+                            <div>
+                                <Row>
+                                    <h5 className={styles.boldFont}>※유료회원 전용 커스터마이징 필드입니다.</h5>
+                                </Row>
+                                <Row>
+                                    <Col md={3}>
+                                        <p className={styles.boldFont}>과거 N일 예측</p>
+                                    </Col>
+                                    <Col md={1}/>
+                                    <Col>
+                                        <Form.Control placeholder="pastPredDays:30" disabled={true}/>
+                                    </Col>
+                                    <Col md={2}/>
+                                </Row>
+                                <br/>
+                                <Row>
+                                    <Col md={3}>
+                                        <p className={styles.boldFont}>Train/Test 비율</p>
+                                    </Col>
+                                    <Col md={1}/>
+                                    <Col>
+                                        <Form.Control placeholder="trainTestSplit:30" disabled={true}/>
+                                    </Col>
+                                    <Col md={2}/>
+                                </Row>
+                                <br/>
+                                <Row>
+                                    <Col md={3}>
+                                        <p className={styles.boldFont}>Validation 비율</p>
+                                    </Col>
+                                    <Col md={1}/>
+                                    <Col>
+                                        <Form.Control placeholder="validPercentage:10" disabled={true}/>
+                                    </Col>
+                                    <Col md={2}/>
+                                </Row>
+                                <br/>
+                                <Row>
+                                    <Col md={3}>
+                                        <p className={styles.boldFont}>Batch Size</p>
+                                    </Col>
+                                    <Col md={1}/>
+                                    <Col>
+                                        <Form.Control  placeholder="batchSize:30" disabled={true}/>
+                                    </Col>
+                                    <Col md={2}/>
+                                </Row>
+                            </div>
+                        )}
+                    </Col>
+                </Row>
+                <br/>
                 <Row>
                     <Col>
-                        테스트셋 그래프
+                        {isDisabled?(
+                            <Button className={styles.predBtn} variant="danger" onClick={doPredict} disabled={isDisabled}>
+                                <Spinner
+                                    as="span"
+                                    animation="border"
+                                    size="sm"
+                                    role="status"
+                                    aria-hidden="true"
+                                />
+                            </Button>
+                        ):(
+                            <Button className={styles.predBtn} variant="danger" onClick={doPredict} disabled={isDisabled}>예측하기</Button>
+                        )
+                        }
                     </Col>
-                    <Col>
-                        등락률 그래프
-                    </Col>
+                </Row>
+                <br/>
+                <Row>
+                    {isRstLoaded?(
+                        <div>
+                            <Col>
+                                <Chart
+                                    chartType="LineChart"
+                                    width="100%"
+                                    height="700px"
+                                    data={chartData}
+                                    options={chartOptions}
+                                />
+                            </Col>
+                            <Col>
+                                <div>
+                                    <h3>내일 예측값:</h3>
+                                    <p>Prediction : {chartData.tomorrow_value}</p>
+                                    <p>{tomorrowValue}</p>
+                                </div>
+                            </Col>
+                        </div>
+                    ) : (
+                        <div></div>
+                    )
+                    }
                 </Row>
             </Container>
-            <hr/>
-            <div>
-                <h2>무료 모델</h2>
-                <ul>
-                    {freeModels.map((modelName) => (
-                        <li key={modelName}>
-                            <input type="radio" name="predModel" value={modelName} onChange={freeModelChange}/>
-                            <label htmlFor={modelName}>{modelName.slice(0, -3)}</label>
-                        </li>
-                    ))}
-                </ul>
-            </div>
-            <div>
-                <h2>유료 모델</h2>
-
-                {isPaidPlan ? (
-                    <ul>
-                        {paidModels.map((modelName) => (
-                            <li key={modelName}>
-                                <input type="radio" name="predModel" value={modelName} onChange={paidModelChange}/>
-                                <label htmlFor={modelName}>{modelName.slice(0, -3)}</label>
-                            </li>
-                        ))}
-                    </ul>
-                ) : (
-                    <div>
-                        <p>유료회원 전용입니다.</p>
-                    </div>
-
-                )}
-            </div>
-            <hr/>
-            {/* 파라미터 선택*/}
-            <div>
-                <label htmlFor="">startDate</label>
-                <input name="startDate" type="date" onChange={onChange}/>
-                <br/>
-                <label htmlFor="">endDate</label>
-                <input name="endDate" type="date" onChange={onChange}/>
-                <br/>
-                <label htmlFor="">epoch</label>
-                <input name="epoch" type="number" onChange={onChange}/>
-                <br/>
-                <p>예측 기준 컬럼 - OHLCV</p>
-                <label htmlFor="">시가 Open</label>
-                <input name="predColumns" value="Open" type="checkbox" onChange={handleCheckboxChange}/>&nbsp;&nbsp;
-                <label htmlFor="">고가 High</label>
-                <input name="predColumns" value="High" type="checkbox" onChange={handleCheckboxChange}/>&nbsp;&nbsp;
-                <label htmlFor="">저가 Low</label>
-                <input name="predColumns" value="Low" type="checkbox" onChange={handleCheckboxChange}/>&nbsp;&nbsp;
-                <label htmlFor="">종가 Close</label>
-                <input name="predColumns" value="Close" type="checkbox" onChange={handleCheckboxChange}/>&nbsp;&nbsp;
-                <label htmlFor="">거래량 Volumne</label>
-                <input name="predColumns" value="Volumne" type="checkbox" onChange={handleCheckboxChange}/>
-                <br/>
-                <select name="targetColumn" onChange={onChangeTarget}>
-                    <option value="Open">시가</option>
-                    <option value="High">고가</option>
-                    <option value="Low">저가</option>
-                    <option value="Close">종가</option>
-                    <option value="Volumne">거래량</option>
-                </select>
-            </div>
-            <div>
-                {isPaidPlan ? (
-                    <div>
-                        <label htmlFor="">과거N일로 예측?</label>
-                        <input name="pastPredDays" type="number" onChange={onChange}/>
-                        <br/>
-                        <label htmlFor="">Train/Test 비율</label>
-                        <input name="trainTestSplit" type="number" onChange={onChange}/>
-                        <br/>
-                        <label htmlFor="">Validation Data 비율</label>
-                        <input name="validPercentage" type="number" onChange={onChange}/>
-                        <br/>
-                        <label htmlFor="">batchSize</label>
-                        <input name="batchSize" type="number" onChange={onChange}/>
-                    </div>
-                ) : (
-                    <div>
-                        <p>유료회원만 선택 가능 필드입니다.</p>
-                        [기본값]
-                        pastPredDays:30,
-                        trainTestSplit:30,
-                        validPercentage:10,
-                        batchSize:30
-                    </div>
-                )}
-            </div>
-            <hr/>
-            <button onClick={()=>{console.log("predModelReq:  "+JSON.stringify(predModelReq))}}>콘솔에 전송객체 값 찍어보기</button>
-            <br/>
-            <button onClick={doPredict} disabled={isDisabled}>예측하기!!!!!!!!!!</button>
-            <div>
-                <h2>예측결과 TEST 데이터</h2>
-                {isRstLoaded?(
-                    <div>
-                        <Chart
-                            chartType="LineChart"
-                            width="100%"
-                            height="700px"
-                            data={chartData}
-                            options={chartOptions}
-                        />
-                        <div>
-                            <h3>내일 예측값:</h3>
-                            <p>Prediction : {chartData.tomorrow_value}</p>
-                            <p>{tomorrowValue}</p>
-                        </div>
-                    </div>
-                ) : (
-                    <div>
-                        ....loading
-                    </div>
-                )}
-            </div>
         </div>
     )
 }
