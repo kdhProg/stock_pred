@@ -196,7 +196,7 @@ new_df = new_df.sort_values(by='Date')
 
 new_df_diff = np.diff(new_df[target_column], axis=0)
 
-new_sc = sc_y.fit_transform(((new_df_diff[:])).reshape(new_df_diff.shape[0],1));
+new_sc = sc_y.transform(((new_df_diff[:])).reshape(new_df_diff.shape[0],1));
 
 new_sc_df = pd.DataFrame(new_sc,columns=[target_column])
 
