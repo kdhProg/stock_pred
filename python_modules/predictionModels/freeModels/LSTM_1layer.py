@@ -1,6 +1,7 @@
 import pandas as pd
 import sys
 import json
+from datetime import datetime, timedelta
 
 from pykrx import stock
 
@@ -166,30 +167,54 @@ y_pred = model.predict(X_test,verbose=0)
 y_pred_inversed = sc_y.inverse_transform(y_pred)
 y_pred_original  = np.cumsum(np.vstack((first_val, y_pred_inversed)), axis=0)
 
-y_test1 = np.transpose(y_test)
-y_test1 = y_test1.reshape(y_test1.shape[0],1)
-y_test_inversed = sc_y.inverse_transform(y_test1)
-y_test_original = np.cumsum(np.vstack((first_val, y_test_inversed)), axis=0)
+# y_test1 = np.transpose(y_test)
+# y_test1 = y_test1.reshape(y_test1.shape[0],1)
+# y_test_inversed = sc_y.inverse_transform(y_test1)
+# y_test_original = np.cumsum(np.vstack((first_val, y_test_inversed)), axis=0)
+y_test_original = ((df.loc[split_index:,pred_columns]).head(len(train_sc_df) - PAST_PRED_DAYS).values)
 
 
 x_index = list(df.loc[split_index:split_index+(len(test_sc_df) - PAST_PRED_DAYS),['Date']].values)
 x_index = list(map(lambda x: (str(x))[2:12],x_index))
 
+today = datetime.today()
+today_str = today.strftime('%Y-%m-%d')
+before_N_days = today - timedelta(days=(PAST_PRED_DAYS+100))
+before_N_days = before_N_days.strftime('%Y-%m-%d')
+new_df = stock.get_market_ohlcv_by_date(fromdate=before_N_days, todate=today_str, ticker=ticker)
 
-tomorrow_data = (test_sc_df.tail(PAST_PRED_DAYS))
+new_df.reset_index(inplace=True)
+
+new_df.rename(columns = {'날짜' : 'Date'}, inplace = True)
+new_df.rename(columns = {'시가' : 'Open'}, inplace = True)
+new_df.rename(columns = {'고가' : 'High'}, inplace = True)
+new_df.rename(columns = {'저가' : 'Low'}, inplace = True)
+new_df.rename(columns = {'종가' : 'Close'}, inplace = True)
+new_df.rename(columns = {'거래량' : 'Volumne'}, inplace = True)
+
+new_df = new_df.sort_values(by='Date')
+
+new_df_diff = np.diff(new_df[target_column], axis=0)
+
+new_sc = sc_y.fit_transform(((new_df_diff[:])).reshape(new_df_diff.shape[0],1));
+
+new_sc_df = pd.DataFrame(new_sc,columns=[target_column])
+
+tomorrow_data = (new_sc_df.tail(PAST_PRED_DAYS))
 tomorrow_reshape = (np.array(tomorrow_data)).reshape(1,PAST_PRED_DAYS,len(pred_columns))
 tomorrow_pred_raw = model.predict(tomorrow_reshape,verbose=0)
 tomorrow_pred_raw_inv = sc_y.inverse_transform(tomorrow_pred_raw)
 tomorrow_rst  = np.cumsum(np.vstack((first_val, tomorrow_pred_raw_inv)), axis=0)
 tomorrow_value = int(tomorrow_rst[-1:][0][0])
 
-today_value = int((((df.tail(1))[target_column]).values)[0])
+today_value = int((((new_df.tail(1))[target_column]).values)[0])
 
 rst = OrderedDict()
 rst["x_index"] = x_index
 # //1 --> 소수점 버리기
 rst["pred"] = list(map(lambda x: (x[0])//1,y_pred_original))  
-rst["real"] = list(map(lambda x: x[0],y_test_original))
+# rst["real"] = list(map(lambda x: x[0],y_test_original))
+rst["real"] = [item.item() for row in y_test_original for item in row]
 rst["tomorrow_value"] = tomorrow_value
 rst["today_value"] = today_value
 
