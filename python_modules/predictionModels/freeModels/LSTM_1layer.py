@@ -171,7 +171,7 @@ y_pred_original  = np.cumsum(np.vstack((first_val, y_pred_inversed)), axis=0)
 # y_test1 = y_test1.reshape(y_test1.shape[0],1)
 # y_test_inversed = sc_y.inverse_transform(y_test1)
 # y_test_original = np.cumsum(np.vstack((first_val, y_test_inversed)), axis=0)
-y_test_original = ((df.loc[split_index:,pred_columns]).head(len(train_sc_df) - PAST_PRED_DAYS).values)
+y_test_original = ((df.loc[split_index:,pred_columns]).head(len(train_sc_df) - PAST_PRED_DAYS)[target_column].values)
 
 
 x_index = list(df.loc[split_index:split_index+(len(test_sc_df) - PAST_PRED_DAYS),['Date']].values)
@@ -194,11 +194,23 @@ new_df.rename(columns = {'거래량' : 'Volumne'}, inplace = True)
 
 new_df = new_df.sort_values(by='Date')
 
-new_df_diff = np.diff(new_df[target_column], axis=0)
+new_df_diff = np.diff(new_df[pred_columns], axis=0)
 
-new_sc = sc_y.transform(((new_df_diff[:])).reshape(new_df_diff.shape[0],1));
+# new_sc = sc_y.fit_transform(((new_df_diff[:])).reshape(new_df_diff.shape[0],1));
+for i in range(len(pred_columns)):
+  if(pred_columns.index(pred_columns[i]) == findIndex):
+    if i==0:
+      new_sc = sc_y.transform(((new_df_diff[:,i])).reshape(new_df_diff.shape[0],1))
+    else:
+      new_sc = np.hstack((new_sc, sc_y.transform(((new_df_diff[:,i])).reshape(new_df_diff.shape[0],1))))
 
-new_sc_df = pd.DataFrame(new_sc,columns=[target_column])
+  else:
+    if i==0:
+      new_sc = sc_X.transform(((new_df_diff[:,i])).reshape(new_df_diff.shape[0],1))
+    else:
+      new_sc = np.hstack((new_sc, sc_X.transform(((new_df_diff[:,i])).reshape(new_df_diff.shape[0],1))))
+
+new_sc_df = pd.DataFrame(new_sc,columns=[pred_columns])
 
 tomorrow_data = (new_sc_df.tail(PAST_PRED_DAYS))
 tomorrow_reshape = (np.array(tomorrow_data)).reshape(1,PAST_PRED_DAYS,len(pred_columns))
@@ -214,7 +226,7 @@ rst["x_index"] = x_index
 # //1 --> 소수점 버리기
 rst["pred"] = list(map(lambda x: (x[0])//1,y_pred_original))  
 # rst["real"] = list(map(lambda x: x[0],y_test_original))
-rst["real"] = [item.item() for row in y_test_original for item in row]
+rst["real"] = y_test_original.tolist()
 rst["tomorrow_value"] = tomorrow_value
 rst["today_value"] = today_value
 
