@@ -180,6 +180,7 @@ public class PredictService {
 //                }
 //                return line;
                 String rst = reader.readLine();
+//                System.out.println(rst);
                 if(rst == null || rst.equals("")){
                     throw new PythonModuleException();
                 }

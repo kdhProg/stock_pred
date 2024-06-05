@@ -60,10 +60,6 @@ const StockPredictPage = () => {
     /* 최종 예측 response 여부 */
     const [isRstLoaded, setIsRstLoaded] = useState(false);
 
-
-    /* 최종 예측 tomorrow 값 */
-    const [tomorrowValue, setTomorrowValue] = useState(null);
-
     /* 예측 버튼 활성화 여부 */
     const [isDisabled, setIsDisabled] = useState(false);
 
@@ -166,12 +162,16 @@ const StockPredictPage = () => {
         setIsDisabled(true);
         await axios.post(`/pred/doPredict`,predModelReq)
             .then((resp) => {
-                    alert("예측 완료")
+                alert("예측 완료")
                 setIsDisabled(false);
                 setIsRstLoaded(true)
                 let data = resp.data
                 setChartData(makeProperDataForm(data));
+
                 setTomorrowValue(data.tomorrow_value);
+                setTodayValue(data.today_value)
+
+                setMarcapValue(marcapDonutmakeProperDataForm(data))
                 }
             )
             .catch((err) => {
@@ -183,7 +183,7 @@ const StockPredictPage = () => {
     }
 
 
-    /* goolge chart */
+    /* goolge chart Test결과*/
     /* google차트에 맞는 형태의 데이터로 변환 */
     const makeProperDataForm = (input)=>{
         const rst = [];
@@ -201,21 +201,81 @@ const StockPredictPage = () => {
     }
 
 
-    /* Google Chart 옵션 */
+    /* Google Chart Test결과 옵션 */
     const chartOptions = {
-        title: 'Dataset Preview',
+        title: '',
         curveType: 'function',
         legend: { position: 'bottom' }
     };
 
     /* Google Chart data */
-    /* 최종 예측 response - JSON */
+    /* 최종 예측 Test결과 response - JSON */
     const [chartData, setChartData] = useState({
         x_index: [],
         pred: [],
-        real: [],
-        tomorrow_value: 0
+        real: []
     });
+
+
+
+    /* goolge chart 등락(도넛그래프)*/
+    const marcapDonutmakeProperDataForm = (input)=>{
+        const rst = [];
+        const index = ['marcap','percentage'];
+        rst.push(index);
+
+        const todayValue = input.today_value
+        const tomorrowValue = input.tomorrow_value;
+
+        /* 등락률 - 기준일 : 오늘(todayValue)   공식 : 예상일(내일) - 오늘 / 오늘 * 100 */
+        const marcapVal = (tomorrowValue-todayValue)/todayValue
+
+        if(marcapVal >= 0){
+            setMarcapDonutChartOptions(prevOptions => ({
+                ...prevOptions,
+                slices: {
+                    ...prevOptions.slices,
+                    0: { color: 'blue' }
+                }
+            }));
+        }
+
+        /* 적절하지 않은 예상값 : 100%이상 증감 --> 이 나와도 그래프는 일단 100으로 표시 */
+        const marpcapPercentage = Math.min(Math.abs(marcapVal) * 100,100);
+        console.error("적절하지 않은 예상값 감지 -> 검증 필요 ")
+
+        const data = ['marcap',marpcapPercentage]
+        rst.push(data);
+
+        const offset = ['offset',100-marpcapPercentage]
+        rst.push(offset);
+
+        return rst
+    }
+    
+    /* googleChart 등락 관련 state */
+    const [marcapValue, setMarcapValue] = useState({
+        marcap:[],
+        percentage:[]
+    })
+
+    /* Google Chart 등락(도넛그래프) 옵션 */
+    const [marcapDonutChartOptions,setMarcapDonutChartOptions] = useState({
+        title: "",
+        legend:'none',
+        is3D: true,
+        // tooltip: { trigger: 'none' },
+        slices: {
+            0: { color: 'red' },
+            1: { color: 'transparent' }
+        }
+
+    });
+
+
+    /* 오늘, 내일 예측값 */
+    const [todayValue,setTodayValue] = useState(0);
+    const [tomorrowValue,setTomorrowValue] = useState(0);
 
 
     useEffect(() => {
@@ -321,7 +381,7 @@ const StockPredictPage = () => {
                                                 <label htmlFor={modelName}>{modelName.slice(0, -3)}</label>
                                                 <Form.Check id={modelName} type="radio" name="predModel"
                                                             value={modelName}
-                                                            onChange={freeModelChange}/>
+                                                            onChange={paidModelChange}/>
                                             </Col>
                                             <Col md={2}/>
                                         </Row>
@@ -530,37 +590,67 @@ const StockPredictPage = () => {
                                 />
                             </Button>
                         ):(
-                            <Button className={styles.predBtn} variant="danger" onClick={doPredict} disabled={isDisabled}>예측하기</Button>
+                            <Button className={styles.predBtn} variant="danger" onClick={doPredict} disabled={isDisabled}>
+                                <h3>예측하기</h3>
+                            </Button>
                         )
                         }
                     </Col>
                 </Row>
                 <br/>
-                <Row>
-                    {isRstLoaded?(
-                        <div>
-                            <Col>
+                {isRstLoaded?(
+                    <div className={styles.predRstDiv}>
+                    <br/><br/>
+                    <Row>
+                        <Col md={1}/>
+                        <Col md={6}>
+                            <h2 className={styles.boldFont}>Test데이터 결과</h2>
+                        </Col>
+                        <Col md={4}>
+                            <h2 className={styles.boldFont}>전일대비 등락률 예상</h2>
+                        </Col>
+                        <Col md={1}/>
+                    </Row>
+                        <br/>
+                    <Row >
+                        <Col md={1}/>
+                        <Col md={6}>
+                            <Chart
+                                chartType="LineChart"
+                                width="100%"
+                                height="400px"
+                                data={chartData}
+                                options={chartOptions}
+                            />
+                        </Col>
+                        <Col md={4}>
+                            <Row>
                                 <Chart
-                                    chartType="LineChart"
+                                    chartType="PieChart"
                                     width="100%"
-                                    height="700px"
-                                    data={chartData}
-                                    options={chartOptions}
+                                    height="300px"
+                                    data={marcapValue}
+                                    options={marcapDonutChartOptions}
                                 />
-                            </Col>
-                            <Col>
-                                <div>
-                                    <h3>내일 예측값:</h3>
-                                    <p>Prediction : {chartData.tomorrow_value}</p>
-                                    <p>{tomorrowValue}</p>
-                                </div>
-                            </Col>
-                        </div>
-                    ) : (
-                        <div></div>
-                    )
-                    }
-                </Row>
+                            </Row>
+                            <br/>
+                            <Row>
+                                <Col>
+                                    <h5 className={styles.boldFont}>오늘값: {todayValue.toLocaleString()}</h5>
+                                </Col>
+                                <Col>
+                                    <h5 className={styles.boldFont}>내일예상값: {tomorrowValue.toLocaleString()}</h5>
+                                </Col>
+                            </Row>
+                        </Col>
+                        <Col md={1}/>
+                    </Row>
+                    <br/><br/>
+                    </div>
+                ) : (
+                    <div></div>
+                )
+                }
             </Container>
         </div>
     )
