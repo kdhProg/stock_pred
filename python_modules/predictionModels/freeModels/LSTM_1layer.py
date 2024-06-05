@@ -183,12 +183,15 @@ tomorrow_pred_raw_inv = sc_y.inverse_transform(tomorrow_pred_raw)
 tomorrow_rst  = np.cumsum(np.vstack((first_val, tomorrow_pred_raw_inv)), axis=0)
 tomorrow_value = int(tomorrow_rst[-1:][0][0])
 
+today_value = int((((df.tail(1))[target_column]).values)[0])
+
 rst = OrderedDict()
 rst["x_index"] = x_index
 # //1 --> 소수점 버리기
 rst["pred"] = list(map(lambda x: (x[0])//1,y_pred_original))  
 rst["real"] = list(map(lambda x: x[0],y_test_original))
 rst["tomorrow_value"] = tomorrow_value
+rst["today_value"] = today_value
 
 rst = json.dumps(rst)
 print(rst)
