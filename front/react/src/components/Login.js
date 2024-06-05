@@ -52,8 +52,9 @@ const Login = () => {
 
     return (
         <div className="loginBoxContainer">
+            <br/><br/>
             <div className="loginBoxColumn">
-                <h4><b>로그인</b></h4>
+                <h2><b>로그인</b></h2>
             </div>
             <div className="loginBoxColumn">
                 <Form.Control className="boxShadow" type="text" placeholder="ID" name="userAccount" value={userAccount} onChange={onChange}/>
@@ -72,6 +73,7 @@ const Login = () => {
                     <Button className="boxShadow" variant="secondary">비밀번호 찾기</Button>
                 </div>
             </div>
+            <br/><br/>
         </div>
     );
 };
