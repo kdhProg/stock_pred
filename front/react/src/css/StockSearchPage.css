@@ -1,0 +1,54 @@
+.stockSchPageContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 1000px;
+    margin: auto;
+
+    /*border:solid  1px blue;*/
+}
+
+.stockSchPageColumn{
+    /*border:solid 1px red;*/
+}
+
+.stockInfoRow{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.stockInfoColumn{
+    width: 250px;
+}
+
+.stockListsRow{
+    height: 900px;
+    overflow: scroll;
+}
+
+.stockEachRow{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+
+    font-size: 20px;
+    font-weight: bold;
+
+    background-color: #eceded;
+}
+
+.stockEachRow:hover{
+    color: white;
+    background-color: #1E1C41;
+}
+
+.stockEachCol{
+    padding-top: 5px;
+    width: 250px;
+}
+
+
+.chooseBtn{
+    width: 250px;
+}

@@ -4,8 +4,9 @@ import {useNavigate, useParams} from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import styles from '../css/StockSearchPage.module.css'
+import styles from '../legacy/StockSearchPage.module.css'
 import Button from "react-bootstrap/Button";
+import "../css/StockSearchPage.css"
 
 
 const StockSearchPage = () => {
@@ -64,47 +65,45 @@ const StockSearchPage = () => {
 
 
     return (
-        <div>
-            <Container>
-                <br/>
-                <br/>
-                <Row className={styles.schKeywordStyle}>
-                    <Col md={4}>
-                        <p>검색어 : {keyword}</p>
-                    </Col>
-                    <Col/>
-                </Row>
-                <br/>
-                <Row className={styles.listColumnInfoStyle}>
-                    <Col>
-                        기업명
-                    </Col>
-                    <Col>
-                        Ticker
-                    </Col>
-                    <Col>
-
-                    </Col>
-                </Row>
-                <br/>
-                <Row  className={styles.overSpaceScroll}>
-                    <Col>
-                        {Object.entries(schList).map(([corpName, ticker]) => (
-                            <Row className={styles.eachRowStyle}>
-                                <Col>
-                                    <p>{corpName}</p>
-                                </Col>
-                                <Col>
-                                    <p>{ticker}</p>
-                                </Col>
-                                <Col>
-                                    <Button variant="secondary" className={styles.tickerButton} onClick={() => choButtonClick(ticker)}>선택</Button>
-                                </Col>
-                            </Row>
-                        ))}
-                    </Col>
-                </Row>
-            </Container>
+        <div className="stockSchPageContainer">
+            <br/><br/>
+            <div className="stockSchPageColumn">
+                <h4><strong>검색어 : {keyword}</strong></h4>
+            </div>
+            <br/>
+            <div className="stockSchPageColumn stockInfoRow">
+                <div className="stockInfoColumn">
+                    <h4><b>기업명</b></h4>
+                </div>
+                <div className="stockInfoColumn">
+                    <h4><b>Ticker</b></h4>
+                </div>
+                <div className="stockInfoColumn">
+                    <h4><b></b></h4>
+                </div>
+            </div>
+            <br/>
+            <div className="stockSchPageColumn stockListsRow">
+                {Object.entries(schList).map(([corpName, ticker]) => (
+                    <div>
+                        <div className="stockEachRow">
+                            <div className="stockEachCol">
+                                <p>{corpName}</p>
+                            </div>
+                            <div className="stockEachCol">
+                                <p>{ticker}</p>
+                            </div>
+                            <div className="stockEachCol">
+                                <Button variant="secondary" className="chooseBtn" onClick={() => choButtonClick(ticker)}>
+                                    <b>선택</b>
+                                </Button>
+                            </div>
+                        </div>
+                        <br/>
+                    </div>
+                ))}
+            </div>
+            <br/><br/>
         </div>
     )
 }

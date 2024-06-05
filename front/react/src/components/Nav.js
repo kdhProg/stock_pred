@@ -3,10 +3,6 @@ import React, {useEffect, useState} from 'react';
 import axios from "axios";
 import StockSearchBox from "./StockSearchBox";
 import {chkUserSubsPlan} from "../functions/chkUserSubsPlan";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import styles from '../css/Nav.module.css'
-import Container from "react-bootstrap/Container";
 import Logo from "../assets/logo_noBG.PNG"
 import "../css/Nav.css"
 
