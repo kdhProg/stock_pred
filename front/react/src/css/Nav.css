@@ -1,0 +1,113 @@
+.navBarContainer{
+    display: flex;
+    flex-direction: row;
+
+    justify-content: space-between;
+    align-items: center;
+
+    max-width: 1450px;
+    height: 70px;
+
+    margin: 0 auto;
+
+    background-color: #313946;
+
+    /*border:solid 1px blue;*/
+}
+
+.navBarColumn{
+    /*border: solid 1px #ff0000;*/
+}
+
+.authenticated{
+    display: flex;
+    flex-direction: row;
+
+    max-width: 1200px;
+    margin-right: 30px;
+
+    align-items: center;
+}
+
+.authenticatedColumn{
+    width: 250px;
+    margin: 0 10px 0 10px;
+
+    text-decoration: none;
+}
+
+.authenticatedColumn>a{
+    font-weight: bold;
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.authenticatedColumn>a:hover{
+    color:yellow;
+}
+
+.authenticatedColumn>button:hover{
+    color:yellow;
+}
+
+.stockSchBox{
+    width: 400px;
+    margin: 10px;
+}
+
+.nonAuthenticated{
+    display: flex;
+    flex-direction: row;
+
+    margin-right: 50px;
+
+    max-width: 400px;
+}
+
+.nonAuthenticatedColumn{
+    width: 200px;
+    margin: 10px;
+}
+
+.nonAuthenticatedColumn>a{
+    font-weight: bold;
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.nonAuthenticatedColumn>a:hover{
+    color:yellow;
+}
+
+
+.logoImg{
+    width: 130px;
+    height: 65px;
+}
+
+
+.imgBox{
+    margin-left: 50px;
+}
+
+.logoutBtn{
+    border: 0;
+    background-color: transparent;
+
+    color:white;
+    text-decoration:none;
+    font-weight: bold;
+
+    vertical-align: center;
+}
+
+.paidBtn{
+    border: 0;
+    background-color: transparent;
+
+    color:white;
+    text-decoration:none;
+    font-weight: bold;
+
+    vertical-align: center;
+}

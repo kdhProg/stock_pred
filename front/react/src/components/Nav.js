@@ -8,6 +8,7 @@ import Col from "react-bootstrap/Col";
 import styles from '../css/Nav.module.css'
 import Container from "react-bootstrap/Container";
 import Logo from "../assets/logo_noBG.PNG"
+import "../css/Nav.css"
 
 const Nav = () => {
 
@@ -47,62 +48,53 @@ const Nav = () => {
 
 
     return (
-        <Container className={styles.navBar}>
-            <Row className={styles.navEntireRow}>
-                <Col md={2} className={`${styles.allColAttribute} ${styles.logoImgLinkCol} ${styles.navCol}`}>
-                    <Link className={styles.logoImgLink} to="/">
-                        <img className={styles.logoImg} src={Logo} alt="Clickable" style={{cursor: 'pointer'}}/>
-                    </Link>
-                </Col>
-                <Col className={styles.navCol}>
-                    {isAuthenticated ? (
-                        <Row>
-                            <Col className={styles.allColAttribute}>
-                                <Link to="/NoticePage">공지사항</Link>
-                            </Col>
-                            <Col className={styles.allColAttribute}>
-                                <Link to="/FreeBoardPage">자유게시판</Link>
-                            </Col>
-                            <Col md={4} className={`${styles.allColAttribute} ${styles.schBoxStyle}`}>
-                                <StockSearchBox/>
-                            </Col>
-                            <Col className={styles.allColAttribute}>
-                                <button className={styles.buttonNormalDesign} onClick={doLogout}>로그아웃</button>
-                            </Col>
-                            <Col className={`${styles.myPageDesign} ${styles.allColAttribute}`}>
-                                <div>
-                                    <Link to="/Mypage">마이페이지</Link>
-                                </div>
-                            </Col>
-                            <Col className={`${styles.paidPlanText} ${styles.allColAttribute}`}>
-                                {isPaidPlan ?(
-                                    <div>
-                                        <p>Paid</p>
-                                    </div>
-                                ):(
-                                    <div>
-                                        <button  className={styles.buttonNormalDesign} onClick={()=>{navigate("/subscribePage")}}>유료계정</button>
-                                    </div>
-                                )
-                                }
-                            </Col>
-                        </Row>
+        <div className="navBarContainer">
+            <div className="navBarColumn imgBox">
+                <Link to="/">
+                    <img className="logoImg" src={Logo} alt="Clickable" style={{cursor: 'pointer'}}/>
+                </Link>
+            </div>
+            {isAuthenticated?(
+                <div className="navBarColumn authenticated">
+                    <div className="authenticatedColumn">
+                        <Link to="/NoticePage">공지사항</Link>
+                    </div>
+                    <div className="authenticatedColumn">
+                        <Link to="/FreeBoardPage">자유게시판</Link>
+                    </div>
+                    <div className="stockSchBox">
+                        <StockSearchBox/>
+                    </div>
+                    <div className="authenticatedColumn">
+                        <Link to="/Mypage">마이페이지</Link>
+                    </div>
+                    {isPaidPlan ? (
+                        <div className="authenticatedColumn">
+                            유료계정입니다.
+                        </div>
                     ) : (
-                        <Row>
-                            <Col>
-
-                            </Col>
-                            <Col md={2} className={styles.allColAttributeNoAuth}>
-                                <Link to="/Join">회원가입</Link>
-                            </Col>
-                            <Col md={2} className={styles.allColAttributeNoAuth}>
-                                <Link to="/login">로그인</Link>
-                            </Col>
-                        </Row>
+                        <div className="authenticatedColumn paidBtnBox">
+                            <button className="paidBtn" onClick={() => {
+                                navigate("/subscribePage")
+                            }}>유료계정 전환
+                            </button>
+                        </div>
                     )}
-                </Col>
-            </Row>
-        </Container>
+                    <div className="authenticatedColumn">
+                        <button className="logoutBtn" onClick={doLogout}>로그아웃</button>
+                    </div>
+                </div>
+            ) : (
+                <div className="navBarColumn nonAuthenticated">
+                    <div className="nonAuthenticatedColumn">
+                    <Link to="/Join">회원가입</Link>
+                    </div>
+                    <div className="nonAuthenticatedColumn">
+                        <Link to="/login">로그인</Link>
+                    </div>
+                </div>
+            )}
+        </div>
     );
 };
 

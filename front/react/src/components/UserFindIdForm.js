@@ -1,6 +1,9 @@
 import axios from "axios";
-import {useState} from "react";
+import React, {useState} from "react";
 import UserFindIdResult from "./UserFindIdResult";
+import "../css/UserFindIdForm.css"
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
 
 const UserFindIdForm = ()=>{
 
@@ -34,15 +37,19 @@ const UserFindIdForm = ()=>{
     return(
         <div>
             {isIdExists?(
-                <div>
-                    <UserFindIdResult userId={userId}/>
-                </div>
+                <UserFindIdResult userId={userId}/>
             ):(
-             <div>
-                 <h1>아이디 찾기</h1>
-                 <label htmlFor="findIdBox">전화번호를 입력하세요</label>
-                 <input id="findIdBox" type="text" onChange={onChange}/>
-                 <button onClick={findId}>아이디 찾기</button>
+             <div className="findIdContainer">
+                 <br/><br/>
+                 <div className="JoinBoxColumn">
+                     <h2><b>아이디 찾기</b></h2>
+                 </div>
+                 <div className="findIdCol">
+                     <Form.Control className="boxShadow" id="findIdBox" type="text" placeholder="전화번호를 입력하세요." onChange={onChange}/>
+                 </div>
+                 <div className="findIdCol">
+                     <Button className="boxShadow"  variant="secondary" onClick={findId}>아이디 찾기</Button>
+                 </div>
              </div>
             )
             }
