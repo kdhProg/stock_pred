@@ -9,7 +9,6 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 
-from keras.layers import LSTM
 from keras.layers import GRU
 from keras.models import Sequential
 from keras.layers import Dense
@@ -37,17 +36,19 @@ from sklearn.preprocessing import MinMaxScaler
 # 용례 : data.get('ticker')
 
 # SpringBoot -> Python
+server_request = sys.stdin.read()
+req = json.loads(server_request)
 
-pred_columns = ['Low','Volumne','Close']
-target_column = 'Volumne'
-PAST_PRED_DAYS = 30
-start_date = '2023-10-12'
-end_date = '2024-06-01'
-ticker = '005930'
-epoch = 100
-train_test_split = 30
-valid_percentage = 10
-batch_size = 30
+pred_columns = req.get("predColumns")
+target_column = req.get("targetColumn")
+PAST_PRED_DAYS = int(req.get("pastPredDays"))
+start_date = req.get("startDate")
+end_date = req.get("endDate")
+ticker = req.get("ticker")
+epoch = int(req.get("epoch"))
+train_test_split = int(req.get("trainTestSplit"))
+valid_percentage = int(req.get("validPercentage"))
+batch_size = int(req.get("batchSize"))
 
 
 original_data = stock.get_market_ohlcv_by_date(fromdate=start_date, todate=end_date, ticker=ticker)
@@ -151,14 +152,6 @@ X_val, y_val = X_train[split_index:], y_train[split_index:]
 K.clear_session()
 
 model = Sequential()
-# model.add(LSTM(20, input_shape=(PAST_PRED_DAYS, len(pred_columns))))
-# model.add(Dense(1))
-
-# model.compile(loss='mean_squared_error', optimizer='adam')
-# early_stop = EarlyStopping(monitor='val_loss', patience=10, restore_best_weights=True)
-
-# model.fit(X_train, y_train, epochs=epoch, batch_size=batch_size, validation_data=(X_val, y_val), callbacks=[early_stop], verbose=0)
-
 model.add(GRU(20, input_shape=(PAST_PRED_DAYS, len(pred_columns))))
 model.add(Dense(1))
 
@@ -166,7 +159,6 @@ model.compile(loss='mean_squared_error', optimizer='adam')
 early_stop = EarlyStopping(monitor='val_loss', patience=10, restore_best_weights=True)
 
 model.fit(X_train, y_train, epochs=epoch, batch_size=batch_size, validation_data=(X_val, y_val), callbacks=[early_stop], verbose=0)
-
 
 first_val = ((df[target_column].values)[split_index+1]).reshape(1,1)
 
@@ -179,8 +171,9 @@ y_pred_original  = np.cumsum(np.vstack((first_val, y_pred_inversed)), axis=0)
 # y_test1 = y_test1.reshape(y_test1.shape[0],1)
 # y_test_inversed = sc_y.inverse_transform(y_test1)
 # y_test_original = np.cumsum(np.vstack((first_val, y_test_inversed)), axis=0)
-
 y_test_original = ((df.loc[split_index:,pred_columns]).head(len(train_sc_df) - PAST_PRED_DAYS)[target_column].values)
+
+
 x_index = list(df.loc[split_index:split_index+(len(test_sc_df) - PAST_PRED_DAYS),['Date']].values)
 x_index = list(map(lambda x: (str(x))[2:12],x_index))
 
@@ -227,12 +220,13 @@ tomorrow_pred_raw_inv = sc_y.inverse_transform(tomorrow_pred_raw)
 tomorrow_rst  = np.cumsum(np.vstack((first_val, tomorrow_pred_raw_inv)), axis=0)
 tomorrow_value = int(tomorrow_rst[-1:][0][0])
 
-today_value = int((((new_df.tail(1))[target_column]).values)[0])
+today_value = int(((new_df.tail(1))[target_column]).values[0])
 
 rst = OrderedDict()
 rst["x_index"] = x_index
 # //1 --> 소수점 버리기
 rst["pred"] = list(map(lambda x: (x[0])//1,y_pred_original))  
+# rst["real"] = list(map(lambda x: x[0],y_test_original))
 rst["real"] = y_test_original.tolist()
 rst["tomorrow_value"] = tomorrow_value
 rst["today_value"] = today_value
