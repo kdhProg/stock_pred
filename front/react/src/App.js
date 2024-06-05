@@ -44,6 +44,7 @@ function App() {
                   <Route path="/post/:postId" element={<PostDetail/>}/>
                   <Route path="/update/:postId" element={<PostUpdate />} />
               </Routes>
+              <br/><br/>
               <Footer/>
           </BrowserRouter>
       </div>

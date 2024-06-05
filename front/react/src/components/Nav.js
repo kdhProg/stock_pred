@@ -48,13 +48,13 @@ const Nav = () => {
 
     return (
         <Container className={styles.navBar}>
-            <Row>
-                <Col md={2} className={`${styles.allColAttribute} ${styles.logoImgLinkCol}`}>
+            <Row className={styles.navEntireRow}>
+                <Col md={2} className={`${styles.allColAttribute} ${styles.logoImgLinkCol} ${styles.navCol}`}>
                     <Link className={styles.logoImgLink} to="/">
                         <img className={styles.logoImg} src={Logo} alt="Clickable" style={{cursor: 'pointer'}}/>
                     </Link>
                 </Col>
-                <Col>
+                <Col className={styles.navCol}>
                     {isAuthenticated ? (
                         <Row>
                             <Col className={styles.allColAttribute}>

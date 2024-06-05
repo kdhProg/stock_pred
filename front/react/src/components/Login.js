@@ -1,7 +1,9 @@
 import React, {useState} from 'react';
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
-
+import "../css/Login.css"
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
 
 const Login = () => {
 
@@ -48,16 +50,28 @@ const Login = () => {
     }
 
 
-
-
     return (
-        <div>
-            <input type="text" placeholder="ID" name="userAccount" value={userAccount} onChange={onChange}/>
-            <input type="text" placeholder="PW" name="password" value={password} onChange={onChange}/>
-            <button onClick={doLogin}>Login</button>
-            <button onClick={findId}>아이디 찾기</button>
-            <button>비밀번호 찾기(아직구현X)</button>
-            <button>소셜로그인(아직구현X)</button>
+        <div className="loginBoxContainer">
+            <div className="loginBoxColumn">
+                <h4><b>로그인</b></h4>
+            </div>
+            <div className="loginBoxColumn">
+                <Form.Control className="boxShadow" type="text" placeholder="ID" name="userAccount" value={userAccount} onChange={onChange}/>
+            </div>
+            <div className="loginBoxColumn">
+                <Form.Control className="boxShadow" type="text" placeholder="PW" name="password" value={password} onChange={onChange}/>
+            </div>
+            <div className="loginBoxColumn loginBtn">
+                <Button variant="secondary" className="boxShadow" onClick={doLogin}>Login</Button>
+            </div>
+            <div className="loginBoxColumn findIdNfindPwRow">
+                <div>
+                    <Button className="boxShadow" variant="secondary" onClick={findId}>아이디 찾기</Button>
+                </div>
+                <div>
+                    <Button className="boxShadow" variant="secondary">비밀번호 찾기</Button>
+                </div>
+            </div>
         </div>
     );
 };

@@ -1,0 +1,32 @@
+
+.loginBoxContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 1000px;
+    margin: auto;
+
+    /*border:solid 1px #4B3BAE;*/
+}
+
+.loginBtn>Button{
+    width: 100%;
+}
+
+.loginBoxColumn{
+    flex: 0;
+    width: 400px;
+    margin: 10px;
+
+    /*border:solid 1px #ff0000;*/
+}
+
+.findIdNfindPwRow{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.boxShadow{
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
+}
