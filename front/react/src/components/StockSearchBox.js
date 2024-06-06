@@ -1,11 +1,8 @@
 import React, {useState} from 'react';
-import {useDispatch} from "react-redux";
-import {updateSchKW} from '../redux/stringSlice';
 import {useNavigate} from 'react-router-dom';
-import styles from '../css/StockSearchBox.module.css'
+import styles from '../legacy/css/StockSearchBox.module.css'
 import Form from "react-bootstrap/Form";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
+import "../css/StockSearchBox.css"
 
 const StockSearchBox = ()=>{
 
@@ -21,20 +18,18 @@ const StockSearchBox = ()=>{
 
 
     return(
-        <div>
-            <Row>
-                <Col md={9}>
-                    <Form.Control
-                        type="text"
-                        value={inputValue}
-                        onChange={(e) => setInputValue(e.target.value)}
-                        placeholder="기업명 또는 Ticker"
-                    />
-                </Col>
-                <Col md={3}>
-                    <button className={styles.buttonNormalDesign} onClick={handleButtonClick}>검색</button>
-                </Col>
-            </Row>
+        <div className="StockSchBoxContainer">
+            <div className="schBoxColumn">
+                <Form.Control
+                    type="text"
+                    value={inputValue}
+                    onChange={(e) => setInputValue(e.target.value)}
+                    placeholder="기업명 또는 Ticker"
+                />
+            </div>
+            <div className="schInfoColumn">
+                <button className="schBoxBtn" onClick={handleButtonClick}>검색</button>
+            </div>
         </div>
     )
 }

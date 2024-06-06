@@ -1,0 +1,29 @@
+
+.StockSchBoxContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+
+    max-width: 400px;
+}
+
+.schBoxColumn{
+
+}
+
+.schInfoColumn{
+    padding-top: 5px;
+}
+
+.schBoxBtn{
+    border: 0;
+    background-color: transparent;
+
+    color:white;
+    text-decoration:none;
+    font-weight: bold;
+}
+
+.schBoxBtn:hover{
+    color: yellow;
+}
