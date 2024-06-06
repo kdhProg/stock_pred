@@ -1,15 +1,17 @@
 import Pagination from "react-js-pagination";
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import axios from "axios";
 import styled from 'styled-components'
 import 'bootstrap/dist/css/bootstrap.css';
 import {Link, useNavigate} from "react-router-dom";
-import styles from '../css/PostList.module.css'
+import styles from '../legacy/css/PostList.module.css'
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import "../css/PostList.css"
+import {FormCheck, Spinner} from "react-bootstrap";
 
 
 const PostList = (props)=>{
@@ -28,9 +30,6 @@ const PostList = (props)=>{
 
     /* 화면 표시용 게시판 */
     let boardName = '';
-
-    /* 기본 글 개수 */
-    const defaultPostSize = 10;
 
     /* 글이 로드되었는가 */
     const [isLoading, setIsLoading] = useState(true);
@@ -138,7 +137,7 @@ const PostList = (props)=>{
 
     /* 검색 수행 */
     const getPosts = async ()=>{
-
+        setIsLoading(true)
         /* 먼저 전체 글 개수 세팅 */
         await getEntirePostsCount();
 
@@ -163,95 +162,99 @@ const PostList = (props)=>{
 
 
     return(
-        <div>
-            <Container>
-                <br/>
-                <br/>
-                <Row>
-                    <Col/>
-                    <Col className={styles.boardName}>
-                        <p>{boardName}</p>
-                    </Col>
-                    <Col/>
-                </Row>
-                <Row>
-                    <Col md={2}>
-                        <p>정렬기준</p>
-                    </Col>
-                    <Col>
-                        <label htmlFor="postId">최신순</label>
-                        <input type="radio" id="postId" name="sort" value="postId" onChange={handleRadioChange}/>
-                        &nbsp;&nbsp;&nbsp;
-                        <label htmlFor="likes">추천수</label>
-                        <input type="radio" id="likes" name="sort" value="likes" onChange={handleRadioChange}/>
-                        &nbsp;&nbsp;&nbsp;
-                        <label htmlFor="reports">신고수</label>
-                        <input type="radio" id="reports" name="sort" value="reports" onChange={handleRadioChange}/>
-                        &nbsp;&nbsp;&nbsp;
-                        <label htmlFor="updateDate">마지막 수정일</label>
-                        <input type="radio" id="updateDate" name="sort" value="updateDate" onChange={handleRadioChange}/>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col md={2}>
-                        <label htmlFor="quantity">페이지 당 글</label>
-                    </Col>
-                    <Col>
-                    <Form.Control type="number" id="quantity" name="quantity" min="5" max="2000"
-                               onChange={handleSizeChange} defaultValue={defaultPostSize}/>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col md={2}>
-                        <p>검색</p>
-                    </Col>
-                    <Col>
-                        <Form.Control type="text" onChange={handleKeywordChange}/>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col>
-                        <button onClick={getPosts}>다시 로드하기</button>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col>
-                        번호
-                    </Col>
-                    <Col>
-                        제목
-                    </Col>
-                    <Col>
-                        작성자
-                    </Col>
-                    <Col>
-                        작성일
-                    </Col>
-                </Row>
-                { isLoading ?(
-                    <Row><Col>loading lists....</Col></Row>
-                ): (
-                    <div>
-                        {postList.map((post) => (
-                            <Row key={post.postId}>
-                                <Col>
+        <div className="postListConatiner">
+            <br/><br/>
+            <div className="boardNameRow">
+                <h1><b>{boardName}</b></h1>
+            </div>
+            <br/><br/>
+            <div className="sortRow">
+                <div className="sortInfo">
+                    <h4><b>정렬기준</b></h4>
+                </div>
+                <div className="sortRadioBoxes">
+                    <label htmlFor="postId">최신순</label>
+                    <Form.Check className="sortRadioBoxEach" type="radio" id="postId" name="sort" value="postId" onChange={handleRadioChange}/>
+                    &nbsp;&nbsp;&nbsp;
+                    <label htmlFor="likes">추천수</label>
+                    <Form.Check className="sortRadioBoxEach" type="radio" id="likes" name="sort" value="likes" onChange={handleRadioChange}/>
+                    &nbsp;&nbsp;&nbsp;
+                    <label htmlFor="reports">신고수</label>
+                    <Form.Check className="sortRadioBoxEach" type="radio" id="reports" name="sort" value="reports" onChange={handleRadioChange}/>
+                    &nbsp;&nbsp;&nbsp;
+                    <label htmlFor="updateDate">마지막 수정일</label>
+                    <Form.Check className="sortRadioBoxEach" type="radio" id="updateDate" name="sort" value="updateDate"
+                           onChange={handleRadioChange}/>
+                </div>
+            </div>
+            <br/>
+            <div className="postPerPageRow">
+                <div className="postPerPageInfo">
+                    <h4><b>페이지 당 글</b></h4>
+                </div>
+                <div className="postPerPageBox">
+                    <Form.Control type="number"  placeholder="기본값:10" id="quantity" name="quantity" min="5" max="20"
+                                  onChange={handleSizeChange}/>
+                </div>
+            </div>
+            <br/>
+            <div className="keywordSchBoxRow">
+                <div className="keywordSchBoxWrapper">
+                    <input className="keywordSchBoxInput" type="text" placeholder="제목 기반 검색"
+                                  onChange={handleKeywordChange}/>
+                </div>
+                <div className="keywordSchBoxBtnColumn">
+                    {isLoading ? (
+                        <button className="loadPostBtn" disabled={true}>
+                            <Spinner
+                                as="span"
+                                animation="border"
+                                size="sm"
+                                role="status"
+                                aria-hidden="true"
+                            />
+                        </button>
+                    ):(
+                        <button className="loadPostBtn" onClick={getPosts}>검색</button>
+                    )}
+                </div>
+            </div>
+            <hr className="splitLine"/>
+            <div className="postInfoRow">
+                <b className="NoColumn">No</b>
+                <b className="titleColumn">제목</b>
+                <b className="authorColumn">글쓴이</b>
+                <b className="dateColumn">작성일</b>
+            </div>
+            <hr className="splitLine"/>
+            {isLoading?(
+                <div className="postListRow">
+                    ....loading....
+                </div>
+            ): (
+                <div className="postListRow">
+                    {postList.map((post) => (
+                        <div>
+                            <div key={post.postId} className="postListEachRow">
+                                <div className="NoColumn">
                                     <p>{post.postId}</p>
-                                </Col>
-                                <Col>
+                                </div>
+                                <div className="titleColumn">
                                     <Link className="link-success" to={`/post/${post.postId}`}>{post.title}</Link>
-                                </Col>
-                                <Col>
+                                </div>
+                                <div className="authorColumn">
                                     <p>{post.author}</p>
-                                </Col>
-                                <Col>
-                                <p>{(post.createdAt).substring(0,10)}</p>
-                                </Col>
-                            </Row>
-                        ))}
-                    </div>
-                )
-                }
-            <Row>
+                                </div>
+                                <div className="dateColumn">
+                                    <p>{(post.createdAt).substring(0,10)}</p>
+                                </div>
+                            </div>
+                            <hr/>
+                        </div>
+                    ))}
+                </div>
+            )}
+            <div className="paginationRow">
                 <PaginationBox>
                     <Pagination
                         activePage={poReq.page}
@@ -261,14 +264,10 @@ const PostList = (props)=>{
                         onChange={handlePageChange}>
                     </Pagination>
                 </PaginationBox>
-            </Row>
-            <Row>
-                <Col md={10}/>
-                <Col>
-                    <Button variant="secondary" onClick={moveToWrite}>글쓰기</Button>
-                </Col>
-            </Row>
-            </Container>
+            </div>
+            <div className="writePostBtnRow">
+                <Button variant="secondary" className="writeBtn" onClick={moveToWrite}>글쓰기</Button>
+            </div>
         </div>
     )
 }

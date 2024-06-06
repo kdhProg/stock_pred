@@ -1,0 +1,156 @@
+.postListConatiner{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+
+    height: 1200px;
+}
+
+.postListConatiner>div{
+    /*border: 1px solid red;*/
+}
+
+/* -- 정렬기준 -- */
+.sortRow{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+/* info 통합관리 */
+.sortInfo, .postPerPageInfo{
+    width: 200px;
+}
+
+/* inputBox 통합관리*/
+.sortRadioBoxes, .postPerPageBox{
+    width: 400px;
+}
+
+.sortRadioBoxEach{
+    display: inline-block;
+}
+
+/* -- 페이지 당 글 개수 -- */
+.postPerPageRow{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+
+/* -- 키워드 검색 -- */
+.keywordSchBoxRow{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    margin: 0px;
+    padding: 10px 0;
+
+    background-color: #eceded;
+}
+
+.keywordSchBoxWrapper{
+    margin-left: 100px;
+}
+
+.keywordSchBoxBtnColumn{
+    /*width: 150px;*/
+    /*height: 40px;*/
+}
+
+.loadPostBtn{
+    width: 150px;
+    height: 40px;
+    color: #FFFFFF;
+    background-color: #1E1C41;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.keywordSchBoxInput{
+    width: 500px;
+    border: none;
+    outline: none;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+
+    height: 40px;
+}
+
+/* -- 분리선 -- */
+.splitLine{
+    border: 2px solid black;
+}
+
+/* -- 글 정보 -- */
+.postInfoRow{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+
+/* -- 글 목록 -- */
+.postListRow{
+    display: flex;
+    flex-direction: column;
+}
+.postListEachRow{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.postListEachRow>div{
+    /*border: 1px solid blue;*/
+}
+
+/* -- 글 작성 -- */
+.writePostBtnRow{
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.writeBtn{
+    width: 200px;
+}
+
+
+/* -- 열 너비 -- */
+.NoColumn{
+    padding: auto;
+    width: 60px;
+}
+.NoColumn>p{
+    margin:0px;
+}
+
+.titleColumn{
+    padding: auto;
+    width: 500px;
+}
+.titleColumn>p{
+    margin:0px;
+}
+
+.authorColumn{
+    padding: auto;
+    width: 80px;
+}
+.authorColumn>p{
+    margin:0px;
+}
+
+.dateColumn{
+    padding: auto;
+    width: 120px;
+}
+.dateColumn>p{
+    margin:0px;
+}
+
+
+/* -- hr 마진 조정 -- */
+hr{
+    margin: 4px 0;
+}
