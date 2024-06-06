@@ -1,0 +1,88 @@
+.selectedDataserPreviewContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+
+    height: 500px;
+    max-width: 1200px;
+
+    background-color: #eceded;
+}
+
+.selectedDataserPreviewContainer>div{
+    /*border: 1px solid red;*/
+}
+.selectedDataserPreviewContainer>div>div{
+    /*border: 1px solid red;*/
+}
+
+/* ----- 파라미터 열 -----*/
+.datasetParamColumn{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    width: 450px;
+}
+
+/* -- 날짜선택 -- */
+.startDateRow{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.endDateRow{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.startDateInfo, .endDateInfo{
+    width: 75px;
+}
+
+
+.prevDateBtn{
+    border: none;
+    width: 300px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+    background-color: #616169;
+    border-radius: 8px;
+    color: white;
+    text-align: center;
+}
+
+/* -- 컬럼 선택 -- */
+.selectColumnRadioBoxRow{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.selectColumnRadioBoxes{
+    display: flex;
+    flex-direction: row;
+}
+
+.prevColRadio{
+    display: inline-block;
+}
+
+/* -- 실행버튼 -- */
+.prevBtn{
+    width: 200px;
+    box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.4);
+    border-radius: 8px;
+}
+
+
+/* ----- 차트 열 -----*/
+.datasetChartColumn{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    width: 700px;
+}
+

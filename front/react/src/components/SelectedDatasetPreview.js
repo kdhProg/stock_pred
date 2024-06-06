@@ -7,6 +7,7 @@ import Button from "react-bootstrap/Button";
 import styles from "../css/SelectedDatasetPreview.module.css"
 import {Spinner} from "react-bootstrap";
 import Form from "react-bootstrap/Form";
+import "../css/SelectedDataserPreview.css"
 
 const SelectedDatasetPreview = (props) => {
 
@@ -104,89 +105,83 @@ const SelectedDatasetPreview = (props) => {
 
 
     return(
-        <div>
-            <Row className={styles.previewRowHeightFix}>
-                <Col md={4}>
-                    <br/>
-                    <Row>
-                        <Col>
-                            <h3 className={styles.boldFont}>데이터셋 미리보기</h3>
-                        </Col>
-                    </Row>
-                    <br/>
-                    <Row>
-                        <Col md={3}>
-                            <p className={styles.prevDateInfoText}>
-                                시작일
-                            </p>
-                            <p className={styles.prevDateInfoText}>
-                                마지막일
-                            </p>
-                        </Col>
-                        <Col>
-                            <input className={styles.prevDateBtn} id="startDate" type="date" name="startDate" onChange={onChangeDate}/>
-                            <br/><br/>
-                            <input className={styles.prevDateBtn} id="endDate" type="date" name="endDate" onChange={onChangeDate}/>
-                        </Col>
-                    </Row>
-                    <br/><br/>
-                    <Row>
-                        <Col className={styles.prevColRadioInfo} md={3}>
-                            <p>조회할 컬럼</p>
-                        </Col>
-                        <Col>
-                            <label htmlFor="">시가</label>
-                            <Form.Check className={styles.prevColRadio} type="radio" name="colName" value="Open" onChange={handleRadioChange}/>&nbsp;&nbsp;
-                            <label htmlFor="">고가</label>
-                            <Form.Check className={styles.prevColRadio} type="radio" name="colName" value="High" onChange={handleRadioChange}/>&nbsp;&nbsp;
-                            <label htmlFor="">저가</label>
-                            <Form.Check className={styles.prevColRadio} type="radio" name="colName" value="Low" onChange={handleRadioChange}/>&nbsp;&nbsp;
-                            <label htmlFor="">종가</label>
-                            <Form.Check className={styles.prevColRadio} type="radio" name="colName" value="Close" onChange={handleRadioChange}/>&nbsp;&nbsp;
-                            <label htmlFor="">거래량</label>
-                            <Form.Check className={styles.prevColRadio} type="radio" name="colName" value="Volumne" onChange={handleRadioChange}/>
-                        </Col>
-                    </Row>
-                    <br/>
-                    <Row>
-                        <Col>
-                            {isDisabled?(
-                                <Button className={styles.prevBtn} variant="secondary" onClick={showSelectedEntireData} disabled={isDisabled}>
-                                    <Spinner
-                                        as="span"
-                                        animation="border"
-                                        size="sm"
-                                        role="status"
-                                        aria-hidden="true"
-                                    />
-                                </Button>
-                                ):(
-                                <Button className={styles.prevBtn} variant="secondary" onClick={showSelectedEntireData} disabled={isDisabled}>데이터검색</Button>
-                                )
-                            }
-                        </Col>
-                    </Row>
-                </Col>
-                <Col>
-                    {isLoading ? (
-                        <div>
-                            <br/><br/><br/><br/><br/><br/><br/>
-                            <p>지정한 데이터셋의 프리뷰를 그래프로 확인하세요.</p>
-                        </div>
-                    ) : (
-                        <div>
-                            <br/><br/>
-                            <Chart
-                                chartType="LineChart"
-                                width="800px"
-                                height="300px"
-                                data={chartData}
-                                options={chartOptions}
+        <div className="selectedDataserPreviewContainer">
+            <div className="datasetParamColumn">
+                <div className="datasetPreviewInfo">
+                    <h3><b>데이터셋 프리뷰</b></h3>
+                </div>
+                <br/><br/>
+                <div className="startDateRow">
+                    <div className="startDateInfo">
+                        <b>시작일</b>
+                    </div>
+                    <div className="startDateBox">
+                        <input className="prevDateBtn" id="startDate" type="date" name="startDate"
+                               onChange={onChangeDate}/>
+                    </div>
+                </div>
+                <br/>
+                <div className="endDateRow">
+                    <div className="endDateInfo">
+                        <b>마지막일</b>
+                    </div>
+                    <div className="endDateBox">
+                        <input className="prevDateBtn" id="endDate" type="date" name="endDate"
+                               onChange={onChangeDate}/>
+                    </div>
+                </div>
+                <br/>
+                <div className="selectColumnRadioBoxRow">
+                    <div className="selectColumnRadioInfo">
+                        <b>조회할 컬럼</b>
+                    </div>
+                    <div className="selectColumnRadioBoxes">
+                        <label htmlFor="">시가</label>
+                        <Form.Check className="prevColRadio" type="radio" name="colName" value="Open" onChange={handleRadioChange}/>&nbsp;&nbsp;
+                        <label htmlFor="">고가</label>
+                        <Form.Check className="prevColRadio" type="radio" name="colName" value="High" onChange={handleRadioChange}/>&nbsp;&nbsp;
+                        <label htmlFor="">저가</label>
+                        <Form.Check className="prevColRadio" type="radio" name="colName" value="Low" onChange={handleRadioChange}/>&nbsp;&nbsp;
+                        <label htmlFor="">종가</label>
+                        <Form.Check className="prevColRadio" type="radio" name="colName" value="Close" onChange={handleRadioChange}/>&nbsp;&nbsp;
+                        <label htmlFor="">거래량</label>
+                        <Form.Check className="prevColRadio" type="radio" name="colName" value="Volumne" onChange={handleRadioChange}/>
+                    </div>
+                </div>
+                <br/>
+                <div className="prevBtnRow">
+                    {isDisabled?(
+                        <Button className="prevBtn" variant="secondary" onClick={showSelectedEntireData} disabled={isDisabled}>
+                            <Spinner
+                                as="span"
+                                animation="border"
+                                size="sm"
+                                role="status"
+                                aria-hidden="true"
                             />
-                        </div>
-                    )}
-                </Col>
-            </Row>
+                        </Button>
+                    ):(
+                        <Button className="prevBtn" variant="secondary" onClick={showSelectedEntireData} disabled={isDisabled}>데이터검색</Button>
+                    )
+                    }
+                </div>
+            </div>
+            <div className="datasetChartColumn">
+                {isLoading ? (
+                    <div>
+                        <br/><br/><br/>
+                        <b>지정한 데이터셋의 프리뷰를 그래프로 확인하세요.</b>
+                    </div>
+                ) : (
+                    <Chart
+                        chartType="LineChart"
+                        width="700px"
+                        height="400px"
+                        data={chartData}
+                        options={chartOptions}
+                    />
+                )}
+            </div>
         </div>
     )
 }

@@ -1,0 +1,232 @@
+.stockPredictEntireContainer{
+    display: flex;
+    flex-direction: column;
+
+
+    max-width: 1200px;
+    margin: auto;
+}
+
+.stockPredictEntireContainer>div{
+    /*border: 1px solid red;*/
+}
+
+/* ----------------- 선택 기업 정보 -----------------*/
+.corpInfoRow{
+    display: flex;
+    flex-direction: row;
+
+    justify-content: space-evenly;
+    background-color: #eceded;
+}
+.corpInfoColumn{
+    display: flex;
+    flex-direction: column;
+}
+
+.corpInfoDataPtag{
+    font-weight: bold;
+    font-size: 30px;
+    color: #4B3BAE;
+}
+
+.datasetPreviewRow{
+
+}
+
+/* ----------------- 모델 선택 -----------------*/
+.modelSelectRow{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+
+    background-color: #eceded;
+}
+
+.freeModelColumn{
+    display: flex;
+    flex-direction: column;
+
+    margin-right: 70px;
+}
+
+.freeModelInfo{
+
+}
+
+.freeModelLists{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.freeModelEach{
+    font-weight: bold;
+    background-color: #dbdbdb;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+
+    width: 300px;
+}
+
+.paidModelColumn{
+    display: flex;
+    flex-direction: column;
+
+    margin-left: 70px;
+}
+
+.paidModelInfo{
+
+}
+
+.paidModelLists{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.paidModelEach{
+    font-weight: bold;
+    background-color: #dbdbdb;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+
+    width: 300px;
+}
+
+/* ----------------- 모델 파라미터 -----------------*/
+.modelParamRow{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+
+    max-width: 1200px;
+
+    background-color: #eceded;
+}
+
+.commonParamColumn{
+    display: flex;
+    flex-direction: column;
+
+    width: 450px;
+}
+
+.commonParamBoxes{
+    display: flex;
+    flex-direction: column;
+}
+
+.paidParamColumn{
+    display: flex;
+    flex-direction: column;
+
+    width: 450px;
+}
+.paidParamBoxes{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.startDateRow, .endDateRow, .epochBoxRow, .predColumnChkBoxRow,.targetColumnSelectBoxRow{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.startDateInfo, .endDateInfo, .epochBoxInfo, .predColumnChkBoxInfo, .targetColumnSelectInfo{
+    width:150px;
+}
+
+.startDateBox, .endDateBox, .epochInputBox,.predColumnChkBoxList, .targetColumnSelectBoxes{
+    width: 400px;
+}
+
+.predDateBtn{
+    border: none;
+    width: 300px;
+    height: 30px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+    background-color: #616169;
+    border-radius: 8px;
+    color: white;
+    text-align: center;
+}
+
+.pastPredDaysRow, .trainTestSplitRow, .validPerRow, .batchSizeRow{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.pastPredDaysInfo, .trainTestSplitInfo, .validPerInfo, .batchSizeInfo{
+    width: 150px;
+}
+
+.pastPredDaysBox, .trainTestSplitBox, .validPerBox, .batchSizeBox{
+    width: 400px;
+}
+
+
+/* -----------------  예측 버튼 -----------------*/
+.predBtn{
+    width: 300px;
+    height: 75px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+
+    font-weight: bold;
+}
+
+/* ----------------- 예측 결과 -----------------*/
+.predictRstRow{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    max-width: 1200px;
+    /*margin: auto;*/
+
+    background-color: #eceded;
+}
+
+.predictRstRow>div{
+    /*border:solid 2px blue;*/
+}
+
+.testRstColumn{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+
+    margin: 0px;
+
+    width: 650px;
+}
+
+.marcapRstColumn{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+
+    margin: 0 10px;
+
+    width: 500px;
+}
+
+.marcapRstValueRow{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.marcapRstValue{
+    text-weight: bold;
+    color: #4B3BAE;
+    font-size: 25px;
+}
+
+.marcapRstValueRow>div>h5{
+    display: flex;
+    flex-direction: row;
+}

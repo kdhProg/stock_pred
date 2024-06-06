@@ -65,9 +65,10 @@ const Nav = () => {
                         <Link to="/Mypage">마이페이지</Link>
                     </div>
                     {isPaidPlan ? (
-                        <div className="authenticatedColumn">
-                            유료계정입니다.
-                        </div>
+                        // <div className="authenticatedColumn">
+                        //     유료계정입니다.
+                        // </div>
+                        <span></span>
                     ) : (
                         <div className="authenticatedColumn paidBtnBox">
                             <button className="paidBtn" onClick={() => {
