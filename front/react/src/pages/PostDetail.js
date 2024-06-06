@@ -1,8 +1,16 @@
 import {useEffect, useState} from "react";
 import {useNavigate, useParams} from "react-router-dom";
 import axios from "axios";
+import "../css/PostDetail.css"
+import Button from "react-bootstrap/Button";
 
 const PostDetail = ()=>{
+    
+    /*
+    * 
+    * Todo 수정 / 삭제는 글쓴이 본인만 가능하도록 -> 관리자는 always삭제 가능
+    * 
+    * */
 
     const navigate = useNavigate();
 
@@ -54,16 +62,39 @@ const PostDetail = ()=>{
     }, []);
 
     return(
-        <div>
+        <div className="postDetailContainer">
             {loading ? (
                 <h2>loading...</h2>
             ) : (
                 <div>
-                <h2>제목: {post.title}</h2>
-                <p>내용: {post.content}</p>
-                <button onClick={updatePost}>수정</button>
-                <button onClick={deletePost}>삭제</button>
-                <button onClick={moveToList}>목록</button>
+                    <br/><br/>
+                    <div className="titleRow">
+                        <div className="titleInfo">
+                            <h4><b>제목</b></h4>
+                        </div>
+                        <div className="titleValueBoxWrapper">
+                            <input className="titleValueBox" type="text" value={post.title} readOnly={true}/>
+                        </div>
+                    </div>
+                    <div className="contentRow">
+                        <div className="contentInfo">
+                            <h4><b>내용</b></h4>
+                        </div>
+                        <div className="contentValueBoxWrapper">
+                            <textarea className="contentValueBox" value={post.content}></textarea>
+                        </div>
+                    </div>
+                    <div className="buttonsRow">
+                        <div className="updateBtnWrapper">
+                            <Button className="detailUpdateBtn" variant="primary" onClick={updatePost}>수정</Button>
+                        </div>
+                        <div className="deleteBtnWrapper">
+                            <Button className="detailDeleteBtn" variant="danger" onClick={deletePost}>삭제</Button>
+                        </div>
+                        <div className="backToListBtnWrapper">
+                            <Button className="detailBackToListBtn" variant="secondary" onClick={moveToList}>목록</Button>
+                        </div>
+                    </div>
                 </div>
             )}
         </div>

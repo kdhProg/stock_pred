@@ -1,5 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import "../css/UserInfoChangeForm.css"
+import Button from "react-bootstrap/Button";
 
 const UserInfoChangeForm = () => {
 
@@ -87,11 +89,11 @@ const UserInfoChangeForm = () => {
         chkIsEssentialValExists();
 
         if(isButtonDisabled){
-            alert("아이디 / 전화번호 -> 필수!!")
+            alert("필수정보 입력여부 확인 : 아이디 / 전화번호 / 별명")
         }else{
             try {
                 await axios.put(`/user/updateUser`, proUpdReq);
-                alert("회원 데이터 수정 성공 - 다시 로그인 ㄱ");
+                alert("회원 데이터 수정 성공 - 다시 로그인 하세요");
                 await axios.get(`/auth/logout`);
                 /*
                  * 로그아웃
@@ -119,38 +121,94 @@ const UserInfoChangeForm = () => {
     }
 
     return (
-        <div>
-            <h3>유저 정보 수정</h3>
-            <h4>반드시 있어야 하는 정보 : 아이디 / 전화번호 / nickname!!!</h4>
-            <div>
-                <label htmlFor="userAccount">아이디</label>
-                <input
-                    type="text"
-                    id="userAccount"
-                    name="userAccount"
-                    defaultValue={curUser}
-                    onChange={onChange}
-                />
+        <div className="userInfoChangeContainer">
+            <br/>
+            <div className="UICintroWrapper">
+                <h3><b>유저 정보 수정</b></h3>
             </div>
-            {Object.entries(curUserProfile).slice(0, -2).map(([key, value]) => (
-                <div key={key}>
-                    <label htmlFor={key}>{key}</label>
+            <br/>
+            <div className="UICuserAccountRow">
+                <div className="UICuserAccountInfo">
+                    <h4><b>아이디</b></h4>
+                </div>
+                <div className="UICuserAccountBoxWrapper">
                     <input
+                        className="UICuserAccountBox"
                         type="text"
-                        id={key}
-                        name={key}
-                        defaultValue={value}
+                        id="userAccount"
+                        name="userAccount"
+                        defaultValue={curUser}
                         onChange={onChange}
                     />
                 </div>
-            ))}
-            <div>
-                <p>가입일 : {curUserProfile.createdAt?.substring(0, 10)}</p>
             </div>
-            <div>
-                <p>마지막 수정일 : {curUserProfile.updateDate?.substring(0, 10)}</p>
+            <div className="UICphoneRow">
+                <div className="UICphoneInfo">
+                    <h4><b>전화번호</b></h4>
+                </div>
+                <div className="UICphoneBoxWrapper">
+                    <input type="text" name="phone" defaultValue={curUserProfile.phone} onChange={onChange} />
+                </div>
             </div>
-            <button onClick={doProfileUpdate}>수정하기</button>
+            <div className="UICnickNameRow">
+                <div className="UICnickNameInfo">
+                    <h4><b>별명</b></h4>
+                </div>
+                <div className="UICnickNameBoxWrapper">
+                    <input type="text" name="nickName" defaultValue={curUserProfile.nickName} onChange={onChange}/>
+                </div>
+            </div>
+            <div className="UICaddressRow">
+                <div className="UICaddressInfo">
+                    <h4><b>주소</b></h4>
+                </div>
+                <div className="UICaddressBoxWrapper">
+                    <input type="text" name="address" defaultValue={curUserProfile.address} onChange={onChange}/>
+                </div>
+            </div>
+            <div className="UICgenderRow">
+                <div className="UICgenderInfo">
+                    <h4><b>성별</b></h4>
+                </div>
+                <div className="UICgenderBoxWrapper">
+                    <input type="text" name="gender" defaultValue={curUserProfile.gender} onChange={onChange}/>
+                </div>
+            </div>
+            <div className="UICbirthRow">
+                <div className="UICbirthInfo">
+                    <h4><b>생일</b></h4>
+                </div>
+                <div className="UICbirthWrapper">
+                    <input type="text" name="birth" defaultValue={curUserProfile.birth} onChange={onChange}/>
+                </div>
+            </div>
+            <div className="UICnationRow">
+                <div className="UICnationInfo">
+                    <h4><b>국가</b></h4>
+                </div>
+                <div className="UICnationBoxWrapper">
+                    <input type="text" name="nation" defaultValue={curUserProfile.nation} onChange={onChange}/>
+                </div>
+            </div>
+            <div className="UICjoinDateRow">
+                <div className="UICjoinDateInfo">
+                    <h4><b>가입일</b></h4>
+                </div>
+                <div className="UICjoinDateBoxWrapper">
+                    <input type="text" value={curUserProfile.createdAt?.substring(0, 10)} readOnly={true}/>
+                </div>
+            </div>
+            <div className="UICupdateDateRow">
+                <div className="UICupdateDateInfo">
+                    <h4><b>마지막 수정일</b></h4>
+                </div>
+                <div className="UICupdateDateBoxWrapper">
+                    <input type="text" value={curUserProfile.updateDate?.substring(0, 10)} readOnly={true}/>
+                </div>
+            </div>
+            <div className="UICchangeBtnRow">
+                <Button className="UICupdateBtn" variant="secondary" onClick={doProfileUpdate}>수정하기</Button>
+            </div>
         </div>
     );
 }

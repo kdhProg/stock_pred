@@ -1,0 +1,38 @@
+.postDetailContainer{
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+
+    max-width: 1200px;
+    height: 900px;
+}
+
+.titleRow, .contentRow, .buttonsRow{
+    display: flex;
+    flex-direction: row;
+}
+
+.titleInfo, .contentInfo{
+    width: 200px;
+}
+
+.titleValueBox{
+    width: 400px;
+}
+
+.contentValueBox{
+    width: 400px; /* 너비 고정 */
+    height: 500px; /* 높이 고정 */
+    resize: none; /* 크기 조정 불가 */
+    overflow-y: auto; /* 내용이 많을 경우 수직 스크롤 적용 */
+    padding: 10px; /* 내부 여백 */
+}
+
+.buttonsRow{
+    width: 800px;
+    justify-content: space-evenly;
+}
+
+.detailUpdateBtn, .detailDeleteBtn, .detailBackToListBtn{
+    width: 100px;
+}

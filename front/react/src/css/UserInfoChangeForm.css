@@ -1,0 +1,45 @@
+.UICuserInfoChangeContainer{
+    display: flex;
+    flex-direction: column;
+
+}
+
+.userInfoChangeContainer>div{
+    /*border: 1px solid red;*/
+}
+
+.UICuserAccountRow, .UICphoneRow, .UICnickNameRow, .UICaddressRow, .UICgenderRow,
+.UICbirthRow, .UICnationRow,.UICjoinDateRow, .UICupdateDateRow{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.UICuserAccountInfo, .UICphoneInfo, .UICnickNameInfo, .UICaddressInfo, .UICgenderInfo, .UICbirthInfo,
+.UICnationInfo, .UICjoinDateInfo, .UICupdateDateInfo{
+
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+
+    margin-left: 500px;
+    width: 200px;
+}
+
+.UICuserAccountBoxWrapper, .UICphoneBoxWrapper, .UICnickNameBoxWrapper, .UICaddressBoxWrapper,
+.UICgenderBoxWrapper, .UICbirthWrapper, .UICnationBoxWrapper, .UICjoinDateBoxWrapper, .UICupdateDateBoxWrapper{
+    width: 300px;
+}
+
+.UICuserAccountBoxWrapper>input, .UICphoneBoxWrapper>input, .UICnickNameBoxWrapper>input{
+    border: 2px solid red;
+}
+
+
+.UICjoinDateBoxWrapper>input, .UICupdateDateBoxWrapper>input{
+    border: none;
+}
+
+.UICupdateBtn{
+    width: 200px;
+}
