@@ -31,7 +31,7 @@ const Mypage = ()=>{
         <div className="MPContainer">
             <br/><br/>
             <div className="MPIntroRow">
-                <h1>마이페이지</h1>
+                <h1><b>마이페이지</b></h1>
             </div>
             <div className="MPCurrentUserRow">
                 <h2>현재 사용자 : {curUser}</h2>
