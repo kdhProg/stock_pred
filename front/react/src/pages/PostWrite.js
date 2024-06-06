@@ -1,6 +1,8 @@
 import {useNavigate} from "react-router-dom";
 import axios from "axios";
 import {useState} from "react";
+import "../css/PostWrite.css"
+import Button from "react-bootstrap/Button";
 
 const PostWrite = ()=>{
 
@@ -70,38 +72,66 @@ const PostWrite = ()=>{
     };
 
     return(
-        <div>
-            <div>
-                <label>제목</label>
-                <input type="text" name="title" value={post.title} onChange={onChange}/>
+        <div className="postWriteContainer">
+            <br/><br/>
+            <div className="titleRow">
+                <div className="titleInfo">
+                    <h4><b>제목</b></h4>
+                </div>
+                <div className="titleBoxWrapper">
+                    <input className="titleInputBox" type="text" name="title" value={post.title} onChange={onChange}/>
+                </div>
             </div>
-            <div>
-                <select name="category" onChange={onChangeCategory}>
-                    <option value="0" selected>공지사항</option>
-                    <option value="1">자유게시판</option>
-                </select>
+            <div className="categoryRow">
+                <div className="categoryInfo">
+                    <h5><b>카테고리</b></h5>
+                </div>
+                <div className="categoryBoxWrapper">
+                    <select name="category" onChange={onChangeCategory}>
+                        <option value="0" selected>공지사항</option>
+                        <option value="1">자유게시판</option>
+                    </select>
+                </div>
             </div>
-            <div>
-                <label>내용</label>
-                <textarea
-                    name="content"
-                    cols="30"
-                    rows="10"
-                    value={post.content}
-                    onChange={onChange}
-                ></textarea>
+            <div className="contentRow">
+                <div className="contentInfo">
+                    <h5><b>내용</b></h5>
+                </div>
+                <div className="contentBoxWrapepr">
+                    <textarea
+                        className="contentBox"
+                        name="content"
+                        value={post.content}
+                        onChange={onChange}
+                    ></textarea>
+                </div>
             </div>
-            <div>
-                <label htmlFor="isImportant">중요성여부</label><input id="isImportant" type="checkbox" name="isImportant"
-                                                                 checked={post.isImportant === 1} onChange={onChangeChk}/>
-                <br/>
-                <label htmlFor="isSecret">비밀글여부</label><input id="isSecret" type="checkbox" name="isSecret"
-                                                            checked={post.isSecret === 1} onChange={onChangeChk}/>
+            <div className="isImportantRow">
+                <div className="isImportantInfo">
+                    <h5><b>중요성여부</b></h5>
+                </div>
+                <div className="isImportantBoxWrapper">
+                    <input className="isImportantBox" id="isImportant" type="checkbox" name="isImportant"
+                           checked={post.isImportant === 1} onChange={onChangeChk}/>
+                </div>
+            </div>
+            <div className="isSecretRow">
+                <div className="isSecretRowInfo">
+                    <h5><b>비밀글여부</b></h5>
+                </div>
+                <div className="isSecretRowBoxWrapper">
+                    <input className="isSecretBox" id="isSecret" type="checkbox" name="isSecret"
+                           checked={post.isSecret === 1} onChange={onChangeChk}/>
+                </div>
             </div>
             <br/>
-            <div>
-                <button onClick={savePost}>저장</button>
-                <button onClick={backToList}>취소</button>
+            <div className="saveNcancelBtnRow">
+                <div className="saveBtnWrapper">
+                    <Button className="saveBtn" variant="success" onClick={savePost}>저장</Button>
+                </div>
+                <div className="cancelBtnWrapper">
+                    <Button className="cancelBtn" variant="secondary" onClick={backToList}>취소</Button>
+                </div>
             </div>
         </div>
     )
