@@ -430,22 +430,22 @@ const StockPredictPage = () => {
                             </div>
                             <div className="predColumnChkBoxList">
                                 <label htmlFor="">시가</label>
-                                <Form.Check className={styles.predColumn} name="predColumns" value="Open"
+                                <Form.Check className="predColumnBoxEach" name="predColumns" value="Open"
                                             type="checkbox"
                                             onChange={handleCheckboxChange}/>&nbsp;&nbsp;
                                 <label htmlFor="">고가</label>
-                                <Form.Check className={styles.predColumn} name="predColumns" value="High"
+                                <Form.Check className="predColumnBoxEach" name="predColumns" value="High"
                                             type="checkbox"
                                             onChange={handleCheckboxChange}/>&nbsp;&nbsp;
                                 <label htmlFor="">저가</label>
-                                <Form.Check className={styles.predColumn} name="predColumns" value="Low" type="checkbox"
+                                <Form.Check className="predColumnBoxEach" name="predColumns" value="Low" type="checkbox"
                                             onChange={handleCheckboxChange}/>&nbsp;&nbsp;
                                 <label htmlFor="">종가</label>
-                                <Form.Check className={styles.predColumn} name="predColumns" value="Close"
+                                <Form.Check className="predColumnBoxEach" name="predColumns" value="Close"
                                             type="checkbox"
                                             onChange={handleCheckboxChange}/>&nbsp;&nbsp;
                                 <label htmlFor="">거래량</label>
-                                <Form.Check className={styles.predColumn} name="predColumns" value="Volumne"
+                                <Form.Check className="predColumnBoxEach" name="predColumns" value="Volumne"
                                             type="checkbox"
                                             onChange={handleCheckboxChange}/>
                             </div>
