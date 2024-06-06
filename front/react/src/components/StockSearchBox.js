@@ -20,7 +20,8 @@ const StockSearchBox = ()=>{
     return(
         <div className="StockSchBoxContainer">
             <div className="schBoxColumn">
-                <Form.Control
+                <input
+                    className="schBox"
                     type="text"
                     value={inputValue}
                     onChange={(e) => setInputValue(e.target.value)}
