@@ -1,6 +1,8 @@
 import {useEffect, useState} from "react";
 import {useNavigate, useParams} from "react-router-dom";
 import axios from "axios";
+import "../css/PostUpdate.css"
+import Button from "react-bootstrap/Button";
 
 const PostUpdate = ()=>{
 
@@ -76,34 +78,64 @@ const PostUpdate = ()=>{
     }, []);
 
     return(
-        <div>
-            <div>
-                <p>제목</p>
-                <input type="text" name="title" value={post.title} onChange={onChange}/>
+        <div className="postUpdateContainer">
+            <br/><br/>
+            <div className="titleRow">
+                <div className="titleInfo">
+                    <h4><b>제목</b></h4>
+                </div>
+                <div className="titleBoxWrapper">
+                    <input className="titleInputBox" type="text" name="title" value={post.title}
+                           onChange={onChange}/>
+                </div>
             </div>
-            <div>
-                <p>카테고리 : {post.category===0?"공지사항":"자유게시판"}</p>
+            <div className="categoryRow">
+            <div className="categoryInfo">
+                    <h5><b>카테고리</b></h5>
+                </div>
+                <div className="categoryBoxWrapper">
+                    <b>{post.category === 0 ? "공지사항" : "자유게시판"}</b>
+                </div>
             </div>
-            <div>
-                <p>내용</p>
+            <div className="contentRow">
+                <div className="contentInfo">
+                    <h5><b>내용</b></h5>
+                </div>
+                <div className="contentBoxWrapepr">
                 <textarea
+                    className="contentBox"
                     name="content"
-                    cols="30"
-                    rows="10"
                     value={post.content}
                     onChange={onChange}
                 ></textarea>
+                </div>
             </div>
-            <div>
-                <label htmlFor="isImportant">중요성여부</label>
-                <input id="isImportant" type="checkbox" name="isImportant" checked={post.isImportant === 1} onChange={onChangeChk}/>
-                <br/>
-                <label htmlFor="isSecret">비밀글여부</label>
-                <input id="isSecret" type="checkbox" name="isSecret" checked={post.isSecret === 1} onChange={onChangeChk}/>
+            <div className="isImportantRow">
+                <div className="isImportantInfo">
+                    <h5><b>중요성여부</b></h5>
+                </div>
+                <div className="isImportantBoxWrapper">
+                    <input className="isImportantBox" id="isImportant" type="checkbox" name="isImportant"
+                           checked={post.isImportant === 1} onChange={onChangeChk}/>
+                </div>
             </div>
-            <div>
-                <button onClick={updatePost}>수정</button>
-                <button onClick={backToDetail}>취소</button>
+            <div className="isSecretRow">
+                <div className="isSecretRowInfo">
+                <h5><b>비밀글여부</b></h5>
+                </div>
+                <div className="isSecretRowBoxWrapper">
+                    <input className="isSecretBox" id="isSecret" type="checkbox" name="isSecret"
+                           checked={post.isSecret === 1} onChange={onChangeChk}/>
+                </div>
+            </div>
+            <br/>
+            <div className="updateNcancelBtnRow">
+                <div className="updateBtnWrapper">
+                    <Button className="updateBtn" variant="primary" onClick={updatePost}>수정</Button>
+                </div>
+                <div className="cancelBtnWrapper">
+                    <Button className="cancelBtn" variant="secondary" onClick={backToDetail}>취소</Button>
+                </div>
             </div>
         </div>
     )

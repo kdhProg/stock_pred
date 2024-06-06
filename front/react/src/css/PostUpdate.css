@@ -1,0 +1,39 @@
+.postUpdateContainer{
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+
+    max-width: 1200px;
+    height: 900px;
+}
+
+.titleRow, .categoryRow, .contentRow, .isImportantRow, .isSecretRow, .updateNcancelBtnRow{
+    display: flex;
+    flex-direction: row;
+
+    /*border: 1px solid #4B3BAE;*/
+}
+
+.updateNcancelBtnRow{
+    justify-content: space-evenly;
+}
+
+.titleInfo, .categoryInfo, .contentInfo, .isImportantInfo, .isSecretRowInfo{
+    width: 200px;
+}
+
+.titleInputBox{
+    width: 400px;
+}
+
+.contentBox{
+    width: 400px; /* 너비 고정 */
+    height: 500px; /* 높이 고정 */
+    resize: none; /* 크기 조정 불가 */
+    overflow-y: auto; /* 내용이 많을 경우 수직 스크롤 적용 */
+    padding: 10px; /* 내부 여백 */
+}
+
+.updateBtn, .cancelBtn{
+    width: 200px;
+}
