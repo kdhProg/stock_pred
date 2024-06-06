@@ -30,10 +30,12 @@
 }
 
 .authenticatedColumn{
-    width: 250px;
-    margin: 0 10px 0 10px;
-
+    width: 140px;
+    height: 30px;
+    margin: 0 10px;
     text-decoration: none;
+
+    /*border:solid 1px red;*/
 }
 
 .authenticatedColumn>a{
@@ -110,4 +112,19 @@
     font-weight: bold;
 
     vertical-align: center;
+}
+
+
+.userAccountRow{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.userAccountValue>b{
+    color: #d6d2e2;
+}
+
+.userAccountSuffix{
+    color: #FFFFFF;
 }

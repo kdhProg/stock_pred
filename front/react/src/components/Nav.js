@@ -16,6 +16,9 @@ const Nav = () => {
     /* 유료구독회원인지 체크 */
     const [isPaidPlan, setIsPaidPlan] = useState(false);
 
+    /* 현재 로그인 사용자 계정 */
+    const [userAccount, setUserAccount] = useState("");
+
     /* logout -> 별도의 페이지에서 이동 */
     const doLogout = async () => {
         await axios.get(`/auth/logout`)
@@ -31,6 +34,10 @@ const Nav = () => {
                         setIsAuthenticated(true)
                         const isPaid = await chkUserSubsPlan();
                         setIsPaidPlan(isPaid)
+
+                        await axios.get(`user/currentUserAccount`).then(async (resp) => {
+                            setUserAccount(resp.data);
+                        });
                     }
                 }
             )
@@ -60,6 +67,14 @@ const Nav = () => {
                     </div>
                     <div className="stockSchBox">
                         <StockSearchBox/>
+                    </div>
+                    <div className="authenticatedColumn userAccountRow">
+                        <div className="userAccountValue">
+                            <b>{userAccount}</b>
+                        </div>
+                        <div className="userAccountSuffix">
+                            <b>님</b>
+                        </div>
                     </div>
                     <div className="authenticatedColumn">
                         <Link to="/Mypage">마이페이지</Link>
