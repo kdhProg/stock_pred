@@ -1,0 +1,127 @@
+.homeContainer{
+    display: flex;
+    flex-direction: column;
+    max-width: 1600px;
+    margin: auto;
+
+    height: 1600px;
+
+    background-image: url('../assets/home_bg_v2.jpg');
+    background-size: cover;
+    /*background:*/
+    /*        linear-gradient(to right, rgba(31, 52, 75, 0.5), rgba(9, 0, 89, 0.5)),*/
+    /*        radial-gradient(circle, rgba(130, 130, 175, 0.5), rgba(164, 156, 234, 0.5));*/
+    border: 1px solid #ccc;
+}
+
+.homeAuthRow{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+
+    width: 1450px;
+}
+
+.homeAuthTextNBtnColumn{
+    width: 600px;
+}
+
+.homeAuthTextNBtnColumn>div{
+    /*border:solid 1px pink;*/
+}
+
+.homeAuthSubTextRow, .homeAuthMainTextRow{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.homeAuthSubTextValue{
+    width: 600px;
+
+    font-size: 50px;
+    color: #FFFFFF;
+}
+
+.homeAuthMainTextValue{
+    width: 600px;
+
+    font-size: 100px;
+    color: #FFFFFF;
+}
+
+.homeAuthRecommandBtnWrapper{
+    display: flex;
+    flex-direction: row;
+
+    width: 600px;
+    height: 100px;
+
+    border-radius: 10px;
+    background-color: #FFFFFF;
+
+    /*border:1px solid red;*/
+}
+
+.homeAuthSchBox{
+
+    margin-top: 10px;
+    margin-left: 10px;
+
+    width: 80%;
+    height: 80px;
+
+    border:none;
+    outline: none;
+}
+
+.homeAuthSchBoxBtn{
+    width: 20%;
+    border:none;
+    outline: none;
+
+    color: white;
+    background-color: #000000;
+}
+
+.homeAuthSchBoxText{
+    font-weight: bold;
+    font-size: 25px;
+}
+
+.homeAuthAddDesWrapper{
+    display: flex;
+    flex-direction: column;
+    align-content: flex-start;
+}
+
+.homeAuthAddDesWrapper>p{
+    color: white;
+    font-size: 20px;
+
+    /*border:solid 1px red;*/
+}
+
+.homeNonAuthLoginBtn{
+    border: 1px solid #babaf8;
+    background-color: transparent;
+
+    font-weight: bold;
+    font-size: 20px;
+
+    color: #babaf8;
+
+    border-radius: 15px;
+
+    width: 250px;
+    height: 50px;
+}
+
+.homeNonAuthLoginBtn:hover{
+    transition: background-color 0.4s ease;
+    color: #e9e9ff;
+}
+
+.homeAuthAdditionalDescriptionColumn{
+    width: 300px;
+}
