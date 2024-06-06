@@ -4,7 +4,7 @@ import {useNavigate, useParams} from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import styles from '../legacy/StockSearchPage.module.css'
+import styles from '../legacy/css/StockSearchPage.module.css'
 import Button from "react-bootstrap/Button";
 import "../css/StockSearchPage.css"
 

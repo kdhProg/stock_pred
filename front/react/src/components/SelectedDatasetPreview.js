@@ -4,7 +4,7 @@ import { Chart } from 'react-google-charts';
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
-import styles from "../css/SelectedDatasetPreview.module.css"
+import styles from "../legacy/css/SelectedDatasetPreview.module.css"
 import {Spinner} from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import "../css/SelectedDataserPreview.css"
@@ -107,10 +107,10 @@ const SelectedDatasetPreview = (props) => {
     return(
         <div className="selectedDataserPreviewContainer">
             <div className="datasetParamColumn">
-                <div className="datasetPreviewInfo">
-                    <h3><b>데이터셋 프리뷰</b></h3>
-                </div>
-                <br/><br/>
+                {/*<div className="datasetPreviewInfo">*/}
+                {/*    <h3><b>데이터셋 프리뷰</b></h3>*/}
+                {/*</div>*/}
+                {/*<br/><br/><br/><br/>*/}
                 <div className="startDateRow">
                     <div className="startDateInfo">
                         <b>시작일</b>
@@ -130,7 +130,7 @@ const SelectedDatasetPreview = (props) => {
                                onChange={onChangeDate}/>
                     </div>
                 </div>
-                <br/>
+                <br/><br/>
                 <div className="selectColumnRadioBoxRow">
                     <div className="selectColumnRadioInfo">
                         <b>조회할 컬럼</b>
@@ -148,7 +148,7 @@ const SelectedDatasetPreview = (props) => {
                         <Form.Check className="prevColRadio" type="radio" name="colName" value="Volumne" onChange={handleRadioChange}/>
                     </div>
                 </div>
-                <br/>
+                <br/><br/>
                 <div className="prevBtnRow">
                     {isDisabled?(
                         <Button className="prevBtn" variant="secondary" onClick={showSelectedEntireData} disabled={isDisabled}>

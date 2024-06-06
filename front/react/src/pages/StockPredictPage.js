@@ -6,10 +6,10 @@ import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import {useParams} from "react-router-dom";
-import styles from "../css/StockPredictPage.module.css"
+import styles from "../legacy/css/StockPredictPage.module.css"
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import {Spinner} from "react-bootstrap";
+import {Accordion, Spinner} from "react-bootstrap";
 import "../css/StockPredictPage.css"
 
 const StockPredictPage = () => {
@@ -325,7 +325,18 @@ const StockPredictPage = () => {
             </div>
             <br/>
             <div className="datasetPreviewRow">
-                <SelectedDatasetPreview ticker={corpInfo[0]}/>
+                <Accordion>
+                    <Accordion.Item  eventKey="0">
+                        <Accordion.Header>
+                            <div className="datasetPreviewAccordionHeader">
+                                <h4><b>데이터셋 프리뷰</b></h4>
+                            </div>
+                        </Accordion.Header>
+                        <Accordion.Body>
+                            <SelectedDatasetPreview ticker={corpInfo[0]}/>
+                        </Accordion.Body>
+                    </Accordion.Item>
+                </Accordion>
             </div>
             <br/>
             <div className="modelSelectRow">
