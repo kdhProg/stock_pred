@@ -12,7 +12,7 @@ public class UserPrincipal extends User {
     public UserPrincipal(com.example.stockpredict.domain.user.User user) {
         super(user.getUserAccount(), user.getUserPassword().getPassword(),
                 List.of(
-                        new SimpleGrantedAuthority("ROLE_USER")  //Todo role 부여하기
+                        new SimpleGrantedAuthority("ROLE_USER")
                 ));
         this.userAccount = user.getUserAccount();
     }

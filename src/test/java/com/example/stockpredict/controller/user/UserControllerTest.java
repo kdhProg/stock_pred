@@ -53,12 +53,14 @@ class UserControllerTest {
 
 
     @Test
-    @DisplayName("/user/join 테스트")
+    @DisplayName("/user/join Test")
     void userJoinTest() throws Exception {
 
         UserJoinRequest user = UserJoinRequest.builder()
                 .userAccount("test1234")
                 .password("qwer1234")
+                .phone("1111")
+                .nickName("aaa")
                 .build();
 
         String json = objectMapper.writeValueAsString(user);
@@ -78,6 +80,8 @@ class UserControllerTest {
         UserJoinRequest user = UserJoinRequest.builder()
                 .userAccount("test1234")
                 .password("qwer1234")
+                .phone("1111")
+                .nickName("aaa")
                 .build();
 
         userService.userJoin(user);

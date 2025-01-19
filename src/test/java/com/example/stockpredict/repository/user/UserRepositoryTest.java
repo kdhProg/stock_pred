@@ -33,6 +33,8 @@ class UserRepositoryTest {
         UserJoinRequest req = UserJoinRequest.builder()
                 .userAccount("test1234")
                 .password("qwer1234")
+                .phone("1111")
+                .nickName("aaa")
                 .build();
 
         userService.userJoin(req);
