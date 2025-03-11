@@ -7,24 +7,35 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.restdocs.RestDocumentationContextProvider;
+import org.springframework.restdocs.RestDocumentationExtension;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
+import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.documentationConfiguration;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
-@AutoConfigureMockMvc
-class UserControllerTest {
+@ExtendWith(RestDocumentationExtension.class)
+public class UserControllerDocTest {
 
-    @Autowired
     private MockMvc mockMvc;
+
+    @BeforeEach
+    void setUp(WebApplicationContext webApplicationContext, RestDocumentationContextProvider restDocumentation) {
+        this.mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext)
+                .apply(documentationConfiguration(restDocumentation))
+                .build();
+    }
 
     @Autowired
     private ObjectMapper objectMapper;
@@ -38,9 +49,6 @@ class UserControllerTest {
 
     @Autowired
     private UserRepository userRepository;
-
-
-
 
 
     @BeforeEach
@@ -66,31 +74,7 @@ class UserControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(json))
                 .andExpect(status().isOk())
-                .andDo(print());
+                .andDo(print())
+                .andDo(document("restTest"));
     }
-
-
-    @Test
-    @DisplayName("/auth/login 테스트")
-    void authLoginTest() throws Exception {
-
-        UserJoinRequest user = UserJoinRequest.builder()
-                .userAccount("test1234")
-                .password("qwer1234")
-                .phone("1111")
-                .nickName("aaa")
-                .build();
-
-        userService.userJoin(user);
-
-
-        String req = "{\"userAccount\" : \"test1234\", \"password\" : \"qwer1234\"}";
-
-        mockMvc.perform(get("/auth/login")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(req))
-                .andExpect(status().isOk())
-                .andDo(print());
-    }
-
 }
