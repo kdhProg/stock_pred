@@ -78,6 +78,34 @@ npm run
 - user / userpassword / userprofile / usersubsription으로 나누어 설계하였습니다.
 
 ---
+## 스크린샷
+<b>* 메인페이지</b>
+<p align="center">
+<img width="70%" src="https://github.com/user-attachments/assets/116d4bea-82ad-4684-8765-7ab794b9e620" alt="">
+</p>
+<b>* 회원가입</b>
+<p align="center">
+<img width="70%" src="https://github.com/user-attachments/assets/61d14872-01f7-4b4d-9d1a-915c5e54d8a5" alt="">
+</p>
+<b>* 로그인</b>
+<p align="center">
+<img width="70%" src="https://github.com/user-attachments/assets/89e38d20-9f72-42d6-9577-6341d06e3190" alt="">
+</p>
+<b>* 티커 선택</b>
+<p align="center">
+<img width="70%" src="https://github.com/user-attachments/assets/d4aa7a0a-a1ca-4b6a-92bb-39d0a6e7655c" alt="">
+</p>
+<b>* 데이터 프리뷰</b>
+<p align="center">
+<img width="70%" src="https://github.com/user-attachments/assets/b325211e-7123-4ead-9f54-d11c432c8ea5" alt="">
+</p>
+<b>* 예측</b>
+<p align="center">
+<img width="70%" src="https://github.com/user-attachments/assets/76c00e17-1d76-4435-91bc-5224927e16f0" alt="">
+</p>
+
+
+---
 
 ## 예측 모델 요약
 
